@@ -78,7 +78,7 @@
 - **Critério de Aceite**: Ao passar o cursor ou tocar nos óculos da Thalita, eles alternam entre 4 cores clássicas (Rosa Choque, Amarelo Neon, Roxo, Turquesa) com microanimação de mola.
 - **Otimização para o Modelo**: Dividir o Hero em subcomponentes para evitar arquivos gigantescos.
 
-### [ ] Etapa 09: Máquina de Escrever Interativa com Efeito de Digitação
+### [x] Etapa 09: Máquina de Escrever Interativa com Efeito de Digitação
 - **Objetivo**: Construir a máquina de escrever retrô onde o usuário pode clicar nas teclas (ou pressionar o teclado físico) emitindo som de máquina e digitando a frase-manifesto da autora na folha de papel.
 - **Arquivos-chave**: `src/components/hero/Typewriter.tsx`.
 - **Critério de Aceite**: Animação de cada letra surgindo na folha em fonte mono/typewriter, som tátil sincronizado e botão de "Concluir Frase" automática.

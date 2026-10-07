@@ -4,13 +4,11 @@ import {
   BookOpen, 
   ArrowDown, 
   Heart, 
-  Coffee, 
-  MapPin, 
   Award,
   Users
 } from 'lucide-react';
 import { GlassesColorPicker, GLASSES_COLORS, GlassesColor } from './GlassesColorPicker';
-import { THALITA_PROFILE } from '@/data/biography';
+import { Typewriter } from './Typewriter';
 import { useAudio } from '@/hooks/use-audio';
 
 export const HeroSection: React.FC = () => {
@@ -31,10 +29,10 @@ export const HeroSection: React.FC = () => {
       className="scroll-mt-24 min-h-[85vh] flex flex-col justify-center py-6 sm:py-10"
       aria-label="Ato 1: O Ateliê da Autora"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
         
-        {/* COLUNA ESQUERDA: Bio, Manifesto e Estatísticas (7 Colunas) */}
-        <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+        {/* COLUNA ESQUERDA: Bio, Manifesto e Estatísticas (6 Colunas) */}
+        <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
           
           {/* Badge de Entrada */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sun-yellow-light border border-sun-yellow/40 text-amber-950 text-xs font-bold uppercase tracking-wider shadow-sticker">
@@ -42,7 +40,7 @@ export const HeroSection: React.FC = () => {
             <span>Ato 1 · O Ateliê da Escritora Carioca</span>
           </div>
 
-          {/* Título Principal de Impacto */}
+          {/* Título Principal com Cor Dinâmica */}
           <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-slate-900 tracking-tight font-heading leading-[1.1]">
             O Ateliê Pop & Diário Mágico de{' '}
             <span 
@@ -53,12 +51,12 @@ export const HeroSection: React.FC = () => {
             </span>
           </h1>
 
-          {/* Texto de Apresentação Afetiva */}
-          <p className="text-slate-600 font-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Mais de duas décadas traduzindo com humor e delicadeza as maiores montanhas-russas da adolescência, amizade e família. Das cartas recusadas no início aos recordes históricos da Bienal e do streaming global.
+          {/* Apresentação Carismática */}
+          <p className="text-slate-600 font-body text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+            Mais de duas décadas traduzindo com humor e afeto as maiores aventuras da juventude. Das cartas recusadas no início aos recordes históricos da Bienal e aos sucessos mundiais no streaming.
           </p>
 
-          {/* Mini-Estatísticas em Pílulas Scrapbook */}
+          {/* Mini-Estatísticas em Pílulas */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-xl mx-auto lg:mx-0 pt-1">
             <div className="p-3 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs text-center">
               <Users className="w-4 h-4 text-pop-pink mx-auto mb-1" />
@@ -85,7 +83,7 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Botões de Ação Rápida */}
+          {/* Botões de Ação */}
           <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">
             <button
               type="button"
@@ -107,52 +105,30 @@ export const HeroSection: React.FC = () => {
             </button>
           </div>
 
+          {/* Óculos Interativos em Destaque na Lateral */}
+          <div className="pt-4 border-t border-slate-200/60 max-w-md mx-auto lg:mx-0">
+            <GlassesColorPicker onColorChange={(c) => setActiveGlasses(c)} />
+          </div>
+
         </div>
 
-        {/* COLUNA DIREITA: Mesa Interativa do Ateliê (5 Colunas) */}
-        <div className="lg:col-span-5 flex flex-col items-center">
-          
-          <div className="w-full max-w-md bg-white rounded-scrapbook shadow-scrapbook border-2 border-amber-200/60 p-6 sm:p-8 relative tape-effect space-y-6">
+        {/* COLUNA DIREITA: Máquina de Escrever Interativa na Mesa de Criação (6 Colunas) */}
+        <div className="lg:col-span-6 flex flex-col items-center w-full">
+          <div className="w-full bg-white/90 rounded-scrapbook shadow-scrapbook border-2 border-amber-200/60 p-5 sm:p-7 relative tape-effect space-y-4">
             
-            {/* Componente dos Óculos com Alternância de Cores */}
-            <div className="pt-2">
-              <GlassesColorPicker onColorChange={(c) => setActiveGlasses(c)} />
-            </div>
-
-            {/* Polaroid da Autora */}
-            <div className="bg-slate-50 p-3 pb-4 rounded-xl border border-slate-200 shadow-polaroid rotate-[-1.5deg] hover:rotate-0 transition-transform duration-300">
-              <div className="relative aspect-[4/3] rounded-lg bg-gradient-to-tr from-amber-100 via-pink-100 to-sky-100 flex items-center justify-center overflow-hidden border border-slate-200/60">
-                <div className="text-center p-4">
-                  <div className="w-12 h-12 rounded-full bg-white/90 shadow-sm flex items-center justify-center mx-auto mb-2 text-pop-pink">
-                    <Heart className="w-6 h-6 fill-pop-pink" />
-                  </div>
-                  <span className="font-heading font-bold text-slate-800 text-sm block">
-                    Thalita Rebouças
-                  </span>
-                  <span className="text-xs text-slate-500 font-body flex items-center justify-center gap-1 mt-0.5">
-                    <MapPin className="w-3 h-3 text-sea-blue" />
-                    Rio de Janeiro, RJ
-                  </span>
-                </div>
-              </div>
-              <p className="font-handwriting text-xl text-slate-700 text-center mt-3">
-                "{THALITA_PROFILE.manifesto}"
+            <div className="text-center space-y-1">
+              <span className="font-handwriting text-2xl text-slate-800 block">
+                Mesa de Datilografia da Autora
+              </span>
+              <p className="text-xs text-slate-500 font-body">
+                Experimente datilografar a frase que guia a carreira da escritora:
               </p>
             </div>
 
-            {/* Elementos Decorativos da Mesa (Caneca & Post-it) */}
-            <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100 font-body">
-              <div className="flex items-center gap-1.5 text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200/60">
-                <Coffee className="w-3.5 h-3.5 text-amber-700" />
-                <span>Café Carioca Quentinho</span>
-              </div>
-              <span className="font-handwriting text-base text-pop-pink font-semibold">
-                Estilo Diário Pop ✨
-              </span>
-            </div>
+            {/* Máquina de Escrever */}
+            <Typewriter />
 
           </div>
-
         </div>
 
       </div>

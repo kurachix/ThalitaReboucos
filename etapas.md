@@ -28,7 +28,7 @@
 - **Critério de Aceite**: Projeto compila em tempo recorde (`npm run dev` limpo), sem erros de tipagem e com hot reload funcional.
 - **Otimização para o Modelo**: Não instalar pacotes desnecessários; manter o `package.json` enxuto.
 
-### [ ] Etapa 02: Design Tokens, Tipografia e Paleta de Cores Carioca
+### [x] Etapa 02: Design Tokens, Tipografia e Paleta de Cores Carioca
 - **Objetivo**: Integrar fontes do Google Fonts (`Outfit` / `Poppins`, `Plus Jakarta Sans`, `Caveat` para manuscritos) e configurar tokens de cores solares, sombras de scrapbook, texturas de papel pautado e bordas adesivas.
 - **Arquivos-chave**: `src/index.css` (ou `src/app/globals.css`), `tailwind.config.js`.
 - **Critério de Aceite**: Variáveis CSS disponíveis (`--color-sun-yellow`, `--color-pop-pink`, `--color-sea-blue`, `--font-handwriting`), renderização correta de classes utilitárias e pré-visualização de fontes no navegador.

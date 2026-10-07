@@ -84,7 +84,7 @@
 - **Critério de Aceite**: Animação de cada letra surgindo na folha em fonte mono/typewriter, som tátil sincronizado e botão de "Concluir Frase" automática.
 - **Otimização para o Modelo**: Controlar o loop de texto via `useEffect` limpo com cleanup para evitar memory leaks.
 
-### [ ] Etapa 10: Linha do Tempo em Álbum de Figurinhas de Memórias
+### [x] Etapa 10: Linha do Tempo em Álbum de Figurinhas de Memórias
 - **Objetivo**: Criar a linha do tempo biográfica em formato de álbum com polaroids inclinadas, carimbos da Bienal e cartões de memórias (1974 a 2024+).
 - **Arquivos-chave**: `src/components/timeline/TimelineSection.tsx`, `src/components/timeline/PolaroidCard.tsx`.
 - **Critério de Aceite**: Efeito de *tilt 3D* suave nas polaroids ao mover o mouse; scroll horizontal fluido em desktop e carrossel magnético no celular; aviãozinho de papel interativo animado.

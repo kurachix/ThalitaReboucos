@@ -1,8 +1,8 @@
 import { AppShell } from '@/components/layout/AppShell';
 import { HeroSection } from '@/components/hero/HeroSection';
+import { TimelineSection } from '@/components/timeline/TimelineSection';
 import { 
   Sparkles, 
-  Clock, 
   BookOpen, 
   Film, 
   HelpCircle, 
@@ -17,37 +17,7 @@ export default function App() {
       <HeroSection />
 
       {/* SEÇÃO 2: TIMELINE — ÁLBUM DE MEMÓRIAS */}
-      <section 
-        id="timeline" 
-        className="scroll-mt-24 py-12"
-      >
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-sea-blue text-xs font-bold uppercase tracking-wider shadow-sticker">
-            <Clock className="w-3.5 h-3.5" />
-            <span>Ato 2 · Álbum de Figurinhas</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
-            Linha do Tempo em Memórias
-          </h2>
-          <p className="text-slate-600 font-body text-base">
-            De 1974 aos dias de hoje: as recusas de editoras, os primeiros sucessos e as filas históricas da Bienal.
-          </p>
-        </div>
-
-        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
-          <div className="max-w-md mx-auto space-y-3 py-6">
-            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sea-blue mx-auto flex items-center justify-center">
-              <Clock className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-800 font-heading">
-              Estrutura Pronta para a Linha do Tempo
-            </h3>
-            <p className="text-sm text-slate-500">
-              O layout base está ancorado e preparado para receber o carrossel horizontal de polaroids 3D na Fase 3.
-            </p>
-          </div>
-        </div>
-      </section>
+      <TimelineSection />
 
       {/* SEÇÃO 3: BOOKSHELF — A ESTANTE POP */}
       <section 

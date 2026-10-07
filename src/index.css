@@ -109,6 +109,32 @@
     animation: eqBar 0.65s ease-in-out 0.1s infinite alternate;
     transform-origin: bottom;
   }
+
+  /* Livro Aberto / Flipbook Modal */
+  .book-gutter-shadow {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.06) 0%,
+      rgba(0, 0, 0, 0.2) 46%,
+      rgba(0, 0, 0, 0.32) 50%,
+      rgba(0, 0, 0, 0.2) 54%,
+      rgba(0, 0, 0, 0.04) 100%
+    );
+  }
+
+  .book-stacked-edges {
+    box-shadow: 
+      -4px 8px 24px -2px rgba(0, 0, 0, 0.3),
+      4px 8px 24px -2px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 10px 0 -4px #F8FAFC,
+      0 13px 0 -4px #E2E8F0,
+      0 28px 50px -12px rgba(15, 23, 42, 0.45);
+  }
+
+  .book-ribbon-tail {
+    clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
+  }
 }
 
 @keyframes eqBar {

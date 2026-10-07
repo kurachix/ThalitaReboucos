@@ -100,7 +100,7 @@
 - **Critério de Aceite**: Filtragem instantânea sem reload, animação suave de reorganização dos livros na estante via Framer Motion / CSS Transitions.
 - **Otimização para o Modelo**: Estruturar a renderização dos livros usando `key` estável baseada no slug do livro.
 
-### [ ] Etapa 12: Leitor & Flipbook de Livros (Modal de Experiência Imersiva)
+### [x] Etapa 12: Leitor & Flipbook de Livros (Modal de Experiência Imersiva)
 - **Objetivo**: Desenvolver o modal de abertura do livro selecionado em formato de livro aberto: página esquerda com capa e estatísticas editoriais; página direita com sinopse, citação e bastidores contados pela autora.
 - **Arquivos-chave**: `src/components/bookshelf/BookFlipbookModal.tsx`.
 - **Critério de Aceite**: Animação realista de abertura e fechamento de capa; tecla `ESC` fecha o modal; botão de fechar com feedback de clique e trava de scroll no fundo (`overflow: hidden`).

@@ -3,6 +3,7 @@ import { BookCategory } from '@/types';
 import { BOOKS_CATALOG } from '@/data/books';
 import { CategoryFilter } from './CategoryFilter';
 import { BookSpine } from './BookSpine';
+import { BookFlipbookModal } from './BookFlipbookModal';
 import { BookOpen, Search, X, Sparkles } from 'lucide-react';
 import { useAudio } from '@/hooks/use-audio';
 
@@ -149,6 +150,9 @@ export const BookshelfSection: React.FC = () => {
         )}
 
       </div>
+
+      {/* Modal Interativo de Abertura do Livro (Flipbook 3D) */}
+      <BookFlipbookModal />
     </section>
   );
 };

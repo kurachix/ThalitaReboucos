@@ -21,6 +21,8 @@ export const BOOKS_CATALOG: Book[] = [
     highlightQuote: 'Mãe não é tudo igual. Mas todas têm o dom de saber exatamente quando a gente precisa de um abraço.',
     coverAccent: '#FF2A85',
     tags: ['Família', 'Humor', 'Best-seller', 'Cinema'],
+    publisher: 'Editora Rocco (Rocco Jovens Leitores)',
+    excerpt: 'Se você acha que a sua mãe é a pessoa mais enlouquecedora do planeta Terra, bem-vinda ao clube! Meu nome é Maria de Lourdes, mas todo mundo me chama de Malu. E esta é a história de como sobrevivi a vinte e um anos sob o mesmo teto que Ângela Cristina — entre broncas homéricas, abraços apertados e piadas na frente dos amigos.',
   },
   {
     id: 'fala-serio-professor',
@@ -107,6 +109,8 @@ export const BOOKS_CATALOG: Book[] = [
     highlightQuote: 'Fã de verdade não mede distância nem vergonha na cara por seu ídolo!',
     coverAccent: '#FF2A85',
     tags: ['Música', 'Aventura', 'Amigas', 'Cinema'],
+    publisher: 'Editora Rocco (Rocco Jovens Leitores)',
+    excerpt: '— Meninas, sentem antes que vocês tenham um treco! — gritou a Gabi, segurando o telefone como se fosse um troféu olímpico. A Manu e a Ritinha congelaram no sofá da sala em Resende. — O Slavabody Disco Disco Boys vem para o Rio de Janeiro! E nós vamos, nem que a gente tenha que ir a pé pela rodovia Presidente Dutra!',
   },
   {
     id: 'tudo-por-um-namorado',
@@ -157,6 +161,8 @@ export const BOOKS_CATALOG: Book[] = [
     highlightQuote: 'A gente só precisa de um amigo verdadeiro para o mundo deixar de ser assustador.',
     coverAccent: '#9B51E0',
     tags: ['Superação', 'Bullying', 'Netflix', 'Copacabana'],
+    publisher: 'Editora Arqueiro',
+    excerpt: 'Meu nome é Cecília, mas você pode me chamar de Tetê. Tenho 16 anos, um nariz com vida própria, uma família que perdeu o juízo (e o dinheiro do aluguel) e uma capacidade assombrosa de atrair situações embaraçosas em qualquer ambiente social. Mas Copacabana ia me ensinar que todo mundo tem um lugar no mundo.',
   },
   {
     id: 'confissoes-garoto-timido',
@@ -195,6 +201,8 @@ export const BOOKS_CATALOG: Book[] = [
     highlightQuote: 'Confiança é como um espelho de cristal: depois de rachado, a imagem nunca mais é a mesma.',
     coverAccent: '#E91E63',
     tags: ['Estreia', 'Drama', 'Cinema'],
+    publisher: 'Editora Rocco',
+    excerpt: 'Dizem que amizade de infância é para sempre. Que você divide a lancheira, os segredos de alcova, os primeiros foras e as maiores vitórias. Mas ninguém te prepara para o instante exato em que a sua melhor amiga quebra o juramento mais sagrado de todos em uma noite fria de sábado.',
   },
   {
     id: 'ela-disse-ele-disse',
@@ -207,6 +215,8 @@ export const BOOKS_CATALOG: Book[] = [
     highlightQuote: 'Homens e mulheres veem o mesmo fato por ângulos diferentes. E a mágica tá exatamente aí.',
     coverAccent: '#00B4D8',
     tags: ['Duplo Ponto de Vista', 'Colegial', 'Cinema'],
+    publisher: 'Editora Rocco (Rocco Jovens Leitores)',
+    excerpt: '— Ela disse que eu estava me achando só porque cheguei de jaqueta nova no primeiro dia de aula.\n— Ele disse que eu não parava de olhar pra ele, o que é uma mentira deslavada! Eu só estava tentando entender aquele penteado esquisito... Duas versões para a mesma história de amor colegial.',
   },
   {
     id: 'um-ano-inesquecivel-verao',

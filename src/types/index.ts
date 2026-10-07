@@ -21,6 +21,8 @@ export interface Book {
   highlightQuote: string;
   coverAccent: string; // Cor de destaque do livro no design
   tags: string[];
+  publisher?: string;
+  excerpt?: string;
 }
 
 export type StreamingPlatform = 'cinema' | 'netflix' | 'prime-video';

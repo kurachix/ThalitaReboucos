@@ -1,9 +1,9 @@
 import { AppShell } from '@/components/layout/AppShell';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TimelineSection } from '@/components/timeline/TimelineSection';
+import { BookshelfSection } from '@/components/bookshelf/BookshelfSection';
 import { 
   Sparkles, 
-  BookOpen, 
   Film, 
   HelpCircle, 
   MessageSquare, 
@@ -20,37 +20,7 @@ export default function App() {
       <TimelineSection />
 
       {/* SEÇÃO 3: BOOKSHELF — A ESTANTE POP */}
-      <section 
-        id="bookshelf" 
-        className="scroll-mt-24 py-12"
-      >
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-100 text-pop-pink text-xs font-bold uppercase tracking-wider shadow-sticker">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Ato 3 · Catálogo Literário</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
-            A Estante Pop Tridimensional
-          </h2>
-          <p className="text-slate-600 font-body text-base">
-            Mais de 25 títulos organizados por séries: Fala Sério!, Popstar, Confissões e Romances.
-          </p>
-        </div>
-
-        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
-          <div className="max-w-md mx-auto space-y-3 py-6">
-            <div className="w-12 h-12 rounded-2xl bg-pink-100 text-pop-pink mx-auto flex items-center justify-center">
-              <BookOpen className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-800 font-heading">
-              Estrutura Pronta para a Estante 3D
-            </h3>
-            <p className="text-sm text-slate-500">
-              Pronto para os filtros interativos por coleção e o flipbook modal de leitura na Fase 4.
-            </p>
-          </div>
-        </div>
-      </section>
+      <BookshelfSection />
 
       {/* SEÇÃO 4: CINEMA — CINE-THALITA */}
       <section 

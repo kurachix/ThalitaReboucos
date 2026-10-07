@@ -94,7 +94,7 @@
 
 ## 📚 FASE 4: Obras Literárias & Cine-Thalita
 
-### [ ] Etapa 11: Estante Pop Tridimensional — Catálogo e Filtros
+### [x] Etapa 11: Estante Pop Tridimensional — Catálogo e Filtros
 - **Objetivo**: Construir a estante de livros moderna com prateleiras estilizadas e sistema de filtros em pílulas ("Todos", "Fala Sério!", "Popstar", "Confissões", "Infantis").
 - **Arquivos-chave**: `src/components/bookshelf/BookshelfSection.tsx`, `src/components/bookshelf/BookSpine.tsx`, `src/components/bookshelf/CategoryFilter.tsx`.
 - **Critério de Aceite**: Filtragem instantânea sem reload, animação suave de reorganização dos livros na estante via Framer Motion / CSS Transitions.

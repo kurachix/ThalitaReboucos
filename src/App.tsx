@@ -1,4 +1,5 @@
 import { AppShell } from '@/components/layout/AppShell';
+import { HeroSection } from '@/components/hero/HeroSection';
 import { 
   Sparkles, 
   Clock, 
@@ -7,41 +8,13 @@ import {
   HelpCircle, 
   MessageSquare, 
   Heart,
-  Feather
 } from 'lucide-react';
 
 export default function App() {
   return (
     <AppShell>
       {/* SEÇÃO 1: HERO — O ATELIÊ DA AUTORA */}
-      <section 
-        id="hero" 
-        className="scroll-mt-24 min-h-[75vh] flex flex-col justify-center items-center text-center relative py-12"
-      >
-        <div className="w-full max-w-4xl bg-white/95 rounded-scrapbook shadow-scrapbook border-2 border-amber-200/60 p-8 sm:p-14 relative tape-effect">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sun-yellow-light text-amber-900 text-xs font-bold uppercase tracking-wider shadow-sticker mb-6">
-            <Feather className="w-3.5 h-3.5 text-pop-pink" />
-            <span>Ato 1 · O Ateliê da Autora</span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight font-heading leading-tight mb-4">
-            O Ateliê Pop & Diário Mágico de <span className="text-pop-pink">Thalita Rebouças</span>
-          </h1>
-          
-          <p className="text-slate-600 font-body text-lg sm:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
-            Mergulhe no universo sensorial da escritora que conquistou mais de 2,3 milhões de leitores com histórias de amizade, família e gargalhadas sinceras.
-          </p>
-
-          <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-6 max-w-xl mx-auto shadow-sm rotate-[-0.5deg]">
-            <p className="font-handwriting text-2xl sm:text-3xl text-slate-800 leading-snug">
-              "Escrevo para aproximar as pessoas através do afeto e da risada!"
-            </p>
-            <span className="font-handwriting text-xl text-slate-500 block text-right mt-2">
-              — Com todo carinho, Thalita 💛
-            </span>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* SEÇÃO 2: TIMELINE — ÁLBUM DE MEMÓRIAS */}
       <section 

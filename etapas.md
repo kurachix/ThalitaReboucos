@@ -72,7 +72,7 @@
 
 ## 🎨 FASE 3: O Ateliê da Autora & Linha do Tempo em Figurinhas
 
-### [ ] Etapa 08: Hero Screen — O Ateliê Carioca da Thalita
+### [x] Etapa 08: Hero Screen — O Ateliê Carioca da Thalita
 - **Objetivo**: Implementar a seção Hero com estética de mesa de trabalho de escritora: cores solares do Rio, iluminação suave, óculos coloridos interativos e apresentação carismática.
 - **Arquivos-chave**: `src/components/hero/HeroSection.tsx`, `src/components/hero/GlassesColorPicker.tsx`.
 - **Critério de Aceite**: Ao passar o cursor ou tocar nos óculos da Thalita, eles alternam entre 4 cores clássicas (Rosa Choque, Amarelo Neon, Roxo, Turquesa) com microanimação de mola.

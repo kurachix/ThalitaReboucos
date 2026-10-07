@@ -34,7 +34,7 @@
 - **Critério de Aceite**: Variáveis CSS disponíveis (`--color-sun-yellow`, `--color-pop-pink`, `--color-sea-blue`, `--font-handwriting`), renderização correta de classes utilitárias e pré-visualização de fontes no navegador.
 - **Otimização para o Modelo**: Definir tokens no CSS uma única vez para evitar classes arbitrárias repetitivas no JSX.
 
-### [ ] Etapa 03: Tipagem Estrita e Modelagem de Dados Biográficos
+### [x] Etapa 03: Tipagem Estrita e Modelagem de Dados Biográficos
 - **Objetivo**: Criar os contratos TypeScript e os repositórios de dados estáticos para biografia, livros, filmes, conselhos e quiz baseados no acervo oficial.
 - **Arquivos-chave**: `src/types/index.ts`, `src/data/biography.ts`, `src/data/books.ts`, `src/data/movies.ts`, `src/data/advices.ts`, `src/data/quiz.ts`.
 - **Critério de Aceite**: Tipos estritos para cada entidade (`Book`, `Movie`, `TimelineMilestone`, `AdviceQuote`, `QuizQuestion`) sem uso de `any`.

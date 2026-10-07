@@ -1,0 +1,68 @@
+import { AdviceQuote } from '@/types';
+
+export const ADVICE_QUOTES: AdviceQuote[] = [
+  {
+    id: 'advice-1',
+    quote: 'A melhor coisa de crescer é descobrir que ninguém, absolutamente ninguém, tem tudo sob controle o tempo todo!',
+    category: 'humor',
+    categoryLabel: 'Pílula de Alívio',
+    bookOrigin: 'Felicidade Incurável',
+    iconName: 'Smile',
+  },
+  {
+    id: 'advice-2',
+    quote: 'Mãe às vezes irrita? Irrita. Mas um dia você vai descobrir que ela só estava tentando te proteger do mundo — e com razão.',
+    category: 'mae',
+    categoryLabel: 'Sabedoria Materna',
+    bookOrigin: 'Fala Sério, Mãe!',
+    iconName: 'Heart',
+  },
+  {
+    id: 'advice-3',
+    quote: 'Amiga de verdade é aquela que segura seu cabelo quando você passa mal e comemora a sua vitória como se fosse dela.',
+    category: 'amizade',
+    categoryLabel: 'Pacto de Amizade',
+    bookOrigin: 'Fala Sério, Amiga!',
+    iconName: 'Users',
+  },
+  {
+    id: 'advice-4',
+    quote: 'Seja dramática sim, seja intensa, mas nunca se esqueça de rir de si mesma no final do dia.',
+    category: 'drama',
+    categoryLabel: 'Dose de Drama Saudável',
+    bookOrigin: 'Confissões de uma Garota Excluída',
+    iconName: 'Sparkles',
+  },
+  {
+    id: 'advice-5',
+    quote: 'Diga "fala sério!" para o que não te faz bem e abrace com tudo o que faz o seu coração cantar.',
+    category: 'amor-proprio',
+    categoryLabel: 'Autoestima em Dia',
+    bookOrigin: 'Fala Sério, Amor!',
+    iconName: 'Sun',
+  },
+  {
+    id: 'advice-6',
+    quote: 'Você não precisa da aprovação da galera mais popular do colégio para ser uma garota incrível.',
+    category: 'amor-proprio',
+    categoryLabel: 'Recado do Coração',
+    bookOrigin: 'Confissões de uma Garota Linda, Popular e Infeliz',
+    iconName: 'Star',
+  },
+  {
+    id: 'advice-7',
+    quote: 'Se o plano A der errado, relaxe: o alfabeto tem mais 25 letras e a vida sempre tem um desvio divertido.',
+    category: 'humor',
+    categoryLabel: 'Respira e Vai',
+    bookOrigin: 'Tudo por um Popstar',
+    iconName: 'Compass',
+  },
+  {
+    id: 'advice-8',
+    quote: 'Não tenha medo de ser a pessoa esquisita do grupo; a originalidade é o único charme que não envelhece.',
+    category: 'drama',
+    categoryLabel: 'Orgulho Nerd',
+    bookOrigin: 'Confissões de um Garoto Tímido',
+    iconName: 'Glasses',
+  },
+];

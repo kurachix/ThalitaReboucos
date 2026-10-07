@@ -122,7 +122,7 @@
 
 ## 🎰 FASE 5: Gamificação Pop & Máquina de Conselhos
 
-### [ ] Etapa 15: Máquina de Conselhos da Thalita (Caça-Níquel Pop)
+### [x] Etapa 15: Máquina de Conselhos da Thalita (Caça-Níquel Pop)
 - **Objetivo**: Construir a máquina estilo caça-níquel/roleta vintage de chicletes com alavanca acionável para sortear pílulas de humor e conselhos afetivos dos livros da autora.
 - **Arquivos-chave**: `src/components/advice-machine/AdviceMachineSection.tsx`, `src/components/advice-machine/SlotReels.tsx`.
 - **Critério de Aceite**: Ao acionar a alavanca, cilindros giram com efeito de desfoque de movimento (*blur*) e som de roleta; cápsula se abre exibindo o conselho sorteado e a assinatura de Thalita.

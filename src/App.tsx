@@ -3,9 +3,9 @@ import { HeroSection } from '@/components/hero/HeroSection';
 import { TimelineSection } from '@/components/timeline/TimelineSection';
 import { BookshelfSection } from '@/components/bookshelf/BookshelfSection';
 import { CinemaSection } from '@/components/cinema/CinemaSection';
+import { AdviceMachineSection } from '@/components/advice-machine/AdviceMachineSection';
 import { 
   Sparkles, 
-  HelpCircle, 
   MessageSquare, 
   Heart,
 } from 'lucide-react';
@@ -26,37 +26,7 @@ export default function App() {
       <CinemaSection />
 
       {/* SEÇÃO 5: ADVICES — MÁQUINA DE CONSELHOS */}
-      <section 
-        id="advices" 
-        className="scroll-mt-24 py-12"
-      >
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider shadow-sticker">
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>Ato 5 · Caça-Níquel Pop</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
-            Máquina de Conselhos da Thalita
-          </h2>
-          <p className="text-slate-600 font-body text-base">
-            Puxe a alavanca e receba pílulas diárias de afeto, humor e autoestima direto dos livros.
-          </p>
-        </div>
-
-        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
-          <div className="max-w-md mx-auto space-y-3 py-6">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 mx-auto flex items-center justify-center">
-              <HelpCircle className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-800 font-heading">
-              Estrutura Pronta para a Roleta de Conselhos
-            </h3>
-            <p className="text-sm text-slate-500">
-              Pronto para os tambores giratórios e o gerador de cards para Instagram Stories na Fase 5.
-            </p>
-          </div>
-        </div>
-      </section>
+      <AdviceMachineSection />
 
       {/* SEÇÃO 6: QUIZ — QUAL PERSONAGEM É VOCÊ? */}
       <section 

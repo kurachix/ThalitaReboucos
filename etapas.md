@@ -50,7 +50,7 @@
 
 ## 🎵 FASE 2: Arquitetura Sensorial & Shell da Aplicação
 
-### [ ] Etapa 05: Sound Engine Tátil (Áudio Interativo & Web Audio / Howler)
+### [x] Etapa 05: Sound Engine Tátil (Áudio Interativo & Web Audio / Howler)
 - **Objetivo**: Implementar o motor de efeitos sonoros táteis (clique de tecla, folhear de página, puxada de alavanca, aplausos) e trilha sonora ambiente lo-fi com suporte a Web Audio API / Howler.js.
 - **Arquivos-chave**: `src/hooks/use-audio.ts`, `src/utils/sound-effects.ts`.
 - **Critério de Aceite**: Os sons só disparam após interação do usuário (*user gesture*); respeita rigorosamente a flag de silêncio global `isMuted`.

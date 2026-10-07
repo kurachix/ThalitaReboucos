@@ -62,7 +62,7 @@
 - **Critério de Aceite**: Barra translúcida com glassmorphism, indicador animado de áudio que oscila quando ativo e se contrai quando mudo, clique com feedback visual.
 - **Otimização para o Modelo**: Manter o componente autocontido com classes utilitárias diretas.
 
-### [ ] Etapa 07: Shell Responsivo, Texturas de Fundo e Layout Base
+### [x] Etapa 07: Shell Responsivo, Texturas de Fundo e Layout Base
 - **Objetivo**: Criar a casca principal da aplicação com container responsivo, padrão sutil de caderno pautado/quadriculado, detalhes de adesivos e microgrid de alinhamento.
 - **Arquivos-chave**: `src/components/layout/AppShell.tsx`, `src/App.tsx` (ou `src/app/page.tsx`).
 - **Critério de Aceite**: Layout responsivo perfeito em resoluções de 320px até 4K; rolagem suave sem quebra de overflow horizontal indesejado.

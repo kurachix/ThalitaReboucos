@@ -1,115 +1,245 @@
-import { Sparkles, Heart, Bookmark, Palette, Volume2 } from 'lucide-react';
-import { Header } from '@/components/common/Header';
+import { AppShell } from '@/components/layout/AppShell';
+import { 
+  Sparkles, 
+  Clock, 
+  BookOpen, 
+  Film, 
+  HelpCircle, 
+  MessageSquare, 
+  Heart,
+  Feather
+} from 'lucide-react';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-paper-ruled flex flex-col">
-      {/* Header Fixo / Flutuante com SoundPill */}
-      <Header />
-
-      <main className="flex-1 py-12 px-4 flex flex-col items-center justify-center">
-        {/* Container Principal Scrapbook */}
-        <div className="w-full max-w-2xl bg-white rounded-scrapbook shadow-scrapbook border-2 border-slate-100 p-8 sm:p-10 relative tape-effect">
+    <AppShell>
+      {/* SEÇÃO 1: HERO — O ATELIÊ DA AUTORA */}
+      <section 
+        id="hero" 
+        className="scroll-mt-24 min-h-[75vh] flex flex-col justify-center items-center text-center relative py-12"
+      >
+        <div className="w-full max-w-4xl bg-white/95 rounded-scrapbook shadow-scrapbook border-2 border-amber-200/60 p-8 sm:p-14 relative tape-effect">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sun-yellow-light text-amber-900 text-xs font-bold uppercase tracking-wider shadow-sticker mb-6">
+            <Feather className="w-3.5 h-3.5 text-pop-pink" />
+            <span>Ato 1 · O Ateliê da Autora</span>
+          </div>
           
-          {/* Cabeçalho do Card */}
-          <div className="text-center space-y-2 mb-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pop-pink-light text-pop-pink text-xs font-semibold uppercase tracking-wider shadow-sticker">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Etapa 06: Header & Sound Pill Ativos</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-heading">
-              Universo <span className="text-pop-pink">Thalita Rebouças</span>
-            </h1>
-            <p className="text-slate-600 font-body text-base max-w-lg mx-auto">
-              Navegação suave com glassmorphism, links entre atos e controle interativo de áudio com equalizador.
+          <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight font-heading leading-tight mb-4">
+            O Ateliê Pop & Diário Mágico de <span className="text-pop-pink">Thalita Rebouças</span>
+          </h1>
+          
+          <p className="text-slate-600 font-body text-lg sm:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+            Mergulhe no universo sensorial da escritora que conquistou mais de 2,3 milhões de leitores com histórias de amizade, família e gargalhadas sinceras.
+          </p>
+
+          <div className="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-6 max-w-xl mx-auto shadow-sm rotate-[-0.5deg]">
+            <p className="font-handwriting text-2xl sm:text-3xl text-slate-800 leading-snug">
+              "Escrevo para aproximar as pessoas através do afeto e da risada!"
             </p>
-          </div>
-
-          {/* Destaque da Pílula Sonora */}
-          <div className="mb-8 p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-pink-50 border border-amber-200/60 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0">
-                <Volume2 className="w-5 h-5" />
-              </div>
-              <div>
-                <h2 className="text-sm font-bold text-slate-800 font-heading">
-                  Pílula Sonora Interativa (Sound Pill)
-                </h2>
-                <p className="text-xs text-slate-500 font-body">
-                  Clique no botão no canto superior direito para alternar entre mudo e a trilha relaxante lo-fi.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Amostra Manuscrita de Scrapbook (Caveat) */}
-          <div className="relative mb-8 bg-sun-yellow-light/60 p-5 rounded-2xl border border-sun-yellow/40 shadow-sm rotate-[-1deg] transition-transform hover:rotate-0">
-            <div className="flex items-start gap-3">
-              <Heart className="w-6 h-6 text-pop-pink fill-pop-pink shrink-0 mt-1" />
-              <div>
-                <p className="font-handwriting text-2xl text-slate-800 leading-snug">
-                  "Escrevo para aproximar as pessoas através do afeto e da risada!"
-                </p>
-                <span className="font-handwriting text-xl text-slate-500 block text-right mt-1">
-                  — Com amor, Thalita 💛
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Paleta de Cores Cariocas Solares */}
-          <div className="space-y-3 mb-8">
-            <div className="flex items-center gap-2 text-sm font-semibold text-slate-700 font-heading">
-              <Palette className="w-4 h-4 text-sea-blue" />
-              <span>Paleta de Cores Solares & Tokens CSS</span>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-              <div className="p-3 rounded-xl bg-sun-yellow-light border border-sun-yellow/30 text-center">
-                <div className="w-8 h-8 rounded-full bg-sun-yellow mx-auto mb-2 shadow-sm" />
-                <span className="block font-heading text-xs font-bold text-slate-800">Sol de Ipanema</span>
-                <code className="text-[10px] text-slate-500 font-mono">#FFD13B</code>
-              </div>
-
-              <div className="p-3 rounded-xl bg-pop-pink-light border border-pop-pink/30 text-center">
-                <div className="w-8 h-8 rounded-full bg-pop-pink mx-auto mb-2 shadow-sm" />
-                <span className="block font-heading text-xs font-bold text-slate-800">Rosa Pop</span>
-                <code className="text-[10px] text-slate-500 font-mono">#FF2A85</code>
-              </div>
-
-              <div className="p-3 rounded-xl bg-sea-blue-light border border-sea-blue/30 text-center">
-                <div className="w-8 h-8 rounded-full bg-sea-blue mx-auto mb-2 shadow-sm" />
-                <span className="block font-heading text-xs font-bold text-slate-800">Azul Mar</span>
-                <code className="text-[10px] text-slate-500 font-mono">#00B4D8</code>
-              </div>
-
-              <div className="p-3 rounded-xl bg-tangerine-light border border-tangerine/30 text-center">
-                <div className="w-8 h-8 rounded-full bg-tangerine mx-auto mb-2 shadow-sm" />
-                <span className="block font-heading text-xs font-bold text-slate-800">Tangerina</span>
-                <code className="text-[10px] text-slate-500 font-mono">#FF7A00</code>
-              </div>
-
-              <div className="p-3 rounded-xl bg-mint-light border border-mint/30 text-center col-span-2 sm:col-span-1">
-                <div className="w-8 h-8 rounded-full bg-mint mx-auto mb-2 shadow-sm" />
-                <span className="block font-heading text-xs font-bold text-slate-800">Menta Fresco</span>
-                <code className="text-[10px] text-slate-500 font-mono">#2EC4B6</code>
-              </div>
-            </div>
-          </div>
-
-          {/* Rodapé do Card */}
-          <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-body">
-            <div className="flex items-center gap-1.5">
-              <Bookmark className="w-4 h-4 text-pop-pink" />
-              <span>Outfit · Plus Jakarta Sans · Caveat</span>
-            </div>
-            <span className="font-medium text-slate-600 bg-slate-100 px-3 py-1 rounded-full">
-              Próxima: Etapa 07 (Shell Responsivo & Layout Base)
+            <span className="font-handwriting text-xl text-slate-500 block text-right mt-2">
+              — Com todo carinho, Thalita 💛
             </span>
           </div>
-
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* SEÇÃO 2: TIMELINE — ÁLBUM DE MEMÓRIAS */}
+      <section 
+        id="timeline" 
+        className="scroll-mt-24 py-12"
+      >
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-sea-blue text-xs font-bold uppercase tracking-wider shadow-sticker">
+            <Clock className="w-3.5 h-3.5" />
+            <span>Ato 2 · Álbum de Figurinhas</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Linha do Tempo em Memórias
+          </h2>
+          <p className="text-slate-600 font-body text-base">
+            De 1974 aos dias de hoje: as recusas de editoras, os primeiros sucessos e as filas históricas da Bienal.
+          </p>
+        </div>
+
+        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
+          <div className="max-w-md mx-auto space-y-3 py-6">
+            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sea-blue mx-auto flex items-center justify-center">
+              <Clock className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 font-heading">
+              Estrutura Pronta para a Linha do Tempo
+            </h3>
+            <p className="text-sm text-slate-500">
+              O layout base está ancorado e preparado para receber o carrossel horizontal de polaroids 3D na Fase 3.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 3: BOOKSHELF — A ESTANTE POP */}
+      <section 
+        id="bookshelf" 
+        className="scroll-mt-24 py-12"
+      >
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-100 text-pop-pink text-xs font-bold uppercase tracking-wider shadow-sticker">
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Ato 3 · Catálogo Literário</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            A Estante Pop Tridimensional
+          </h2>
+          <p className="text-slate-600 font-body text-base">
+            Mais de 25 títulos organizados por séries: Fala Sério!, Popstar, Confissões e Romances.
+          </p>
+        </div>
+
+        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
+          <div className="max-w-md mx-auto space-y-3 py-6">
+            <div className="w-12 h-12 rounded-2xl bg-pink-100 text-pop-pink mx-auto flex items-center justify-center">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 font-heading">
+              Estrutura Pronta para a Estante 3D
+            </h3>
+            <p className="text-sm text-slate-500">
+              Pronto para os filtros interativos por coleção e o flipbook modal de leitura na Fase 4.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 4: CINEMA — CINE-THALITA */}
+      <section 
+        id="cinema" 
+        className="scroll-mt-24 py-12"
+      >
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider shadow-sticker">
+            <Film className="w-3.5 h-3.5" />
+            <span>Ato 4 · Do Papel Para as Telas</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Cine-Thalita & Streaming
+          </h2>
+          <p className="text-slate-600 font-body text-base">
+            As adaptações consagradas nas telas dos cinemas, Netflix e Prime Video.
+          </p>
+        </div>
+
+        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
+          <div className="max-w-md mx-auto space-y-3 py-6">
+            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 mx-auto flex items-center justify-center">
+              <Film className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 font-heading">
+              Estrutura Pronta para a Claquete Interativa
+            </h3>
+            <p className="text-sm text-slate-500">
+              Preparado para a claquete com som tátil de CLACK! e exibição dos 5 filmes na Fase 4.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 5: ADVICES — MÁQUINA DE CONSELHOS */}
+      <section 
+        id="advices" 
+        className="scroll-mt-24 py-12"
+      >
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider shadow-sticker">
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>Ato 5 · Caça-Níquel Pop</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Máquina de Conselhos da Thalita
+          </h2>
+          <p className="text-slate-600 font-body text-base">
+            Puxe a alavanca e receba pílulas diárias de afeto, humor e autoestima direto dos livros.
+          </p>
+        </div>
+
+        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
+          <div className="max-w-md mx-auto space-y-3 py-6">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 mx-auto flex items-center justify-center">
+              <HelpCircle className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 font-heading">
+              Estrutura Pronta para a Roleta de Conselhos
+            </h3>
+            <p className="text-sm text-slate-500">
+              Pronto para os tambores giratórios e o gerador de cards para Instagram Stories na Fase 5.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 6: QUIZ — QUAL PERSONAGEM É VOCÊ? */}
+      <section 
+        id="quiz" 
+        className="scroll-mt-24 py-12"
+      >
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-bold uppercase tracking-wider shadow-sticker">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Ato 6 · Mini-Jogo Interativo</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Quiz: Qual Personagem Você É?
+          </h2>
+          <p className="text-slate-600 font-body text-base">
+            Malu, Tetê, Gabi ou Rosa? Descubra quem tem mais a ver com o seu jeito de viver a vida.
+          </p>
+        </div>
+
+        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
+          <div className="max-w-md mx-auto space-y-3 py-6">
+            <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-800 mx-auto flex items-center justify-center">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 font-heading">
+              Estrutura Pronta para o Quiz Interativo
+            </h3>
+            <p className="text-sm text-slate-500">
+              Preparado para os cartões dinâmicos e a explosão de confetes festivos na Fase 5.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 7: FAN-WALL — MURAL DOS FÃS */}
+      <section 
+        id="fan-wall" 
+        className="scroll-mt-24 py-12"
+      >
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-100 text-pop-pink text-xs font-bold uppercase tracking-wider shadow-sticker">
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Ato 7 · Parede de Cortiça</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Mural dos Fãs & Bienal Nostalgia
+          </h2>
+          <p className="text-slate-600 font-body text-base">
+            Deixe seu recadinho afetuoso pregado no mural e celebre a conexão de leitores de todo o Brasil.
+          </p>
+        </div>
+
+        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
+          <div className="max-w-md mx-auto space-y-3 py-6">
+            <div className="w-12 h-12 rounded-2xl bg-pink-100 text-pop-pink mx-auto flex items-center justify-center">
+              <Heart className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-800 font-heading">
+              Estrutura Pronta para o Mural de Post-its
+            </h3>
+            <p className="text-sm text-slate-500">
+              Preparado para a parede de cortiça, recados balançantes e persistência local na Fase 6.
+            </p>
+          </div>
+        </div>
+      </section>
+    </AppShell>
   );
 }

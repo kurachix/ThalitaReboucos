@@ -22,7 +22,7 @@
 
 ## 🚀 FASE 1: Fundação, Tooling, Tokens e Dados Estruturados
 
-### [ ] Etapa 01: Inicialização do Workspace e Configuração da Stack
+### [x] Etapa 01: Inicialização do Workspace e Configuração da Stack
 - **Objetivo**: Inicializar o projeto com TypeScript Strict Mode, empacotador veloz (Vite ou Next.js), Tailwind CSS e bibliotecas de ícones/utilitários essenciais (`lucide-react`, `clsx`, `tailwind-merge`).
 - **Arquivos-chave**: `package.json`, `tsconfig.json`, `vite.config.ts` (ou `next.config.js`), `tailwind.config.js`.
 - **Critério de Aceite**: Projeto compila em tempo recorde (`npm run dev` limpo), sem erros de tipagem e com hot reload funcional.

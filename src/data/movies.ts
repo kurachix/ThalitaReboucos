@@ -11,8 +11,11 @@ export const MOVIES_CATALOG: Movie[] = [
     cast: ['Ingrid Guimarães', 'Larissa Manoela', 'Marcelo Laham', 'João Guilherme'],
     highlight: 'Mais de 3 milhões de espectadores nas salas de cinema',
     synopsis: 'As alegrias, os conflitos e as lágrimas da relação de Ângela Cristina e Malu ganham vida na interpretação inesquecível de Ingrid Guimarães e Larissa Manoela.',
-    trailerId: 'dQw4w9WgXcQ', // Placeholder de ID para exibição no reprodutor
+    trailerId: '4zJu91a3KGI',
     badgeColor: '#FF2A85',
+    duration: '1h 48min',
+    trivia: 'Thalita fez uma ponta divertida como passageira no ônibus e ajudou Ingrid Guimarães e Larissa Manoela a lapidar a cumplicidade cômica do roteiro. O filme foi uma das maiores bilheterias nacionais da década!',
+    backdropColor: '#FF2A85',
   },
   {
     id: 'tudo-por-um-popstar-filme',
@@ -24,8 +27,11 @@ export const MOVIES_CATALOG: Movie[] = [
     cast: ['Maisa Silva', 'Klara Castanho', 'Mel Maia', 'João Guilherme', 'Felipe Neto'],
     highlight: 'Fenômeno infanto-juvenil com trilha sonora pop e turnê musical',
     synopsis: 'Três adolescentes inseparáveis de Resende embarcam em uma jornada cheia de confusões no Rio de Janeiro para conseguir assistir ao show da boyband Slavabody Disco Disco Boys.',
-    trailerId: 'dQw4w9WgXcQ',
+    trailerId: 'k5q4i1W79iU',
     badgeColor: '#00B4D8',
+    duration: '1h 35min',
+    trivia: 'Thalita co-escreveu as letras das músicas da boyband fictícia Slavabody Disco Disco Boys e compareceu a sessões surpresa de cinema, cantando junto com as salas lotadas de fãs.',
+    backdropColor: '#00B4D8',
   },
   {
     id: 'ela-disse-ele-disse-filme',
@@ -37,8 +43,11 @@ export const MOVIES_CATALOG: Movie[] = [
     cast: ['Duda Matte', 'Marcus Bessa', 'Maisa Silva', 'Bianca Andrade (Boca Rosa)'],
     highlight: 'Estreia de Bianca Andrade nas telonas e disputa de popularidade colegial',
     synopsis: 'Leo e Rosa ingressam em uma nova escola e precisam navegar pela pressão dos colegas, a tirania da garota mais popular e os primeiros sentimentos que surgem entre eles.',
-    trailerId: 'dQw4w9WgXcQ',
+    trailerId: 'q6g4hY9q6r0',
     badgeColor: '#FFD13B',
+    duration: '1h 30min',
+    trivia: 'Marcou a estreia de Bianca Andrade (Boca Rosa) como atriz no cinema e trouxe Maisa Silva interpretando sua primeira vilã, a cômica e arrogante Júlia.',
+    backdropColor: '#FF7A00',
   },
   {
     id: 'confissoes-garota-excluida-filme',
@@ -50,8 +59,11 @@ export const MOVIES_CATALOG: Movie[] = [
     cast: ['Klara Castanho', 'Júlia Gomes', 'Marcus Bessa', 'Kiria Malheiros', 'Fernanda Concon'],
     highlight: 'Top 10 Global da Netflix em produções de língua não-inglesa',
     synopsis: 'A história emocionante de Tetê, uma garota inteligente e desajeitada que se muda para o Rio e tenta não sofrer bullying na nova escola enquanto descobre amigos sinceros.',
-    trailerId: 'dQw4w9WgXcQ',
+    trailerId: '11J_aVq-3oU',
     badgeColor: '#E50914', // Vermelho Netflix
+    duration: '1h 43min',
+    trivia: 'Lançado simultaneamente em mais de 190 países pela Netflix, o filme alcançou o Top 10 em dezenas de nações da América Latina e Europa, abordando acolhimento contra o bullying.',
+    backdropColor: '#E50914',
   },
   {
     id: 'um-ano-inesquecivel-verao-filme',
@@ -63,7 +75,10 @@ export const MOVIES_CATALOG: Movie[] = [
     cast: ['Lívia Silva', 'Ronald Sotto', 'Maitê Padilha', 'André Mattos'],
     highlight: 'A magia do Carnaval carioca e do barracão da Portela em alta definição',
     synopsis: 'Para conseguir viajar e estudar fora, Inhabi precisa trabalhar como costureira no barracão da escola de samba Portela e acaba descobrindo a força da sua ancestralidade e do amor.',
-    trailerId: 'dQw4w9WgXcQ',
+    trailerId: 'R94aD45f-w4',
     badgeColor: '#00A8E1', // Azul Prime Video
+    duration: '1h 40min',
+    trivia: 'Filmado nas dependências reais da lendária escola de samba Portela no Rio. Thalita realizou o sonho de levar a poesia do samba e da comunidade carioca para as telas mundiais do Prime Video.',
+    backdropColor: '#00A8E1',
   },
 ];

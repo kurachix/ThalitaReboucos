@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { MOVIES_CATALOG } from '@/data/movies';
 import { Movie } from '@/types';
 import { Clapperboard } from './Clapperboard';
+import { MovieCard } from './MovieCard';
+import { TrailerModal } from './TrailerModal';
 import { useAudio } from '@/hooks/use-audio';
 import { 
   Film, 
@@ -10,16 +12,27 @@ import {
   Users, 
   Award, 
   Clapperboard as ClapperIcon,
-  Play
+  Play,
+  ChevronLeft,
+  ChevronRight,
+  MessageCircle,
+  Eye
 } from 'lucide-react';
 
 export const CinemaSection: React.FC = () => {
   const [selectedMovieIndex, setSelectedMovieIndex] = useState(0);
   const [isProjectorOn, setIsProjectorOn] = useState(true);
   const [spotlightPulse, setSpotlightPulse] = useState(false);
-  const { playClick } = useAudio();
+  
+  // Estado do Trailer Modal (Lightbox Acessível)
+  const [trailerMovie, setTrailerMovie] = useState<Movie | null>(null);
+  const [isTrailerModalOpen, setIsTrailerModalOpen] = useState(false);
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const { playClick, playPageFlip } = useAudio();
 
   const currentMovie = MOVIES_CATALOG[selectedMovieIndex];
+  const totalMovies = MOVIES_CATALOG.length;
 
   // Disparo da batida da claquete: acende e pulsa o feixe de luz do projetor
   const handleClap = useCallback((_movie: Movie) => {
@@ -33,13 +46,37 @@ export const CinemaSection: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Seleção de filme na tira de película 35mm
+  // Seleção de filme
   const handleSelectMovie = (index: number) => {
     playClick();
     setSelectedMovieIndex(index);
     setIsProjectorOn(true);
     setSpotlightPulse(true);
     setTimeout(() => setSpotlightPulse(false), 500);
+  };
+
+  // Navegação no carrossel
+  const handlePrevMovie = () => {
+    playPageFlip();
+    const prevIdx = selectedMovieIndex > 0 ? selectedMovieIndex - 1 : totalMovies - 1;
+    handleSelectMovie(prevIdx);
+  };
+
+  const handleNextMovie = () => {
+    playPageFlip();
+    const nextIdx = selectedMovieIndex < totalMovies - 1 ? selectedMovieIndex + 1 : 0;
+    handleSelectMovie(nextIdx);
+  };
+
+  // Abertura de trailer sob demanda
+  const handleOpenTrailer = (movie: Movie) => {
+    playClick();
+    setTrailerMovie(movie);
+    setIsTrailerModalOpen(true);
+  };
+
+  const handleCloseTrailer = () => {
+    setIsTrailerModalOpen(false);
   };
 
   return (
@@ -142,7 +179,7 @@ export const CinemaSection: React.FC = () => {
                   : 'bg-slate-900/40 border-slate-800 opacity-60'
               }`}
             >
-              {/* Badge de Plataforma e Ano */}
+              {/* Badge de Plataforma, Ano e Duração */}
               <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
                 <span 
                   className="px-3 py-1 rounded-full text-xs font-bold font-heading text-white shadow-xs"
@@ -151,8 +188,10 @@ export const CinemaSection: React.FC = () => {
                   {currentMovie.platformLabel}
                 </span>
 
-                <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                <div className="flex items-center gap-3 text-xs font-mono text-slate-400">
                   <span>Lançamento: <strong className="text-white">{currentMovie.year}</strong></span>
+                  <span>•</span>
+                  <span>{currentMovie.duration || 'Longa-metragem'}</span>
                 </div>
               </div>
 
@@ -167,11 +206,11 @@ export const CinemaSection: React.FC = () => {
               </div>
 
               {/* Destaque de Bilheteria / Recorde de Audiência */}
-              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-start gap-3 my-3">
+              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-start gap-3 my-2">
                 <Award className="w-5 h-5 text-sun-yellow shrink-0 mt-0.5" />
                 <div>
                   <span className="block text-[11px] uppercase tracking-wider text-slate-400 font-heading font-bold">
-                    Marco do Cinema
+                    Marco do Cinema & Streaming
                   </span>
                   <p className="text-xs sm:text-sm text-slate-200 font-semibold">
                     {currentMovie.highlight}
@@ -185,7 +224,7 @@ export const CinemaSection: React.FC = () => {
               </p>
 
               {/* Elenco Consagrado */}
-              <div className="pt-3 border-t border-slate-800/80 space-y-2">
+              <div className="pt-2 border-t border-slate-800/80 space-y-2">
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 font-heading font-bold">
                   <Users className="w-3.5 h-3.5 text-pop-pink" />
                   <span>Elenco Principal:</span>
@@ -202,6 +241,29 @@ export const CinemaSection: React.FC = () => {
                 </div>
               </div>
 
+              {/* Botões de Ação na Tela Principal: Assistir Trailer e Ver Bastidores */}
+              <div className="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleOpenTrailer(currentMovie)}
+                  className="px-4 py-2 rounded-xl bg-sun-yellow hover:bg-sun-yellow-dark text-slate-950 font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-md active:scale-95"
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  <span>Assistir Trailer Oficial</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleOpenTrailer(currentMovie);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 border border-slate-700 active:scale-95"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-pop-pink" />
+                  <span>Curiosidades da Thalita</span>
+                </button>
+              </div>
+
               {/* Selo de Iluminação Ativa */}
               {isProjectorOn && (
                 <div className="absolute top-4 right-4 hidden sm:flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sun-yellow/20 border border-sun-yellow/40 text-sun-yellow text-[10px] font-mono">
@@ -214,62 +276,87 @@ export const CinemaSection: React.FC = () => {
 
         </div>
 
-        {/* ======================================================== */}
-        {/* TIRA DE PELÍCULA 35MM: SELETOR DOS 5 FILMES              */}
-        {/* ======================================================== */}
-        <div className="mt-8 pt-6 border-t border-slate-800/80">
-          <div className="flex items-center justify-between mb-3 text-xs text-slate-400">
-            <span className="font-heading font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <Tv className="w-3.5 h-3.5 text-sun-yellow" />
-              <span>Filmografia Adaptada (Selecione para rodar na claquete):</span>
+        {/* =================================================================== */}
+        {/* CARROSSEL DE FILMES & BASTIDORES DAS TELAS (CAROUSEL DE CARDS)      */}
+        {/* =================================================================== */}
+        <div className="mt-10 pt-8 border-t border-slate-800/80">
+          
+          {/* Cabeçalho do Carrossel com Controles Anterior / Próximo */}
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-heading font-bold uppercase tracking-wider text-sun-yellow">
+                <Tv className="w-4 h-4" />
+                <span>Carrossel de Obras Audiovisuais</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black font-heading text-white tracking-tight mt-0.5">
+                Os 5 Filmes Adaptados
+              </h3>
+            </div>
+
+            {/* Controles do Carrossel */}
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs text-slate-400 mr-2 hidden sm:inline">
+                Filme {selectedMovieIndex + 1} de {totalMovies}
+              </span>
+
+              <button
+                type="button"
+                onClick={handlePrevMovie}
+                aria-label="Filme anterior"
+                className="p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white transition-all border border-slate-700 active:scale-95"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNextMovie}
+                aria-label="Próximo filme"
+                className="p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white transition-all border border-slate-700 active:scale-95"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Grid e Carrossel Fluído de Filmes */}
+          <div 
+            ref={carouselRef}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
+          >
+            {MOVIES_CATALOG.map((movie, idx) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                index={idx}
+                isSelected={idx === selectedMovieIndex}
+                onSelect={(_m, index) => handleSelectMovie(index)}
+                onWatchTrailer={handleOpenTrailer}
+              />
+            ))}
+          </div>
+
+          {/* Dica de Navegação Rápida */}
+          <div className="mt-4 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-500 font-mono">
+            <span className="flex items-center gap-1.5">
+              <Eye className="w-3.5 h-3.5 text-sun-yellow" />
+              <span>Clique em qualquer cartaz para carregar na claquete ou assista ao trailer.</span>
             </span>
-            <span className="font-mono text-[11px] text-slate-500 hidden sm:inline">
-              5 Longas-Metragens Consagrados
+            <span className="hidden sm:inline">
+              100% sob demanda sem carregamentos pesados
             </span>
           </div>
 
-          {/* Fotogramas da Tira de Filme */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
-            {MOVIES_CATALOG.map((movie, idx) => {
-              const isSelected = idx === selectedMovieIndex;
-              return (
-                <button
-                  key={movie.id}
-                  type="button"
-                  onClick={() => handleSelectMovie(idx)}
-                  className={`group relative text-left p-3 rounded-xl border transition-all duration-200 ${
-                    isSelected
-                      ? 'bg-slate-800 border-sun-yellow shadow-md ring-2 ring-sun-yellow/40 scale-[1.02]'
-                      : 'bg-slate-900/60 border-slate-800 hover:bg-slate-800/80 hover:border-slate-700'
-                  }`}
-                >
-                  {/* Furinhos simulando película 35mm no topo */}
-                  <div className="flex justify-between items-center pb-2 border-b border-slate-800/60 text-[10px] font-mono text-slate-400">
-                    <span>FILM 0{idx + 1}</span>
-                    <span className="text-[10px] font-bold text-slate-300">{movie.year}</span>
-                  </div>
-
-                  <h4 className="font-heading font-bold text-xs text-white line-clamp-1 mt-2 group-hover:text-sun-yellow transition-colors">
-                    {movie.title}
-                  </h4>
-                  <span className="text-[10px] font-mono text-slate-400 block truncate mt-0.5">
-                    {movie.director}
-                  </span>
-
-                  {/* Indicador de Seleção Ativa */}
-                  {isSelected && (
-                    <div className="mt-2 flex items-center gap-1 text-[10px] font-bold text-sun-yellow font-heading">
-                      <Play className="w-2.5 h-2.5 fill-current" />
-                      <span>Na Claquete</span>
-                    </div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
         </div>
 
       </div>
+
+      {/* Modal Lightbox Acessível para Reprodução de Trailer Sob Demanda */}
+      <TrailerModal
+        movie={trailerMovie}
+        isOpen={isTrailerModalOpen}
+        onClose={handleCloseTrailer}
+      />
     </section>
   );
 };

@@ -112,7 +112,7 @@
 - **Critério de Aceite**: A batida da claquete acende um feixe de luz de projetor de cinema que destaca o filme selecionado na seção.
 - **Otimização para o Modelo**: Isolar a física de rotação da claquete usando estados simples de mola no Framer Motion (`rotate: [0, -25, 0]`).
 
-### [ ] Etapa 14: Cine-Thalita — Carrossel de Filmes e Bastidores das Telas
+### [x] Etapa 14: Cine-Thalita — Carrossel de Filmes e Bastidores das Telas
 - **Objetivo**: Apresentar os 5 filmes adaptados das obras de Thalita (Netflix, Prime Video, Cinema), com elenco, sinopse, recordes de bilheteria e modal/aba com curiosidades e trailers.
 - **Arquivos-chave**: `src/components/cinema/CinemaSection.tsx`, `src/components/cinema/MovieCard.tsx`, `src/components/cinema/TrailerModal.tsx`.
 - **Critério de Aceite**: Navegação fluida entre os filmes, badges de streaming (Netflix / Prime Video / Cinema), reprodução de trailer ou teaser oficial em lightbox acessível.

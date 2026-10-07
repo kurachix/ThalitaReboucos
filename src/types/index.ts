@@ -39,6 +39,9 @@ export interface Movie {
   synopsis: string;
   trailerId?: string; // YouTube video ID para exibição leve
   badgeColor: string;
+  trivia?: string; // Curiosidades e bastidores contados pela autora
+  duration?: string;
+  backdropColor?: string;
 }
 
 export type MilestoneType = 

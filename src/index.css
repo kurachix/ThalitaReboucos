@@ -91,4 +91,31 @@
     border: 3px dashed #CBD5E1;
     border-radius: 12px;
   }
+
+  /* Barras do Equalizador de Som */
+  .animate-eq-1 {
+    animation: eqBar 0.75s ease-in-out infinite alternate;
+    transform-origin: bottom;
+  }
+  .animate-eq-2 {
+    animation: eqBar 0.55s ease-in-out 0.15s infinite alternate;
+    transform-origin: bottom;
+  }
+  .animate-eq-3 {
+    animation: eqBar 0.85s ease-in-out 0.35s infinite alternate;
+    transform-origin: bottom;
+  }
+  .animate-eq-4 {
+    animation: eqBar 0.65s ease-in-out 0.1s infinite alternate;
+    transform-origin: bottom;
+  }
+}
+
+@keyframes eqBar {
+  0% {
+    transform: scaleY(0.25);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }

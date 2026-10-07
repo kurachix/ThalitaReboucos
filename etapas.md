@@ -56,7 +56,7 @@
 - **Critério de Aceite**: Os sons só disparam após interação do usuário (*user gesture*); respeita rigorosamente a flag de silêncio global `isMuted`.
 - **Otimização para o Modelo**: Sintetizar sons via Web Audio API como fallback para não depender obrigatoriamente de arquivos externos pesados de áudio.
 
-### [ ] Etapa 06: Barra de Navegação Flutuante & Pílula Sonora ("Sound Pill")
+### [x] Etapa 06: Barra de Navegação Flutuante & Pílula Sonora ("Sound Pill")
 - **Objetivo**: Construir o header fixo/flutuante com logotipo estilizado de Thalita, links de navegação suave entre atos biográficos e o botão de áudio interativo com equalizador animado em CSS.
 - **Arquivos-chave**: `src/components/common/Header.tsx`, `src/components/audio/SoundPill.tsx`.
 - **Critério de Aceite**: Barra translúcida com glassmorphism, indicador animado de áudio que oscila quando ativo e se contrai quando mudo, clique com feedback visual.

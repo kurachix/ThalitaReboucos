@@ -40,7 +40,7 @@
 - **Critério de Aceite**: Tipos estritos para cada entidade (`Book`, `Movie`, `TimelineMilestone`, `AdviceQuote`, `QuizQuestion`) sem uso de `any`.
 - **Otimização para o Modelo**: Concentrar todo o acervo em arquivos dedicados na pasta `src/data/`, deixando os componentes focados 100% em visual e interatividade.
 
-### [ ] Etapa 04: Gerenciamento de Estado Global com Zustand
+### [x] Etapa 04: Gerenciamento de Estado Global com Zustand
 - **Objetivo**: Criar o store leve para gerenciar o estado da aplicação: controle de áudio (*mute/unmute*), livro selecionado para leitura, adesivos colecionados desbloqueados e modal ativo.
 - **Arquivos-chave**: `src/store/use-app-store.ts`.
 - **Critério de Aceite**: Store exportando `useAppStore` com ações reativas (`toggleAudio`, `openBookModal`, `collectSticker`), com estado inicial mudo (`isMuted: true`).

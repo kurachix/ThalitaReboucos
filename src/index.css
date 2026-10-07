@@ -135,6 +135,28 @@
   .book-ribbon-tail {
     clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
   }
+
+  /* Claquete de Cinema & Feixe de Luz de Projetor */
+  .clapper-stripes {
+    background: repeating-linear-gradient(
+      -45deg,
+      #0F172A,
+      #0F172A 18px,
+      #F8FAFC 18px,
+      #F8FAFC 36px
+    );
+  }
+
+  .projector-beam {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 235, 130, 0.4) 0%,
+      rgba(255, 215, 0, 0.18) 35%,
+      rgba(255, 255, 255, 0.06) 70%,
+      transparent 100%
+    );
+    clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+  }
 }
 
 @keyframes eqBar {

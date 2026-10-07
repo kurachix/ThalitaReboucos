@@ -106,7 +106,7 @@
 - **Critério de Aceite**: Animação realista de abertura e fechamento de capa; tecla `ESC` fecha o modal; botão de fechar com feedback de clique e trava de scroll no fundo (`overflow: hidden`).
 - **Otimização para o Modelo**: Usar portal React (`createPortal`) ou modal nativo com controle de foco e acessibilidade.
 
-### [ ] Etapa 13: Claquete Interativa de Cinema
+### [x] Etapa 13: Claquete Interativa de Cinema
 - **Objetivo**: Criar o componente de claquete de cinema onde o usuário puxa e solta a haste móvel (drag ou clique), disparando a animação de batida com som de *CLACK!*.
 - **Arquivos-chave**: `src/components/cinema/Clapperboard.tsx`.
 - **Critério de Aceite**: A batida da claquete acende um feixe de luz de projetor de cinema que destaca o filme selecionado na seção.

@@ -31,6 +31,7 @@ export interface AppState {
   setActiveBook: (bookId: string | null) => void;
   openMovieModal: (movieId: string) => void;
   closeMovieModal: () => void;
+  setSelectedMovieId: (movieId: string | null) => void;
   collectSticker: (stickerId: string) => void;
   closeAllModals: () => void;
 }
@@ -106,6 +107,11 @@ export const useAppStore = create<AppState>((set) => ({
       selectedMovieId: null,
       isMovieModalOpen: false,
       activeModal: null,
+    }),
+
+  setSelectedMovieId: (movieId: string | null) =>
+    set({
+      selectedMovieId: movieId,
     }),
 
   // Desbloquear e Colecionar Adesivos (Sem duplicatas)

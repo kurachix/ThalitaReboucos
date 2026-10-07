@@ -2,9 +2,9 @@ import { AppShell } from '@/components/layout/AppShell';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { TimelineSection } from '@/components/timeline/TimelineSection';
 import { BookshelfSection } from '@/components/bookshelf/BookshelfSection';
+import { CinemaSection } from '@/components/cinema/CinemaSection';
 import { 
   Sparkles, 
-  Film, 
   HelpCircle, 
   MessageSquare, 
   Heart,
@@ -23,37 +23,7 @@ export default function App() {
       <BookshelfSection />
 
       {/* SEÇÃO 4: CINEMA — CINE-THALITA */}
-      <section 
-        id="cinema" 
-        className="scroll-mt-24 py-12"
-      >
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider shadow-sticker">
-            <Film className="w-3.5 h-3.5" />
-            <span>Ato 4 · Do Papel Para as Telas</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
-            Cine-Thalita & Streaming
-          </h2>
-          <p className="text-slate-600 font-body text-base">
-            As adaptações consagradas nas telas dos cinemas, Netflix e Prime Video.
-          </p>
-        </div>
-
-        <div className="bg-white/80 rounded-scrapbook shadow-scrapbook border border-slate-200/70 p-8 text-center text-slate-500 font-body">
-          <div className="max-w-md mx-auto space-y-3 py-6">
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 mx-auto flex items-center justify-center">
-              <Film className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-800 font-heading">
-              Estrutura Pronta para a Claquete Interativa
-            </h3>
-            <p className="text-sm text-slate-500">
-              Preparado para a claquete com som tátil de CLACK! e exibição dos 5 filmes na Fase 4.
-            </p>
-          </div>
-        </div>
-      </section>
+      <CinemaSection />
 
       {/* SEÇÃO 5: ADVICES — MÁQUINA DE CONSELHOS */}
       <section 

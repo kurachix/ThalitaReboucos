@@ -160,7 +160,7 @@
 
 ## ⚡ FASE 7: Acessibilidade, Performance 60 FPS & Polimento
 
-### [ ] Etapa 20: Modo de Movimento Reduzido & Acessibilidade Inclusiva (a11y)
+### [x] Etapa 20: Modo de Movimento Reduzido & Acessibilidade Inclusiva (a11y)
 - **Objetivo**: Adaptar todas as animações para o padrão `prefers-reduced-motion: reduce`, adicionar atributos ARIA (`aria-label`, `role="dialog"`, `aria-live`) e assegurar navegação completa por teclado.
 - **Arquivos-chave**: `src/hooks/use-reduced-motion.ts`, `src/index.css`.
 - **Critério de Aceite**: Com a redução de movimento ativada no sistema operacional, a página substitui transições rápidas e giros 3D por fades suaves e transições discretas sem perder usabilidade.

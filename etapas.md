@@ -1,7 +1,7 @@
 # 🗺️ Roteiro de Desenvolvimento: Universo Thalita Rebouças
-## Guia de Execução em 24 Etapas Modulares (Otimizado para Desempenho e Contexto da IA)
+## Guia de Execução em 34 Etapas Modulares (24 Fundamentais + 10 Atualizações de Experiência e Qualidade)
 
-> **Estratégia de Engenharia**: Este documento divide a criação do site biográfico hiper-interativo de **Thalita Rebouças** em **24 etapas incrementais e atômicas**. Cada etapa possui escopo estrito, arquivos delimitados e critérios de verificação objetivos, evitando perda de contexto do modelo de IA e garantindo fluidez contínua (60-120 FPS).
+> **Estratégia de Engenharia**: Este documento divide a criação e evolução contínua do site biográfico hiper-interativo de **Thalita Rebouças** em etapas incrementais e atômicas. As 24 primeiras etapas estabeleceram a fundação completa e os 7 atos da experiência, enquanto a **Fase 9 (Etapas 25 a 34)** traz 10 atualizações profundas focadas em refinamento de qualidade, feedback sensorial e interação direta do usuário com a plataforma.
 
 ---
 
@@ -17,6 +17,7 @@
 | **Fase 6** | Mural dos Fãs & Comunidade de Leitores | Etapas 18 a 19 |
 | **Fase 7** | Acessibilidade, Performance 60 FPS & Polimento | Etapas 20 a 22 |
 | **Fase 8** | SEO Biográfico Schema.org & Validação Final | Etapas 23 a 24 |
+| **Fase 9** | Refinamento de Qualidade & Interação Usuário ➔ Plataforma | Etapas 25 a 34 |
 
 ---
 
@@ -193,6 +194,70 @@
 - **Arquivos-chave**: `dist/` (ou `.next/`), `README.md`.
 - **Critério de Aceite**: Build limpo sem erros, todos os links externos funcionando, áudio responsivo, gamificação 100% interativa e documentação atualizada.
 - **Otimização para o Modelo**: Executar comando de checagem de tipos (`tsc --noEmit`) antes do empacotamento final.
+
+---
+
+## ✨ FASE 9: Refinamento de Qualidade & Interação Usuário ➔ Plataforma (10 Atualizações de Excelência)
+
+### [ ] Etapa 25: Resposta Háptica Mobile e Efeito "Touch Ripple Pop"
+- **Objetivo**: Implementar respostas táteis físicas via `navigator.vibrate` em dispositivos móveis compatíveis nas interações-chave (clique das teclas da máquina de escrever, batida da claquete, alavanca do caça-níqueis e fixação do post-it com alfinete) acopladas a uma animação visual de micro-burst de partículas e ondulação elástica (*ripple pop*).
+- **Arquivos-chave**: `src/utils/haptics.ts`, `src/components/common/RippleFeedback.tsx`, `src/index.css`.
+- **Critério de Aceite**: Em dispositivos móveis suportados, ações de impacto disparam vibração sutil (10-30ms); visualmente, cada toque/clique em botões primários gera feedback expansivo suave com física elástica.
+- **Impacto na Interação**: Transforma cliques planos em sensações de toque físico palpável, conectando a interface ao mundo real.
+
+### [ ] Etapa 26: Navegação Global por Teclado e Modo Power-User (Atalhos & Quick-Nav)
+- **Objetivo**: Criar sistema abrangente de hotkeys globais com modal de ajuda (`[?]`) e anéis de foco inteligentes (`focus-visible`) estilizados com tema pop neon.
+- **Arquivos-chave**: `src/hooks/use-keyboard-navigation.ts`, `src/components/common/KeyboardShortcutsModal.tsx`.
+- **Critério de Aceite**: Teclas mapeadas: `[M]` alterna áudio mudo/ativo; `[Espaço]` aciona a interação focal da seção em vista (alavanca de conselhos ou claquete); `[J]` / `[K]` ou setas transitam suavemente entre atos biográficos; `[?]` abre o diálogo de atalhos.
+- **Impacto na Interação**: Concede agilidade instantânea para usuários frequentes, revisores e eleva o nível de acessibilidade motora sem depender do mouse.
+
+### [ ] Etapa 27: Passaporte da Leitora — Rastreador de Exploração & Gamificação Interativa
+- **Objetivo**: Introduzir um "Passaporte / Crachá de Fã" flutuante retrátil que rastreia em tempo real os marcos de interação do usuário (ex: 6 selos: "Datilografou Manifesto", "Girou Caça-Níquel", "Bateu Claquete", "Concluiu Quiz", "Colou Post-It", "Abriu Livro").
+- **Arquivos-chave**: `src/components/gamification/ReaderPassport.tsx`, `src/store/use-app-store.ts`, `src/data/achievements.ts`.
+- **Critério de Aceite**: Barra discreta ou ícone de passaporte com contagem regressiva/porcentagem (ex: "4/6 experiências vividas"); ao atingir 100%, desbloqueia o carimbo holográfico "Super Fã Oficial da Thalita" com chuva de confetes e mensagem comemorativa exclusiva.
+- **Impacto na Interação**: Estimula a curiosidade e incentiva o usuário a explorar e interagir com 100% dos componentes da página.
+
+### [ ] Etapa 28: Cursor Customizado Reativo com Trilha de Brilhos (Desktop Magic Trail)
+- **Objetivo**: Implementar cursor estilizado para desktop que assume identidades visuais contextuais conforme a seção percorrida (caneta de autógrafo no Ateliê e Mural, claquete no Cinema, lupa na Estante e dedinho adesivo nos botões).
+- **Arquivos-chave**: `src/components/common/CustomCursor.tsx`, `src/hooks/use-cursor-trail.ts`, `src/index.css`.
+- **Critério de Aceite**: Rastro suave e ultra-leve de micro-estrelas/brilhos ao mover o mouse; cursor se desativa automaticamente em dispositivos touch e sob `prefers-reduced-motion` sem gerar consumo excessivo de CPU.
+- **Impacto na Interação**: Torna a navegação visualmente lúdica, viva e imersiva desde o primeiro milissegundo de uso no computador.
+
+### [ ] Etapa 29: Easter Eggs e Reações Afetivas Dinâmicas da Thalita aos Gestos do Visitante
+- **Objetivo**: Inserir gatilhos lúdicos escondidos (como triplo-clique nos óculos da autora, interação com a caneca de café no ateliê ou sequência de teclas especiais) revelando fotos raras de bastidores, mensagens de voz carinhosas ou balões de fala contextuais.
+- **Arquivos-chave**: `src/components/hero/EasterEggs.tsx`, `src/components/common/SpeechBubble.tsx`, `src/data/easter-eggs.ts`.
+- **Critério de Aceite**: Gatilhos documentados disparam balões de fala bem-humorados no estilo característico de Thalita ("Você achou meu diário secreto!"), com áudio afetivo opcional e efeito sonoro de risada pop.
+- **Impacto na Interação**: Cria o sentimento de surpresa, encanto e descoberta orgânica, marcas registradas da literatura infanto-juvenil da autora.
+
+### [ ] Etapa 30: Folheamento Tátil & Leitor com Audiobook Preview nos Livros
+- **Objetivo**: Enriquecer o modal de livros (`BookFlipbookModal`) com suporte a gestos touch de arrastar para virar página (*swipe-to-flip*), som aprimorado de folhear papel real e botão interativo "Ouvir Trecho" com síntese de voz (Web Speech API) ou áudio demonstrativo da autora.
+- **Arquivos-chave**: `src/components/bookshelf/BookFlipbookModal.tsx`, `src/components/bookshelf/AudiobookPlayer.tsx`.
+- **Critério de Aceite**: Usuário pode folhear a página clicando nas extremidades ou deslizando horizontalmente no touch; botão de play/pause para ouvir sinopse em áudio com barra de progresso em tempo real; marcador de página interativo que salva os livros favoritos do visitante no `localStorage`.
+- **Impacto na Interação**: Eleva o consumo da obra literária para um formato multissensorial (visual, sonoro e gestual).
+
+### [ ] Etapa 31: Seletor Dinâmico de Ambientes Afetivos (Modo Copacabana / Noite de Estreia / Caderno Pastel)
+- **Objetivo**: Criar um seletor rápido de ambientação na barra de navegação que altera harmonicamente as variáveis CSS de iluminação, contraste e plano de fundo: "Tarde em Copacabana" (solar/amarelo vivo), "Noite de Estreia" (dark pop/cinema neon) e "Caderno Pastel" (tons suaves de papel pautado).
+- **Arquivos-chave**: `src/components/common/ThemeSelector.tsx`, `src/store/use-app-store.ts`, `src/index.css`.
+- **Critério de Aceite**: Transição fluida de cor sem piscadas na tela (*no flash*); escolha salva e recuperada automaticamente do `localStorage`; conformidade de contraste WCAG AA mantida em todos os temas.
+- **Impacto na Interação**: Dá ao usuário sensação de controle e personalização do próprio ambiente de leitura conforme seu gosto ou horário do dia.
+
+### [ ] Etapa 32: Skeletons Orgânicos & Otimização Preditiva de Latência Zero (Preload on Hover)
+- **Objetivo**: Implementar esqueletos de carregamento (*skeleton placeholders*) desenhados no estilo de caderno com efeito de brilho suave para carrosséis e cards, além de pré-carregamento sob demanda (hover prefetch) ao passar o mouse sobre botões de trailer e livros.
+- **Arquivos-chave**: `src/components/common/SkeletonCard.tsx`, `src/hooks/use-prefetch.ts`.
+- **Critério de Aceite**: Ao passar o cursor sobre um card de filme ou livro por mais de 100ms, metadados pesados e trailers do YouTube são pré-conectados em segundo plano (`dns-prefetch` e `modulepreload`), abrindo o modal com latência zero perceptível.
+- **Impacto na Interação**: Elimina qualquer fricção ou sensação de espera, proporcionando velocidade instantânea ao usuário.
+
+### [ ] Etapa 33: Gaveta Flutuante de Acessibilidade Visual e Cognitiva (Quick A11y Drawer)
+- **Objetivo**: Desenvolver um painel flutuante de acessibilidade acessível via botão discreto no rodapé/lateral contendo controles imediatos: ajuste de tamanho da fonte (A- / A / A+), alternador para tipografia legível / OpenDyslexic, alto contraste e interruptor de pausa de animações.
+- **Arquivos-chave**: `src/components/accessibility/A11yDrawer.tsx`, `src/hooks/use-a11y-preferences.ts`.
+- **Critério de Aceite**: Alterações refletem instantaneamente no DOM via classes raiz (`html.high-contrast`, `html.font-large`, `html.dyslexic-friendly`); estado persistido no navegador; suporte total a leitores de tela.
+- **Impacto na Interação**: Garante que leitores de todas as idades, com diferentes graus de visão ou neurodivergências, aproveitem a biografia com máximo conforto e autonomia.
+
+### [ ] Etapa 34: Interação Social no Mural dos Fãs (Reações com Emojis & Contador de Carinho)
+- **Objetivo**: Expandir o Mural de Cortiça permitindo que os visitantes reajam a qualquer post-it já fixado através de uma barra de reações em miniatura (❤️ "Amei", 👏 "Arrasou", 📖 "Li Tudo", ✨ "Inspirador"), com contador dinâmico e animação de mini-corações subindo pela tela.
+- **Arquivos-chave**: `src/components/fan-wall/PostItNote.tsx`, `src/components/fan-wall/NoteReactions.tsx`, `src/hooks/use-local-notes.ts`.
+- **Critério de Aceite**: Clicar na reação incrementa a contagem imediatamente no `localStorage` do usuário e exibe micro-explosão de corações com física orgânica; barra de busca e filtro rápido de post-its por cor e cidade de origem.
+- **Impacto na Interação**: Converte a experiência passiva de leitura de recados em uma comunidade viva e afetiva de troca entre leitores da autora.
 
 ---
 

@@ -235,12 +235,6 @@
 - **Critério de Aceite**: Usuário pode folhear a página clicando nas extremidades ou deslizando horizontalmente no touch; botão de play/pause para ouvir sinopse em áudio com barra de progresso em tempo real; marcador de página interativo que salva os livros favoritos do visitante no `localStorage`.
 - **Impacto na Interação**: Eleva o consumo da obra literária para um formato multissensorial (visual, sonoro e gestual).
 
-### [ ] Etapa 31: Seletor Dinâmico de Ambientes Afetivos (Modo Copacabana / Noite de Estreia / Caderno Pastel)
-- **Objetivo**: Criar um seletor rápido de ambientação na barra de navegação que altera harmonicamente as variáveis CSS de iluminação, contraste e plano de fundo: "Tarde em Copacabana" (solar/amarelo vivo), "Noite de Estreia" (dark pop/cinema neon) e "Caderno Pastel" (tons suaves de papel pautado).
-- **Arquivos-chave**: `src/components/common/ThemeSelector.tsx`, `src/store/use-app-store.ts`, `src/index.css`.
-- **Critério de Aceite**: Transição fluida de cor sem piscadas na tela (*no flash*); escolha salva e recuperada automaticamente do `localStorage`; conformidade de contraste WCAG AA mantida em todos os temas.
-- **Impacto na Interação**: Dá ao usuário sensação de controle e personalização do próprio ambiente de leitura conforme seu gosto ou horário do dia.
-
 ### [ ] Etapa 32: Skeletons Orgânicos & Otimização Preditiva de Latência Zero (Preload on Hover)
 - **Objetivo**: Implementar esqueletos de carregamento (*skeleton placeholders*) desenhados no estilo de caderno com efeito de brilho suave para carrosséis e cards, além de pré-carregamento sob demanda (hover prefetch) ao passar o mouse sobre botões de trailer e livros.
 - **Arquivos-chave**: `src/components/common/SkeletonCard.tsx`, `src/hooks/use-prefetch.ts`.

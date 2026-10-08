@@ -133,6 +133,7 @@ export const Clapperboard: React.FC<ClapperboardProps> = ({
       <div 
         role="button"
         tabIndex={0}
+        data-focal-action="clapperboard"
         aria-label={`Claquete de cinema para ${currentMovie.title}. Clique ou puxe a haste para bater.`}
         onKeyDown={handleKeyDown}
         onClick={handleQuickClap}

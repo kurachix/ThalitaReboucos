@@ -190,6 +190,7 @@ export const AdviceMachineSection: React.FC = () => {
               onClick={handlePullLever}
               role="button"
               tabIndex={0}
+              data-focal-action="advice-lever"
               aria-label="Puxar alavanca da máquina de conselhos"
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {

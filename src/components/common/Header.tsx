@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Heart, Menu, X, BookOpen, Film, HelpCircle, MessageSquare, Sparkles, Clock, Zap, ZapOff } from 'lucide-react';
+import { Heart, Menu, X, BookOpen, Film, HelpCircle, MessageSquare, Sparkles, Clock, Zap, ZapOff, Keyboard } from 'lucide-react';
 import { SoundPill } from '@/components/audio/SoundPill';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotionControls } from '@/hooks/use-reduced-motion';
+import { useAppStore } from '@/store/use-app-store';
+import { triggerHaptic } from '@/utils/haptics';
 
 interface NavItem {
   label: string;
@@ -24,6 +26,7 @@ export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { playClick } = useAudio();
   const { isReducedMotion, toggleReducedMotion } = useReducedMotionControls();
+  const toggleKeyboardModal = useAppStore((state) => state.toggleKeyboardModal);
 
   const handleNavClick = (href: string) => {
     playClick();
@@ -115,6 +118,22 @@ export const Header: React.FC = () => {
             )}
           </button>
 
+          {/* Botão de Atalhos de Teclado [?] */}
+          <button
+            type="button"
+            onClick={() => {
+              playClick();
+              triggerHaptic('light');
+              toggleKeyboardModal();
+            }}
+            aria-label="Abrir guia de atalhos de teclado (ou pressione ? no teclado)"
+            className="p-2 rounded-full border border-slate-200 bg-white/80 hover:bg-pink-50 hover:text-pop-pink hover:border-pink-300 text-slate-600 transition-all text-xs font-heading font-bold flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink shadow-xs"
+            title="Atalhos de Teclado [?]"
+          >
+            <Keyboard className="w-4 h-4 text-slate-600 hover:text-pop-pink" />
+            <span className="hidden xl:inline text-[11px]">Atalhos [?]</span>
+          </button>
+
           {/* Sound Pill Flutuante */}
           <SoundPill />
 
@@ -183,6 +202,26 @@ export const Header: React.FC = () => {
                 isReducedMotion ? 'bg-purple-200 text-purple-900' : 'bg-slate-200 text-slate-600'
               }`}>
                 {isReducedMotion ? 'Ativado' : 'Desativado'}
+              </span>
+            </button>
+
+            {/* Atalhos de Teclado no Menu Mobile */}
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                triggerHaptic('light');
+                setIsMobileMenuOpen(false);
+                toggleKeyboardModal();
+              }}
+              className="w-full flex items-center justify-between px-3 py-2.5 mt-2 rounded-xl text-xs font-semibold font-heading bg-amber-50 hover:bg-pink-50 text-slate-700 hover:text-pop-pink transition-colors border border-amber-200/60"
+            >
+              <div className="flex items-center gap-2">
+                <Keyboard className="w-4 h-4 text-pop-pink shrink-0" />
+                <span>Atalhos de Teclado (Power-User)</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md bg-white text-slate-600 border border-slate-200 text-[10px] font-mono font-bold">
+                [?]
               </span>
             </button>
           </div>

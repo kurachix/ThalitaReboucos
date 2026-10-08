@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type ActiveModalType = 'book' | 'movie' | 'advice-card' | 'new-note' | null;
+export type ActiveModalType = 'book' | 'movie' | 'advice-card' | 'new-note' | 'keyboard' | null;
 
 export interface AppState {
   // Áudio e Trilha
@@ -18,6 +18,9 @@ export interface AppState {
 
   // Card de Conselho para Redes Sociais
   isAdviceCardModalOpen: boolean;
+
+  // Modal de Atalhos de Teclado (Modo Power-User)
+  isKeyboardModalOpen: boolean;
 
   // Acessibilidade: Movimento Reduzido (a11y)
   isReducedMotion: boolean;
@@ -40,6 +43,9 @@ export interface AppState {
   setSelectedMovieId: (movieId: string | null) => void;
   openAdviceCardModal: () => void;
   closeAdviceCardModal: () => void;
+  openKeyboardModal: () => void;
+  closeKeyboardModal: () => void;
+  toggleKeyboardModal: () => void;
   toggleReducedMotion: () => void;
   setReducedMotion: (value: boolean) => void;
   collectSticker: (stickerId: string) => void;
@@ -72,6 +78,7 @@ export const useAppStore = create<AppState>((set) => ({
   isMovieModalOpen: false,
 
   isAdviceCardModalOpen: false,
+  isKeyboardModalOpen: false,
 
   collectedStickers: [],
   activeModal: null,
@@ -152,6 +159,25 @@ export const useAppStore = create<AppState>((set) => ({
       activeModal: null,
     }),
 
+  // Controle do Modal de Atalhos de Teclado
+  openKeyboardModal: () =>
+    set({
+      isKeyboardModalOpen: true,
+      activeModal: 'keyboard',
+    }),
+
+  closeKeyboardModal: () =>
+    set({
+      isKeyboardModalOpen: false,
+      activeModal: null,
+    }),
+
+  toggleKeyboardModal: () =>
+    set((state) => ({
+      isKeyboardModalOpen: !state.isKeyboardModalOpen,
+      activeModal: !state.isKeyboardModalOpen ? 'keyboard' : null,
+    })),
+
   // Acessibilidade: Controle de Movimento Reduzido (a11y)
   toggleReducedMotion: () =>
     set((state) => {
@@ -191,6 +217,7 @@ export const useAppStore = create<AppState>((set) => ({
       selectedMovieId: null,
       isMovieModalOpen: false,
       isAdviceCardModalOpen: false,
+      isKeyboardModalOpen: false,
       activeModal: null,
     }),
 }));

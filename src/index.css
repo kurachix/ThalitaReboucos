@@ -440,4 +440,28 @@ html[data-low-end="true"] .projector-beam {
   will-change: transform, opacity;
 }
 
+/* =================================================================== */
+/* ANÉIS DE FOCO INTELIGENTES POP NEON (ETAPA 26: POWER-USER & A11Y)   */
+/* =================================================================== */
+
+:focus-visible {
+  outline: 3px solid #FF2A85;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 4px rgba(255, 209, 59, 0.45), 0 0 14px rgba(255, 42, 133, 0.4);
+  transition: outline-offset 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #FF2A85;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(255, 209, 59, 0.5), 0 0 16px rgba(255, 42, 133, 0.45);
+}
+
+
 

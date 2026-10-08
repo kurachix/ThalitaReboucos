@@ -205,7 +205,7 @@
 - **Critério de Aceite**: Em dispositivos móveis suportados, ações de impacto disparam vibração sutil (10-30ms); visualmente, cada toque/clique em botões primários gera feedback expansivo suave com física elástica.
 - **Impacto na Interação**: Transforma cliques planos em sensações de toque físico palpável, conectando a interface ao mundo real.
 
-### [ ] Etapa 26: Navegação Global por Teclado e Modo Power-User (Atalhos & Quick-Nav)
+### [x] Etapa 26: Navegação Global por Teclado e Modo Power-User (Atalhos & Quick-Nav)
 - **Objetivo**: Criar sistema abrangente de hotkeys globais com modal de ajuda (`[?]`) e anéis de foco inteligentes (`focus-visible`) estilizados com tema pop neon.
 - **Arquivos-chave**: `src/hooks/use-keyboard-navigation.ts`, `src/components/common/KeyboardShortcutsModal.tsx`.
 - **Critério de Aceite**: Teclas mapeadas: `[M]` alterna áudio mudo/ativo; `[Espaço]` aciona a interação focal da seção em vista (alavanca de conselhos ou claquete); `[J]` / `[K]` ou setas transitam suavemente entre atos biográficos; `[?]` abre o diálogo de atalhos.

@@ -7,10 +7,14 @@ import { AdviceMachineSection } from '@/components/advice-machine/AdviceMachineS
 import { QuizSection } from '@/components/quiz/QuizSection';
 import { FanWallSection } from '@/components/fan-wall/FanWallSection';
 import { useDeviceCapability } from '@/hooks/use-device-capability';
+import { useKeyboardNavigation } from '@/hooks/use-keyboard-navigation';
 
 export default function App() {
   // Inicializa detecção de capacidade de hardware, conexão e touch
   useDeviceCapability();
+
+  // Inicializa atalhos globais de teclado (Modo Power-User & Acessibilidade)
+  useKeyboardNavigation();
 
   return (
     <AppShell>

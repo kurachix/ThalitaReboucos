@@ -3,6 +3,7 @@ import { Header } from '@/components/common/Header';
 import { FloatingStickersLayer } from '@/components/common/FloatingStickersLayer';
 import { KeyboardShortcutsModal } from '@/components/common/KeyboardShortcutsModal';
 import { ReaderPassport } from '@/components/gamification/ReaderPassport';
+import { CustomCursor } from '@/components/common/CustomCursor';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { Heart, Sparkles, BookOpen, Instagram, Twitter } from 'lucide-react';
 import { THALITA_PROFILE } from '@/data/biography';
@@ -15,6 +16,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col bg-paper-ruled text-slate-800 antialiased overflow-x-hidden selection:bg-pink-200 selection:text-pink-900 relative">
       
+      {/* Cursor Customizado Reativo com Trilha Mágica de Brilhos (Desktop) */}
+      <CustomCursor />
+
       {/* Modal Global de Atalhos de Teclado (Modo Power-User) */}
       <KeyboardShortcutsModal />
 

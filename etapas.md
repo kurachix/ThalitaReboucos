@@ -217,7 +217,7 @@
 - **Critério de Aceite**: Barra discreta ou ícone de passaporte com contagem regressiva/porcentagem (ex: "4/6 experiências vividas"); ao atingir 100%, desbloqueia o carimbo holográfico "Super Fã Oficial da Thalita" com chuva de confetes e mensagem comemorativa exclusiva.
 - **Impacto na Interação**: Estimula a curiosidade e incentiva o usuário a explorar e interagir com 100% dos componentes da página.
 
-### [ ] Etapa 28: Cursor Customizado Reativo com Trilha de Brilhos (Desktop Magic Trail)
+### [x] Etapa 28: Cursor Customizado Reativo com Trilha de Brilhos (Desktop Magic Trail)
 - **Objetivo**: Implementar cursor estilizado para desktop que assume identidades visuais contextuais conforme a seção percorrida (caneta de autógrafo no Ateliê e Mural, claquete no Cinema, lupa na Estante e dedinho adesivo nos botões).
 - **Arquivos-chave**: `src/components/common/CustomCursor.tsx`, `src/hooks/use-cursor-trail.ts`, `src/index.css`.
 - **Critério de Aceite**: Rastro suave e ultra-leve de micro-estrelas/brilhos ao mover o mouse; cursor se desativa automaticamente em dispositivos touch e sob `prefers-reduced-motion` sem gerar consumo excessivo de CPU.

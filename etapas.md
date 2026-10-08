@@ -211,7 +211,7 @@
 - **Critério de Aceite**: Teclas mapeadas: `[M]` alterna áudio mudo/ativo; `[Espaço]` aciona a interação focal da seção em vista (alavanca de conselhos ou claquete); `[J]` / `[K]` ou setas transitam suavemente entre atos biográficos; `[?]` abre o diálogo de atalhos.
 - **Impacto na Interação**: Concede agilidade instantânea para usuários frequentes, revisores e eleva o nível de acessibilidade motora sem depender do mouse.
 
-### [ ] Etapa 27: Passaporte da Leitora — Rastreador de Exploração & Gamificação Interativa
+### [x] Etapa 27: Passaporte da Leitora — Rastreador de Exploração & Gamificação Interativa
 - **Objetivo**: Introduzir um "Passaporte / Crachá de Fã" flutuante retrátil que rastreia em tempo real os marcos de interação do usuário (ex: 6 selos: "Datilografou Manifesto", "Girou Caça-Níquel", "Bateu Claquete", "Concluiu Quiz", "Colou Post-It", "Abriu Livro").
 - **Arquivos-chave**: `src/components/gamification/ReaderPassport.tsx`, `src/store/use-app-store.ts`, `src/data/achievements.ts`.
 - **Critério de Aceite**: Barra discreta ou ícone de passaporte com contagem regressiva/porcentagem (ex: "4/6 experiências vividas"); ao atingir 100%, desbloqueia o carimbo holográfico "Super Fã Oficial da Thalita" com chuva de confetes e mensagem comemorativa exclusiva.

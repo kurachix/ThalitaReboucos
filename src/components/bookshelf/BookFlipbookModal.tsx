@@ -4,6 +4,8 @@ import { useAppStore } from '@/store/use-app-store';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { BOOKS_CATALOG } from '@/data/books';
+import { AudiobookPlayer } from './AudiobookPlayer';
+import { triggerHaptic } from '@/utils/haptics';
 import { 
   X, 
   BookOpen, 
@@ -36,13 +38,29 @@ export const BookFlipbookModal: React.FC = () => {
   const [copiedQuote, setCopiedQuote] = useState(false);
   const [mobilePage, setMobilePage] = useState<'left' | 'right'>('right');
 
+  // Estado de Livros Favoritos salvos no localStorage
+  const [favoriteBooks, setFavoriteBooks] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const saved = localStorage.getItem('thalita_favorite_books');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [favoriteToast, setFavoriteToast] = useState<string | null>(null);
+
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
 
   // Busca o livro selecionado no catálogo
   const currentIndex = BOOKS_CATALOG.findIndex((b) => b.id === activeBookId);
   const currentBook = currentIndex !== -1 ? BOOKS_CATALOG[currentIndex] : BOOKS_CATALOG[0];
   const totalBooks = BOOKS_CATALOG.length;
+
+  const isFavorited = currentBook ? favoriteBooks.includes(currentBook.id) : false;
 
   const prevBook = currentIndex > 0 ? BOOKS_CATALOG[currentIndex - 1] : BOOKS_CATALOG[totalBooks - 1];
   const nextBook = currentIndex < totalBooks - 1 ? BOOKS_CATALOG[currentIndex + 1] : BOOKS_CATALOG[0];
@@ -76,15 +94,68 @@ export const BookFlipbookModal: React.FC = () => {
     openBookModal(nextBook.id);
   }, [playPageFlip, openBookModal, nextBook.id]);
 
-  // Cópia da citação marcante com feedback
-  const handleCopyQuote = useCallback(() => {
+  // Alterna livro como favorito e persiste
+  const handleToggleFavorite = useCallback(() => {
     if (!currentBook) return;
     playClick();
-    const textToCopy = `"${currentBook.highlightQuote}" — Thalita Rebouças (${currentBook.title})`;
-    navigator.clipboard?.writeText(textToCopy);
+    triggerHaptic('medium');
+
+    const nextFavorites = isFavorited
+      ? favoriteBooks.filter((id) => id !== currentBook.id)
+      : [...favoriteBooks, currentBook.id];
+
+    setFavoriteBooks(nextFavorites);
+    try {
+      localStorage.setItem('thalita_favorite_books', JSON.stringify(nextFavorites));
+    } catch {}
+
+    setFavoriteToast(
+      isFavorited
+        ? 'Removido dos favoritos'
+        : `💖 "${currentBook.title}" marcado como favorito!`
+    );
+    setTimeout(() => setFavoriteToast(null), 2500);
+  }, [currentBook, isFavorited, favoriteBooks, playClick]);
+
+  // Copia citação marcante para a área de transferência
+  const handleCopyQuote = useCallback(() => {
+    if (!currentBook) return;
+    triggerHaptic('light');
+    playClick();
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(`"${currentBook.highlightQuote}" — Thalita Rebouças, em "${currentBook.title}"`);
+    }
     setCopiedQuote(true);
-    setTimeout(() => setCopiedQuote(false), 2400);
+    setTimeout(() => setCopiedQuote(false), 2200);
   }, [currentBook, playClick]);
+
+  // Gestos de toque horizontal (Swipe-to-Flip)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
+
+    // Detecta arrasto predominantemente horizontal (> 42px)
+    if (Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        // Deslizar para a esquerda -> folheia para o próximo
+        triggerHaptic('medium');
+        handleNavigateNext();
+      } else {
+        // Deslizar para a direita -> folheia para o anterior
+        triggerHaptic('medium');
+        handleNavigatePrev();
+      }
+    }
+
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+  };
 
   // Trava de Scroll no Background e Foco de Acessibilidade
   useEffect(() => {
@@ -232,17 +303,60 @@ export const BookFlipbookModal: React.FC = () => {
           </button>
         </div>
 
+        {/* Toast Notificador de Livro Favoritado */}
+        {favoriteToast && (
+          <div className="absolute top-12 left-1/2 -translate-x-1/2 z-40 bg-slate-900 text-white text-xs font-heading font-extrabold px-4 py-1.5 rounded-full shadow-xl border border-pink-400 animate-in fade-in zoom-in duration-150 flex items-center gap-1.5 select-none">
+            <Heart className="w-3.5 h-3.5 text-pop-pink fill-pop-pink" />
+            <span>{favoriteToast}</span>
+          </div>
+        )}
+
         {/* Estrutura Física do Livro Aberto (Spread com Capa Dura, Páginas e Lombada) */}
-        <div className="relative bg-paper rounded-2xl md:rounded-3xl book-stacked-edges overflow-hidden border-4 border-amber-950/20 shadow-2xl flex flex-col md:flex-row min-h-[480px] md:min-h-[560px] max-h-[80vh] md:max-h-[76vh]">
-          
-          {/* Fita Marcador de Página de Cetim (Silk Ribbon Bookmark) */}
-          <div 
-            className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 sm:w-5 h-16 sm:h-20 z-30 pointer-events-none book-ribbon-tail shadow-md"
+        <div 
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative bg-paper rounded-2xl md:rounded-3xl book-stacked-edges overflow-hidden border-4 border-amber-950/20 shadow-2xl flex flex-col md:flex-row min-h-[480px] md:min-h-[560px] max-h-[80vh] md:max-h-[76vh]"
+        >
+          {/* Botão de Folhear Anterior (Lateral Esquerda) */}
+          <button
+            type="button"
+            onClick={handleNavigatePrev}
+            aria-label={`Folhear para o livro anterior: ${prevBook.title}`}
+            className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-14 rounded-l-2xl bg-amber-100/90 hover:bg-white text-slate-700 hover:text-pop-pink border border-amber-300 shadow-md items-center justify-center transition-all hover:-translate-x-1 active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink"
+            title={`Página anterior (←): ${prevBook.title}`}
+          >
+            <ChevronLeft className="w-5 h-5 group-hover:scale-125 transition-transform text-pop-pink" />
+          </button>
+
+          {/* Botão de Folhear Próximo (Lateral Direita) */}
+          <button
+            type="button"
+            onClick={handleNavigateNext}
+            aria-label={`Folhear para o próximo livro: ${nextBook.title}`}
+            className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-14 rounded-r-2xl bg-amber-100/90 hover:bg-white text-slate-700 hover:text-pop-pink border border-amber-300 shadow-md items-center justify-center transition-all hover:translate-x-1 active:scale-95 group focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink"
+            title={`Próxima página (→): ${nextBook.title}`}
+          >
+            <ChevronRight className="w-5 h-5 group-hover:scale-125 transition-transform text-pop-pink" />
+          </button>
+
+          {/* Fita Marcador de Página Interativo (Silk Ribbon Bookmark) */}
+          <button 
+            type="button"
+            onClick={handleToggleFavorite}
+            aria-label={isFavorited ? `Remover ${currentBook.title} dos favoritos` : `Salvar ${currentBook.title} nos favoritos`}
+            className="absolute -top-1 left-1/2 -translate-x-1/2 w-6 sm:w-7 h-18 sm:h-22 z-30 book-ribbon-tail shadow-md cursor-pointer transition-transform hover:scale-105 active:scale-95 flex flex-col items-center pt-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink"
             style={{
-              backgroundColor: currentBook.coverAccent || '#FF2A85',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.25)',
+              backgroundColor: isFavorited ? '#FF2A85' : (currentBook.coverAccent || '#E5B41C'),
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.35)',
             }}
-          />
+            title={isFavorited ? 'Livro favoritado! Clique para remover' : 'Clique na fita para salvar como favorito'}
+          >
+            <Heart 
+              className={`w-3.5 h-3.5 transition-transform group-hover:scale-125 ${
+                isFavorited ? 'text-white fill-white animate-pulse' : 'text-white/80'
+              }`} 
+            />
+          </button>
 
           {/* Sombra Central da Lombada e Vinco de Dobradura (Central Spine Gutter) */}
           <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-12 book-gutter-shadow pointer-events-none z-20" />
@@ -437,6 +551,14 @@ export const BookFlipbookModal: React.FC = () => {
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* Player de Narração do Audiobook Preview */}
+            <div className="pt-3">
+              <AudiobookPlayer
+                bookTitle={currentBook.title}
+                textToNarrate={activeTab === 'synopsis' ? currentBook.synopsis : bookExcerpt}
+              />
             </div>
 
             {/* Conteúdo Central da Página Direita */}

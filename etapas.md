@@ -172,7 +172,7 @@
 - **Critério de Aceite**: Zero quedas bruscas de frames (jank); score elevado no Lighthouse; carregamento responsivo sob 3G/4G.
 - **Otimização para o Modelo**: Executar revisão sistemática seguindo o checklist da skill `performance-audit-cross-device`.
 
-### [ ] Etapa 22: Adesivos Decorativos & Microinterações Magnéticas
+### [x] Etapa 22: Adesivos Decorativos & Microinterações Magnéticas
 - **Objetivo**: Implementar adesivos holográficos arrastáveis pelo usuário (*draggable stickers*) espalhados pela tela e efeito magnético nos botões primários de ação (o botão é atraído suavemente em direção ao cursor).
 - **Arquivos-chave**: `src/components/common/MagneticButton.tsx`, `src/components/common/FloatingSticker.tsx`.
 - **Critério de Aceite**: Adesivos podem ser arrastados com física natural e soltos em qualquer ponto; botões respondem com suavidade magnética no desktop.

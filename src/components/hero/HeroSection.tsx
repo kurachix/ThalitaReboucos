@@ -10,6 +10,7 @@ import {
 import { GlassesColorPicker, GLASSES_COLORS, GlassesColor } from './GlassesColorPicker';
 import { Typewriter } from './Typewriter';
 import { useAudio } from '@/hooks/use-audio';
+import { MagneticButton } from '@/components/common/MagneticButton';
 
 export const HeroSection: React.FC = () => {
   const [activeGlasses, setActiveGlasses] = useState<GlassesColor>(GLASSES_COLORS[0]);
@@ -83,9 +84,9 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Botões de Ação */}
+          {/* Botões de Ação com Efeito Magnético Suave */}
           <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-            <button
+            <MagneticButton
               type="button"
               onClick={() => handleScrollTo('#timeline')}
               className="px-6 py-3 rounded-full text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 hover:scale-105 active:scale-95"
@@ -93,16 +94,16 @@ export const HeroSection: React.FC = () => {
             >
               <span>Ver Linha do Tempo</span>
               <ArrowDown className="w-4 h-4" />
-            </button>
+            </MagneticButton>
 
-            <button
+            <MagneticButton
               type="button"
               onClick={() => handleScrollTo('#bookshelf')}
               className="px-6 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-heading font-bold text-sm shadow-xs hover:border-slate-300 transition-all duration-200 flex items-center gap-2"
             >
               <BookOpen className="w-4 h-4 text-pop-pink" />
               <span>Explorar Estante Pop</span>
-            </button>
+            </MagneticButton>
           </div>
 
           {/* Óculos Interativos em Destaque na Lateral */}

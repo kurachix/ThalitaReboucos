@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header } from '@/components/common/Header';
+import { FloatingStickersLayer } from '@/components/common/FloatingStickersLayer';
 import { Heart, Sparkles, BookOpen, Instagram, Twitter } from 'lucide-react';
 import { THALITA_PROFILE } from '@/data/biography';
 
@@ -23,6 +24,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
         }}
         aria-hidden="true"
       />
+
+      {/* Camada de Adesivos Holográficos Arrastáveis (Draggable Pop Stickers) */}
+      <FloatingStickersLayer />
 
       {/* Header Fixo com Glassmorphism */}
       <Header />

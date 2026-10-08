@@ -4,6 +4,7 @@ import { NoteColor } from '@/types';
 import { PostItNote } from './PostItNote';
 import { BienalPolaroid } from './BienalPolaroid';
 import { AddNoteModal } from './AddNoteModal';
+import { MagneticButton } from '@/components/common/MagneticButton';
 import { useLocalNotes, NewNoteInput } from '@/hooks/use-local-notes';
 import { useAudio } from '@/hooks/use-audio';
 import { 
@@ -176,8 +177,8 @@ export const FanWallSection: React.FC = () => {
             />
           </div>
 
-          {/* Botão de Pregar Novo Recado */}
-          <button
+          {/* Botão Magnético de Pregar Novo Recado */}
+          <MagneticButton
             type="button"
             onClick={() => {
               playClick();
@@ -187,7 +188,7 @@ export const FanWallSection: React.FC = () => {
           >
             <PlusCircle className="w-4 h-4" />
             <span>Pregar Meu Recado 📌</span>
-          </button>
+          </MagneticButton>
         </div>
 
         {/* ======================================================== */}

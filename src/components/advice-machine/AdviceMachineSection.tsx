@@ -3,6 +3,7 @@ import { ADVICE_QUOTES } from '@/data/advices';
 import { AdviceQuote } from '@/types';
 import { SlotReels, THEME_REEL_ITEMS, BOOK_REEL_ITEMS, CHARM_REEL_ITEMS } from './SlotReels';
 import { ShareableCard } from './ShareableCard';
+import { MagneticButton } from '@/components/common/MagneticButton';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { 
@@ -221,8 +222,8 @@ export const AdviceMachineSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Botão de Disparo Textual Alternativo */}
-            <button
+            {/* Botão de Disparo Textual com Efeito Magnético */}
+            <MagneticButton
               type="button"
               disabled={isSpinning}
               onClick={handlePullLever}
@@ -234,7 +235,7 @@ export const AdviceMachineSection: React.FC = () => {
             >
               <RotateCcw className={`w-4 h-4 ${isSpinning ? 'animate-spin' : ''}`} />
               <span>{isSpinning ? 'Girando Roleta...' : 'Puxar Alavanca! 🎰'}</span>
-            </button>
+            </MagneticButton>
           </div>
 
         </div>
@@ -329,7 +330,7 @@ export const AdviceMachineSection: React.FC = () => {
                     <strong>Gostou desse conselho?</strong> Exporte em formato de card estilizado com borda scrapbook, autógrafo digital e proporções perfeitas para <strong>Instagram Stories (9:16)</strong> ou <strong>Feed/WhatsApp (1:1)</strong>.
                   </p>
                 </div>
-                <button
+                <MagneticButton
                   type="button"
                   onClick={() => {
                     playClick();
@@ -339,7 +340,7 @@ export const AdviceMachineSection: React.FC = () => {
                 >
                   <Sparkles className="w-3.5 h-3.5 text-sun-yellow" />
                   <span>Personalizar Card 🎨</span>
-                </button>
+                </MagneticButton>
               </div>
 
             </div>

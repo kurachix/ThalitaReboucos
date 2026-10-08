@@ -1,6 +1,7 @@
 import React from 'react';
 import { Movie } from '@/types';
 import { useAudio } from '@/hooks/use-audio';
+import { useHoverPrefetch, prefetchYouTubeTrailer } from '@/hooks/use-prefetch';
 import { 
   Play, 
   Award, 
@@ -27,6 +28,11 @@ export const MovieCard: React.FC<MovieCardProps> = ({
 }) => {
   const { playClick } = useAudio();
 
+  // Otimização Preditiva: pré-conecta com YouTube e carrega thumbnail ao pairar cursor > 100ms
+  const prefetchHandlers = useHoverPrefetch(() => {
+    prefetchYouTubeTrailer(movie.trailerId);
+  }, 100);
+
   const handleCardClick = () => {
     onSelect(movie, index);
   };
@@ -40,6 +46,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
   return (
     <div
       onClick={handleCardClick}
+      {...prefetchHandlers}
       className={`group relative flex flex-col justify-between rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden select-none ${
         isSelected
           ? 'bg-slate-900 border-sun-yellow shadow-[0_0_30px_rgba(255,209,59,0.25)] ring-2 ring-sun-yellow/40 scale-[1.02]'

@@ -4,13 +4,25 @@ import { BOOKS_CATALOG } from '@/data/books';
 import { CategoryFilter } from './CategoryFilter';
 import { BookSpine } from './BookSpine';
 import { BookFlipbookModal } from './BookFlipbookModal';
+import { SkeletonCard } from '@/components/common/SkeletonCard';
 import { BookOpen, Search, X, Sparkles } from 'lucide-react';
 import { useAudio } from '@/hooks/use-audio';
 
 export const BookshelfSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<BookCategory>('todos');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const { playClick } = useAudio();
+
+  const handleSelectCategory = (cat: BookCategory) => {
+    if (cat === selectedCategory) return;
+    setIsTransitioning(true);
+    setSelectedCategory(cat);
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 150);
+    return () => clearTimeout(timer);
+  };
 
   const filteredBooks = useMemo(() => {
     return BOOKS_CATALOG.filter((book) => {
@@ -82,7 +94,7 @@ export const BookshelfSection: React.FC = () => {
         {/* Filtros em Pílulas */}
         <CategoryFilter
           selectedCategory={selectedCategory}
-          onSelectCategory={(cat) => setSelectedCategory(cat)}
+          onSelectCategory={handleSelectCategory}
         />
       </div>
 
@@ -103,7 +115,15 @@ export const BookshelfSection: React.FC = () => {
         </div>
 
         {/* Prateleira com Livros */}
-        {filteredBooks.length > 0 ? (
+        {isTransitioning ? (
+          <div className="pt-8">
+            <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-6 pb-2">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <SkeletonCard key={n} variant="book" />
+              ))}
+            </div>
+          </div>
+        ) : filteredBooks.length > 0 ? (
           <div className="pt-8">
             
             {/* Grid dos Livros Alinhados */}

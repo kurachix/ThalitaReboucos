@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Movie } from '@/types';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { SkeletonCard } from '@/components/common/SkeletonCard';
 import { 
   X, 
   Film, 
@@ -30,7 +31,15 @@ export const TrailerModal: React.FC<TrailerModalProps> = ({
   const prefersReduced = useReducedMotion();
   const [isClosing, setIsClosing] = useState(false);
   const [activeTab, setActiveTab] = useState<'trailer' | 'trivia'>('trailer');
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Reseta estado de carregamento do player ao trocar de filme ou abrir modal
+  useEffect(() => {
+    if (isOpen) {
+      setIsIframeLoaded(false);
+    }
+  }, [isOpen, movie?.trailerId]);
 
   // Fechamento suave com feedback sonoro
   const handleClose = useCallback(() => {
@@ -208,13 +217,24 @@ export const TrailerModal: React.FC<TrailerModalProps> = ({
               {/* Reprodutor de Trailer em Iframe Carregado Estritamente Sob Demanda */}
               <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-black border border-slate-700 shadow-2xl">
                 {movie.trailerId ? (
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${movie.trailerId}?autoplay=1&rel=0&modestbranding=1`}
-                    title={`Trailer oficial de ${movie.title}`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  />
+                  <>
+                    {!isIframeLoaded && (
+                      <SkeletonCard
+                        variant="trailer-player"
+                        className="absolute inset-0 z-10 w-full h-full"
+                      />
+                    )}
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${movie.trailerId}?autoplay=1&rel=0&modestbranding=1`}
+                      title={`Trailer oficial de ${movie.title}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      onLoad={() => setIsIframeLoaded(true)}
+                      className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${
+                        isIframeLoaded ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  </>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full text-slate-400 p-6 text-center space-y-2">
                     <Film className="w-10 h-10 text-slate-600" />

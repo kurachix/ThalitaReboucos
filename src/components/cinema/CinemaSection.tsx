@@ -5,6 +5,7 @@ import { Clapperboard } from './Clapperboard';
 import { MovieCard } from './MovieCard';
 import { TrailerModal } from './TrailerModal';
 import { useAudio } from '@/hooks/use-audio';
+import { useHoverPrefetch, prefetchYouTubeTrailer } from '@/hooks/use-prefetch';
 import { 
   Film, 
   Sparkles, 
@@ -33,6 +34,11 @@ export const CinemaSection: React.FC = () => {
 
   const currentMovie = MOVIES_CATALOG[selectedMovieIndex];
   const totalMovies = MOVIES_CATALOG.length;
+
+  // Pré-conexão e cache antecipado ao pairar sobre os botões do filme projetado
+  const prefetchTrailerHandlers = useHoverPrefetch(() => {
+    prefetchYouTubeTrailer(currentMovie.trailerId);
+  }, 100);
 
   // Disparo da batida da claquete: acende e pulsa o feixe de luz do projetor
   const handleClap = useCallback((_movie: Movie) => {
@@ -246,6 +252,7 @@ export const CinemaSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleOpenTrailer(currentMovie)}
+                  {...prefetchTrailerHandlers}
                   className="px-4 py-2 rounded-xl bg-sun-yellow hover:bg-sun-yellow-dark text-slate-950 font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-2 shadow-md active:scale-95"
                 >
                   <Play className="w-4 h-4 fill-current" />
@@ -257,6 +264,7 @@ export const CinemaSection: React.FC = () => {
                   onClick={() => {
                     handleOpenTrailer(currentMovie);
                   }}
+                  {...prefetchTrailerHandlers}
                   className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-heading font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 border border-slate-700 active:scale-95"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-pop-pink" />

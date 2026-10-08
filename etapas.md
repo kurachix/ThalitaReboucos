@@ -235,24 +235,17 @@
 - **Critério de Aceite**: Usuário pode folhear a página clicando nas extremidades ou deslizando horizontalmente no touch; botão de play/pause para ouvir sinopse em áudio com barra de progresso em tempo real; marcador de página interativo que salva os livros favoritos do visitante no `localStorage`.
 - **Impacto na Interação**: Eleva o consumo da obra literária para um formato multissensorial (visual, sonoro e gestual).
 
-### [ ] Etapa 32: Skeletons Orgânicos & Otimização Preditiva de Latência Zero (Preload on Hover)
+### [ ] Etapa 31: Skeletons Orgânicos & Otimização Preditiva de Latência Zero (Preload on Hover)
 - **Objetivo**: Implementar esqueletos de carregamento (*skeleton placeholders*) desenhados no estilo de caderno com efeito de brilho suave para carrosséis e cards, além de pré-carregamento sob demanda (hover prefetch) ao passar o mouse sobre botões de trailer e livros.
 - **Arquivos-chave**: `src/components/common/SkeletonCard.tsx`, `src/hooks/use-prefetch.ts`.
 - **Critério de Aceite**: Ao passar o cursor sobre um card de filme ou livro por mais de 100ms, metadados pesados e trailers do YouTube são pré-conectados em segundo plano (`dns-prefetch` e `modulepreload`), abrindo o modal com latência zero perceptível.
 - **Impacto na Interação**: Elimina qualquer fricção ou sensação de espera, proporcionando velocidade instantânea ao usuário.
 
-### [ ] Etapa 33: Gaveta Flutuante de Acessibilidade Visual e Cognitiva (Quick A11y Drawer)
+### [ ] Etapa 32: Gaveta Flutuante de Acessibilidade Visual e Cognitiva (Quick A11y Drawer)
 - **Objetivo**: Desenvolver um painel flutuante de acessibilidade acessível via botão discreto no rodapé/lateral contendo controles imediatos: ajuste de tamanho da fonte (A- / A / A+), alternador para tipografia legível / OpenDyslexic, alto contraste e interruptor de pausa de animações.
 - **Arquivos-chave**: `src/components/accessibility/A11yDrawer.tsx`, `src/hooks/use-a11y-preferences.ts`.
 - **Critério de Aceite**: Alterações refletem instantaneamente no DOM via classes raiz (`html.high-contrast`, `html.font-large`, `html.dyslexic-friendly`); estado persistido no navegador; suporte total a leitores de tela.
 - **Impacto na Interação**: Garante que leitores de todas as idades, com diferentes graus de visão ou neurodivergências, aproveitem a biografia com máximo conforto e autonomia.
-
-### [ ] Etapa 34: Interação Social no Mural dos Fãs (Reações com Emojis & Contador de Carinho)
-- **Objetivo**: Expandir o Mural de Cortiça permitindo que os visitantes reajam a qualquer post-it já fixado através de uma barra de reações em miniatura (❤️ "Amei", 👏 "Arrasou", 📖 "Li Tudo", ✨ "Inspirador"), com contador dinâmico e animação de mini-corações subindo pela tela.
-- **Arquivos-chave**: `src/components/fan-wall/PostItNote.tsx`, `src/components/fan-wall/NoteReactions.tsx`, `src/hooks/use-local-notes.ts`.
-- **Critério de Aceite**: Clicar na reação incrementa a contagem imediatamente no `localStorage` do usuário e exibe micro-explosão de corações com física orgânica; barra de busca e filtro rápido de post-its por cor e cidade de origem.
-- **Impacto na Interação**: Converte a experiência passiva de leitura de recados em uma comunidade viva e afetiva de troca entre leitores da autora.
-
 ---
 
 ## 📌 Guia de Execução para Desenvolvedores e Agentes IA

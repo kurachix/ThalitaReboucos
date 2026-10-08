@@ -2,6 +2,7 @@ import React from 'react';
 import { Book } from '@/types';
 import { useAppStore } from '@/store/use-app-store';
 import { useAudio } from '@/hooks/use-audio';
+import { useHoverPrefetch, prefetchBookDetails } from '@/hooks/use-prefetch';
 import { BookOpen, Sparkles } from 'lucide-react';
 
 interface BookSpineProps {
@@ -12,6 +13,11 @@ interface BookSpineProps {
 export const BookSpine: React.FC<BookSpineProps> = ({ book, index }) => {
   const openBookModal = useAppStore((state) => state.openBookModal);
   const { playPageFlip } = useAudio();
+
+  // Pré-aquecimento de síntese de voz e recursos ao passar cursor sobre o livro (> 100ms)
+  const prefetchHandlers = useHoverPrefetch(() => {
+    prefetchBookDetails(book.id);
+  }, 100);
 
   const handleBookClick = () => {
     playPageFlip();
@@ -24,6 +30,7 @@ export const BookSpine: React.FC<BookSpineProps> = ({ book, index }) => {
   return (
     <div
       onClick={handleBookClick}
+      {...prefetchHandlers}
       className={`group relative flex flex-col justify-between w-40 sm:w-44 ${heightClass} rounded-r-xl rounded-l-xs p-4 cursor-pointer select-none transition-all duration-300 ease-out hover:-translate-y-3 hover:scale-105 hover:rotate-[-1.5deg]`}
       style={{
         backgroundColor: book.coverAccent,

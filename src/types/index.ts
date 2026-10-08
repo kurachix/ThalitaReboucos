@@ -20,6 +20,7 @@ export interface Book {
   pages: number;
   highlightQuote: string;
   coverAccent: string; // Cor de destaque do livro no design
+  coverUrl?: string; // Link direto para a imagem oficial da capa na web
   tags: string[];
   publisher?: string;
   excerpt?: string;

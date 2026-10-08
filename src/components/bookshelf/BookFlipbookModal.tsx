@@ -37,6 +37,11 @@ export const BookFlipbookModal: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'synopsis' | 'excerpt'>('synopsis');
   const [copiedQuote, setCopiedQuote] = useState(false);
   const [mobilePage, setMobilePage] = useState<'left' | 'right'>('right');
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [activeBookId]);
 
   // Estado de Livros Favoritos salvos no localStorage
   const [favoriteBooks, setFavoriteBooks] = useState<string[]>(() => {
@@ -377,63 +382,114 @@ export const BookFlipbookModal: React.FC = () => {
               <span>CATÁLOGO #{currentIndex + 1}</span>
             </div>
 
-            {/* Réplica Estilizada da Capa do Livro */}
+            {/* Capa do Livro (Imagem Oficial Linkada ou Réplica Estilizada) */}
             <div className="my-auto py-3">
-              <div
-                className="relative mx-auto w-48 sm:w-56 h-64 sm:h-72 rounded-r-2xl rounded-l-xs p-5 flex flex-col justify-between text-white shadow-2xl transform transition-transform duration-300 hover:scale-[1.02]"
-                style={{
-                  backgroundColor: currentBook.coverAccent,
-                  boxShadow: `
-                    -6px 0 12px -2px rgba(0, 0, 0, 0.4),
-                    8px 12px 24px -2px rgba(0, 0, 0, 0.35),
-                    inset -3px 0 6px rgba(255, 255, 255, 0.3),
-                    inset 5px 0 10px rgba(0, 0, 0, 0.3)
-                  `,
-                }}
-              >
-                {/* Efeito de Costura e Relevo da Lombada */}
-                <div className="absolute top-0 left-0 bottom-0 w-3.5 bg-black/25 border-r border-white/20 rounded-l-xs flex flex-col justify-between py-3 items-center pointer-events-none">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                  <div className="w-1 h-12 bg-white/20 rounded-full" />
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                </div>
+              {currentBook.coverUrl && !imageError ? (
+                <div
+                  className="relative mx-auto w-48 sm:w-56 h-68 sm:h-76 rounded-r-2xl rounded-l-xs overflow-hidden shadow-2xl transform transition-transform duration-300 hover:scale-[1.02] border-r-2 border-y border-amber-950/20 group"
+                  style={{
+                    backgroundColor: currentBook.coverAccent,
+                    boxShadow: `
+                      -6px 0 14px -2px rgba(0, 0, 0, 0.45),
+                      10px 14px 28px -2px rgba(0, 0, 0, 0.4),
+                      inset -3px 0 6px rgba(255, 255, 255, 0.25)
+                    `,
+                  }}
+                >
+                  {/* Imagem Oficial da Capa Linkada */}
+                  <img
+                    src={currentBook.coverUrl}
+                    alt={`Capa oficial do livro ${currentBook.title}`}
+                    className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-500 group-hover:scale-105"
+                    onError={() => setImageError(true)}
+                  />
 
-                {/* Topo da Capa: Ano e Badge */}
-                <div className="pl-2 flex items-center justify-between">
-                  <span className="text-[11px] font-mono font-bold bg-black/30 px-2 py-0.5 rounded-sm backdrop-blur-xs">
-                    {currentBook.year}
-                  </span>
-                  {currentBook.tags.includes('Cinema') && (
-                    <span className="text-[10px] font-heading font-extrabold uppercase bg-sun-yellow text-amber-950 px-2 py-0.5 rounded-full shadow-xs flex items-center gap-1">
-                      <Film className="w-3 h-3" />
-                      <span>Filme</span>
+                  {/* Efeito de Costura e Relevo da Lombada */}
+                  <div className="absolute top-0 left-0 bottom-0 w-3.5 bg-gradient-to-r from-black/60 via-black/30 to-transparent border-r border-white/25 rounded-l-xs flex flex-col justify-between py-3 items-center pointer-events-none z-10">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/40 shadow-xs" />
+                    <div className="w-1 h-14 bg-white/20 rounded-full" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/40 shadow-xs" />
+                  </div>
+
+                  {/* Topo da Capa: Ano e Badge */}
+                  <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 z-10">
+                    <span className="text-[10px] font-mono font-bold bg-black/60 text-white px-2 py-0.5 rounded-sm backdrop-blur-xs border border-white/20 shadow-xs">
+                      {currentBook.year}
                     </span>
-                  )}
-                </div>
+                    {currentBook.tags.includes('Cinema') && (
+                      <span className="text-[10px] font-heading font-extrabold uppercase bg-sun-yellow text-amber-950 px-2 py-0.5 rounded-full shadow-xs flex items-center gap-1 backdrop-blur-xs">
+                        <Film className="w-3 h-3" />
+                        <span>Filme</span>
+                      </span>
+                    )}
+                  </div>
 
-                {/* Centro da Capa: Título e Nome da Autora */}
-                <div className="pl-2 my-auto text-center space-y-2">
-                  <h3 
-                    id="book-modal-title"
-                    className="text-lg sm:text-xl font-heading font-black leading-tight drop-shadow-sm text-white"
-                  >
-                    {currentBook.title}
-                  </h3>
-                  <div className="w-10 h-0.5 bg-white/60 mx-auto rounded-full" />
-                  <p className="font-handwriting text-xl text-white/95 tracking-wide">
-                    Thalita Rebouças
-                  </p>
-                </div>
+                  {/* Brilho Especular Fosco / Verniz Localizado */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/15 to-transparent pointer-events-none rounded-r-2xl" />
 
-                {/* Base da Capa: Selo da Editora e Páginas */}
-                <div className="pl-2 flex items-center justify-between text-[11px] text-white/80 font-mono border-t border-white/20 pt-2">
-                  <span>{currentBook.publisher?.split(' ')[0] || 'Rocco'}</span>
-                  <span>{currentBook.pages} págs</span>
+                  {/* Selo no Rodapé: Capa Oficial */}
+                  <div className="absolute bottom-2 right-2 bg-black/65 backdrop-blur-xs text-white/95 text-[10px] font-mono px-2 py-0.5 rounded-full border border-white/20 flex items-center gap-1 shadow-md">
+                    <Sparkles className="w-2.5 h-2.5 text-sun-yellow" />
+                    <span>Capa Oficial</span>
+                  </div>
                 </div>
+              ) : (
+                <div
+                  className="relative mx-auto w-48 sm:w-56 h-64 sm:h-72 rounded-r-2xl rounded-l-xs p-5 flex flex-col justify-between text-white shadow-2xl transform transition-transform duration-300 hover:scale-[1.02]"
+                  style={{
+                    backgroundColor: currentBook.coverAccent,
+                    boxShadow: `
+                      -6px 0 12px -2px rgba(0, 0, 0, 0.4),
+                      8px 12px 24px -2px rgba(0, 0, 0, 0.35),
+                      inset -3px 0 6px rgba(255, 255, 255, 0.3),
+                      inset 5px 0 10px rgba(0, 0, 0, 0.3)
+                    `,
+                  }}
+                >
+                  {/* Efeito de Costura e Relevo da Lombada */}
+                  <div className="absolute top-0 left-0 bottom-0 w-3.5 bg-black/25 border-r border-white/20 rounded-l-xs flex flex-col justify-between py-3 items-center pointer-events-none">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                    <div className="w-1 h-12 bg-white/20 rounded-full" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                  </div>
 
-                {/* Brilho Especular Fosco / Verniz Localizado */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-r-2xl" />
-              </div>
+                  {/* Topo da Capa: Ano e Badge */}
+                  <div className="pl-2 flex items-center justify-between">
+                    <span className="text-[11px] font-mono font-bold bg-black/30 px-2 py-0.5 rounded-sm backdrop-blur-xs">
+                      {currentBook.year}
+                    </span>
+                    {currentBook.tags.includes('Cinema') && (
+                      <span className="text-[10px] font-heading font-extrabold uppercase bg-sun-yellow text-amber-950 px-2 py-0.5 rounded-full shadow-xs flex items-center gap-1">
+                        <Film className="w-3 h-3" />
+                        <span>Filme</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Centro da Capa: Título e Nome da Autora */}
+                  <div className="pl-2 my-auto text-center space-y-2">
+                    <h3 
+                      id="book-modal-title"
+                      className="text-lg sm:text-xl font-heading font-black leading-tight drop-shadow-sm text-white"
+                    >
+                      {currentBook.title}
+                    </h3>
+                    <div className="w-10 h-0.5 bg-white/60 mx-auto rounded-full" />
+                    <p className="font-handwriting text-xl text-white/95 tracking-wide">
+                      Thalita Rebouças
+                    </p>
+                  </div>
+
+                  {/* Base da Capa: Selo da Editora e Páginas */}
+                  <div className="pl-2 flex items-center justify-between text-[11px] text-white/80 font-mono border-t border-white/20 pt-2">
+                    <span>{currentBook.publisher?.split(' ')[0] || 'Rocco'}</span>
+                    <span>{currentBook.pages} págs</span>
+                  </div>
+
+                  {/* Brilho Especular Fosco / Verniz Localizado */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-r-2xl" />
+                </div>
+              )}
             </div>
 
             {/* Ficha Catalográfica e Estatísticas Editoriais */}

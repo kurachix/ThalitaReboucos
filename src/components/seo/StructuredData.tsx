@@ -86,6 +86,7 @@ export const StructuredData: React.FC = () => {
           '@type': 'Organization',
           name: book.publisher || 'Editora Rocco',
         },
+        ...(book.coverUrl ? { image: book.coverUrl } : {}),
         author: {
           '@id': 'https://thalitareboucas.com.br/#author',
         },

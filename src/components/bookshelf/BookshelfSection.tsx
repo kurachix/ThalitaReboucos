@@ -60,6 +60,7 @@ export const BookshelfSection: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Buscar livros por título, personagem ou tema"
             placeholder="Buscar por título, personagem ou tema..."
             className="w-full pl-11 pr-10 py-2.5 rounded-full bg-white/95 border border-slate-200 text-slate-800 text-sm font-body shadow-xs focus:outline-none focus:ring-2 focus:ring-pop-pink/50 focus:border-pop-pink transition-all placeholder:text-slate-400"
           />

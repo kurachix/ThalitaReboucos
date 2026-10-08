@@ -12,6 +12,7 @@ import {
   Baby
 } from 'lucide-react';
 import { useAudio } from '@/hooks/use-audio';
+import { useReducedMotion } from '@/hooks/use-reduced-motion';
 
 interface PolaroidCardProps {
   milestone: TimelineMilestone;
@@ -24,6 +25,7 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ milestone, index }) 
   const [isHovered, setIsHovered] = useState(false);
   const [airplaneFlying, setAirplaneFlying] = useState(false);
   const { playClick, playPageFlip } = useAudio();
+  const prefersReduced = useReducedMotion();
 
   // Rotação orgânica natural de álbum de figurinhas (-2deg a +2deg)
   const baseRotation = (index % 2 === 0 ? -1.5 : 1.5) * (0.8 + (index % 3) * 0.2);
@@ -84,16 +86,27 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ milestone, index }) 
   return (
     <div
       ref={cardRef}
-      onMouseMove={handleMouseMove}
+      role="article"
+      tabIndex={0}
+      aria-label={`Marco biográfico do ano ${milestone.year}: ${milestone.title}`}
+      onMouseMove={prefersReduced ? undefined : handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
-      className="relative shrink-0 w-80 sm:w-88 select-none transition-transform duration-200 ease-out cursor-pointer group"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      className="relative shrink-0 w-80 sm:w-88 select-none transition-transform duration-200 ease-out cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink rounded-2xl"
       style={{
-        transform: isHovered
-          ? `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(1.03, 1.03, 1.03)`
-          : `rotate(${baseRotation}deg)`,
-        transformStyle: 'preserve-3d',
+        transform: prefersReduced
+          ? 'none'
+          : isHovered
+            ? `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(1.03, 1.03, 1.03)`
+            : `rotate(${baseRotation}deg)`,
+        transformStyle: prefersReduced ? undefined : 'preserve-3d',
       }}
     >
       {/* Washi Tape Decorativa no Topo */}

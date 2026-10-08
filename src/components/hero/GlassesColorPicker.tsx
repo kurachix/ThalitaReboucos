@@ -185,6 +185,7 @@ export const GlassesColorPicker: React.FC<GlassesColorPickerProps> = ({ onColorC
             key={color.id}
             type="button"
             onClick={() => handleSelectColor(idx)}
+            aria-pressed={idx === selectedIndex}
             aria-label={`Selecionar óculos na cor ${color.name}`}
             className={`w-5 h-5 rounded-full transition-transform duration-200 focus:outline-none ${
               idx === selectedIndex ? 'scale-125 ring-2 ring-offset-1 ring-slate-700' : 'hover:scale-110 opacity-70 hover:opacity-100'

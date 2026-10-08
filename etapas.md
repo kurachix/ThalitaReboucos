@@ -166,7 +166,7 @@
 - **Critério de Aceite**: Com a redução de movimento ativada no sistema operacional, a página substitui transições rápidas e giros 3D por fades suaves e transições discretas sem perder usabilidade.
 - **Otimização para o Modelo**: Usar variáveis CSS com fallback condicional para velocidade de animação.
 
-### [ ] Etapa 21: Otimização de Performance 60-120 FPS e Auditoria Mobile
+### [x] Etapa 21: Otimização de Performance 60-120 FPS e Auditoria Mobile
 - **Objetivo**: Garantir que as animações operem estritamente sobre propriedades GPU-friendly (`transform`, `opacity`), aplicar `will-change` moderadamente, otimizar tamanhos de imagens e auditar taxas de quadros em dispositivos móveis.
 - **Arquivos-chave**: Toda a árvore de componentes em `src/components/`.
 - **Critério de Aceite**: Zero quedas bruscas de frames (jank); score elevado no Lighthouse; carregamento responsivo sob 3G/4G.

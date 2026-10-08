@@ -32,8 +32,8 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* Rodapé Scrapbook Afetivo */}
-      <footer className="relative z-10 w-full bg-white/90 backdrop-blur-md border-t border-amber-200/60 mt-20 pt-12 pb-8">
+      {/* Rodapé Scrapbook Afetivo com Suporte a Safe Area em Telas Móveis */}
+      <footer className="relative z-10 w-full bg-white/90 backdrop-blur-md border-t border-amber-200/60 mt-20 pt-12 pb-8 safe-area-bottom">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
             

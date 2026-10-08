@@ -47,6 +47,12 @@
     font-family: var(--font-body);
     color: var(--color-ink-dark);
     background-color: var(--color-paper);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Otimização de latência de toque em celulares (remove delay de 300ms) */
+  button, a, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -344,3 +350,52 @@ html[data-reduced-motion="true"] *::after {
 html[data-reduced-motion="true"] .post-it-pendulum:hover {
   animation: none !important;
 }
+
+/* =================================================================== */
+/* OTIMIZAÇÃO DE PERFORMANCE 60-120 FPS & AUDITORIA MOBILE (ETAPA 21)   */
+/* =================================================================== */
+
+/* Otimização de renderização e reflow em seções fora da viewport */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 720px;
+}
+
+/* Scroll horizontal otimizado com aceleração por GPU e inércia tátil */
+.gpu-accelerated-scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
+  transform: translateZ(0);
+}
+
+/* Safe area insets para telas móveis com entalhe / Dynamic Island */
+.safe-area-bottom {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-area-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+/* Tiering gracioso para smartphones de entrada / low-end */
+html[data-low-end="true"] .backdrop-blur-md,
+html[data-low-end="true"] .backdrop-blur-lg,
+html[data-low-end="true"] .backdrop-blur-xs {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: rgba(255, 255, 255, 0.97) !important;
+}
+
+html[data-low-end="true"] .projector-beam {
+  opacity: 0.4 !important;
+  filter: none !important;
+}
+
+/* Em dispositivos touch, garante feedback visual imediato e desativa hover persistente */
+@media (hover: none) and (pointer: coarse) {
+  .post-it-pendulum:hover {
+    animation: none;
+  }
+}
+

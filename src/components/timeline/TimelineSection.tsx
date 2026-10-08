@@ -90,13 +90,10 @@ export const TimelineSection: React.FC = () => {
         ))}
       </div>
 
-      {/* Carrossel de Polaroids com Tilt 3D */}
+      {/* Carrossel de Polaroids com Tilt 3D e Aceleração GPU */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-8 overflow-x-auto pb-10 pt-4 px-2 snap-x snap-mandatory scroll-smooth scrollbar-none items-stretch"
-        style={{
-          WebkitOverflowScrolling: 'touch',
-        }}
+        className="flex gap-8 overflow-x-auto pb-10 pt-4 px-2 snap-x snap-mandatory scroll-smooth scrollbar-none items-stretch gpu-accelerated-scroll"
       >
         {TIMELINE_MILESTONES.map((milestone, index) => (
           <div key={milestone.id} className="snap-center">

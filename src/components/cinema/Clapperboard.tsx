@@ -152,6 +152,7 @@ export const Clapperboard: React.FC<ClapperboardProps> = ({
             style={{
               transform: `rotate(${stickAngle}deg)`,
               transformOrigin: '12px 100%',
+              touchAction: 'none',
             }}
             title="Puxe a haste para cima e solte para bater a claquete!"
           >

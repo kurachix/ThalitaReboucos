@@ -144,7 +144,7 @@
 
 ## 💌 FASE 6: Mural dos Fãs & Comunidade de Leitores
 
-### [ ] Etapa 18: Mural dos Fãs da Bienal (Parede de Cortiça Interativa)
+### [x] Etapa 18: Mural dos Fãs da Bienal (Parede de Cortiça Interativa)
 - **Objetivo**: Montar o mural de cortiça com post-its coloridos realistas, alfinetes fixadores, recados carinhosos de leitores e fotos históricas das sessões de 12 horas de autógrafos.
 - **Arquivos-chave**: `src/components/fan-wall/FanWallSection.tsx`, `src/components/fan-wall/PostItNote.tsx`.
 - **Critério de Aceite**: Post-its com rotações orgânicas aleatórias (-3° a 4°), efeito de balanço ao passar o mouse (*pendulum hover*) e sombras que simulam papel descolado da parede.

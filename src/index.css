@@ -174,6 +174,68 @@
       rgba(255, 255, 255, 0.15) 100%
     );
   }
+
+  /* Parede de Cortiça do Mural dos Fãs */
+  .bg-cork-board {
+    background-color: #BD8E58;
+    background-image: 
+      radial-gradient(#9B6F3B 12%, transparent 14%),
+      radial-gradient(#875C29 12%, transparent 14%),
+      radial-gradient(rgba(255, 255, 255, 0.14) 12%, transparent 16%),
+      radial-gradient(rgba(0, 0, 0, 0.12) 12%, transparent 16%);
+    background-position: 0 0, 16px 16px, 8px 8px, 24px 24px;
+    background-size: 32px 32px;
+  }
+
+  .cork-wood-frame {
+    box-shadow: 
+      inset 0 0 32px rgba(0, 0, 0, 0.5),
+      inset 0 0 8px rgba(0, 0, 0, 0.7),
+      0 20px 40px -10px rgba(15, 23, 42, 0.4);
+    border: 12px solid #5A351A;
+  }
+
+  /* Sombras realistas de papel post-it descolado da parede */
+  .post-it-shadow {
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      2px 8px 16px -2px rgba(0, 0, 0, 0.22),
+      inset 0 -2px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .post-it-shadow-lifted {
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.12),
+      4px 18px 28px -4px rgba(0, 0, 0, 0.32),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Balanço pendular orgânico ao passar o mouse (pivô no alfinete central) */
+  .post-it-pendulum {
+    transform-origin: 50% 12px;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .post-it-pendulum:hover {
+      animation: pendulumSwing 1.6s ease-in-out infinite alternate;
+    }
+  }
+}
+
+@keyframes pendulumSwing {
+  0% {
+    transform: rotate(var(--rot, 0deg));
+  }
+  30% {
+    transform: rotate(calc(var(--rot, 0deg) - 3deg)) translateY(-3px) scale(1.02);
+  }
+  70% {
+    transform: rotate(calc(var(--rot, 0deg) + 3deg)) translateY(-3px) scale(1.02);
+  }
+  100% {
+    transform: rotate(var(--rot, 0deg)) translateY(-4px) scale(1.03);
+  }
 }
 
 @keyframes eqBar {

@@ -110,4 +110,19 @@ export interface FanNote {
   color: NoteColor;
   createdAt: string;
   rotationDeg: number;
+  likes?: number;
+  pinnedBook?: string;
 }
+
+export interface BienalMemory {
+  id: string;
+  year: string;
+  title: string;
+  description: string;
+  caption: string;
+  durationHours: number;
+  tag: string;
+  rotationDeg: number;
+  accentColor: string;
+}
+

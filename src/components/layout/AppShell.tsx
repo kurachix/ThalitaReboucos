@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from '@/components/common/Header';
 import { FloatingStickersLayer } from '@/components/common/FloatingStickersLayer';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { Heart, Sparkles, BookOpen, Instagram, Twitter } from 'lucide-react';
 import { THALITA_PROFILE } from '@/data/biography';
 
@@ -12,6 +13,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col bg-paper-ruled text-slate-800 antialiased overflow-x-hidden selection:bg-pink-200 selection:text-pink-900 relative">
       
+      {/* Dados Estruturados Schema.org JSON-LD para SEO e Google Rich Results */}
+      <StructuredData />
+
       {/* Luz e Gradientes Atmosféricos Cariocas de Fundo */}
       <div 
         className="pointer-events-none fixed inset-0 z-0 opacity-40 mix-blend-multiply"

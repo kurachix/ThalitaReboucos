@@ -182,7 +182,7 @@
 
 ## 🏆 FASE 8: SEO Biográfico Schema.org & Validação Final
 
-### [ ] Etapa 23: SEO Biográfico Estruturado (Schema.org Person / Books) & Metadados
+### [x] Etapa 23: SEO Biográfico Estruturado (Schema.org Person / Books) & Metadados
 - **Objetivo**: Inserir metatags completas de Open Graph, Twitter Cards e dados estruturados em JSON-LD (`Schema.org/Person`, `CreativeWorkSeries`, `Movie`) com links para perfis oficiais e biografia.
 - **Arquivos-chave**: `index.html` (ou `src/app/layout.tsx`), `src/components/seo/StructuredData.tsx`.
 - **Critério de Aceite**: Validador de Rich Results do Google reconhece a entidade "Thalita Rebouças" com suas ocupações, obras e mídias sociais.

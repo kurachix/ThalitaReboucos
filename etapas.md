@@ -134,7 +134,7 @@
 - **Critério de Aceite**: Card com arte visual impecável, borda scrapbook, autógrafo digital e botão "Copiar Frase" com toast de confirmação.
 - **Otimização para o Modelo**: Usar canvas HTML5 nativo ou estilização SVG exportável, evitando bibliotecas externas excessivamente pesadas.
 
-### [ ] Etapa 17: Quiz Interativo "Qual Personagem de Thalita Rebouças É Você?"
+### [x] Etapa 17: Quiz Interativo "Qual Personagem de Thalita Rebouças É Você?"
 - **Objetivo**: Desenvolver o mini-jogo de 3 perguntas dinâmicas estilo bilhete escolar ("Malu", "Tetê", "Gabi", "Davi"), com transição de cartões e cálculo automático de afinidade.
 - **Arquivos-chave**: `src/components/quiz/QuizSection.tsx`, `src/components/quiz/QuizQuestionCard.tsx`, `src/components/quiz/QuizResultCard.tsx`.
 - **Critério de Aceite**: Transições animadas entre perguntas; tela final com resultado personalizado, descrição divertida da personagem e explosão festiva de confetes via `canvas-confetti`.

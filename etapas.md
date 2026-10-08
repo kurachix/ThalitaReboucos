@@ -241,11 +241,11 @@
 - **Critério de Aceite**: Ao passar o cursor sobre um card de filme ou livro por mais de 100ms, metadados pesados e trailers do YouTube são pré-conectados em segundo plano (`dns-prefetch` e `modulepreload`), abrindo o modal com latência zero perceptível.
 - **Impacto na Interação**: Elimina qualquer fricção ou sensação de espera, proporcionando velocidade instantânea ao usuário.
 
-### [ ] Etapa 32: Gaveta Flutuante de Acessibilidade Visual e Cognitiva (Quick A11y Drawer)
-- **Objetivo**: Desenvolver um painel flutuante de acessibilidade acessível via botão discreto no rodapé/lateral contendo controles imediatos: ajuste de tamanho da fonte (A- / A / A+), alternador para tipografia legível / OpenDyslexic, alto contraste e interruptor de pausa de animações.
+### [x] Etapa 32: Gaveta Flutuante de Acessibilidade Visual e Cognitiva (Quick A11y Drawer)
+- **Objetivo**: Desenvolver um painel flutuante de acessibilidade acessível via botão discreto no rodapé/lateral contendo controles imediatos: ajuste de tamanho da fonte (A- / A / A+), alternador para tipografia legível / OpenDyslexic, alto contraste e interruptor de pausa de animações. - FOCADO EM LIBRAS, API DE INTERPRETE (Suíte Oficial VLibras).
 - **Arquivos-chave**: `src/components/accessibility/A11yDrawer.tsx`, `src/hooks/use-a11y-preferences.ts`.
-- **Critério de Aceite**: Alterações refletem instantaneamente no DOM via classes raiz (`html.high-contrast`, `html.font-large`, `html.dyslexic-friendly`); estado persistido no navegador; suporte total a leitores de tela.
-- **Impacto na Interação**: Garante que leitores de todas as idades, com diferentes graus de visão ou neurodivergências, aproveitem a biografia com máximo conforto e autonomia.
+- **Critério de Aceite**: Alterações refletem instantaneamente no DOM via classes raiz (`html.high-contrast`, `html.font-large`, `html.dyslexic-friendly`); integração completa com o widget oficial de tradução em LIBRAS (VLibras); atalho de teclado `[A]`; estado persistido no navegador; suporte total a leitores de tela.
+- **Impacto na Interação**: Garante que leitores de todas as idades, com diferentes graus de visão ou surdos/com deficiência auditiva, aproveitem a biografia com máximo conforto e autonomia.
 ---
 
 ## 📌 Guia de Execução para Desenvolvedores e Agentes IA

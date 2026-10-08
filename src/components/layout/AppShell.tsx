@@ -3,6 +3,7 @@ import { Header } from '@/components/common/Header';
 import { FloatingStickersLayer } from '@/components/common/FloatingStickersLayer';
 import { KeyboardShortcutsModal } from '@/components/common/KeyboardShortcutsModal';
 import { ReaderPassport } from '@/components/gamification/ReaderPassport';
+import { A11yDrawer } from '@/components/accessibility/A11yDrawer';
 import { CustomCursor } from '@/components/common/CustomCursor';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { Heart, Sparkles, BookOpen, Instagram, Twitter } from 'lucide-react';
@@ -24,6 +25,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
 
       {/* Gamificação: Passaporte da Leitora (Rastreador de Exploração & Selos) */}
       <ReaderPassport />
+
+      {/* Central de Acessibilidade & Tradutor Oficial em LIBRAS (VLibras) */}
+      <A11yDrawer />
       
       {/* Dados Estruturados Schema.org JSON-LD para SEO e Google Rich Results */}
       <StructuredData />

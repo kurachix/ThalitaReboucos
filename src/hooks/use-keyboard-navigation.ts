@@ -129,6 +129,15 @@ export function useKeyboardNavigation() {
         return;
       }
 
+      // [A] ou [a]: Alterna Central de Acessibilidade & LIBRAS
+      if (e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
+        playClick();
+        triggerHaptic('medium');
+        window.dispatchEvent(new CustomEvent('toggle-a11y-drawer'));
+        return;
+      }
+
       // Se nenhum modal estiver aberto, permite navegação por atos e ações focais
       if (!isAnyModalOpen) {
         // [J] ou [Seta para Baixo]: Próxima seção

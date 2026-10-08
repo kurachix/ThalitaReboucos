@@ -56,6 +56,12 @@ const SHORTCUTS: ShortcutItem[] = [
     category: 'Geral',
   },
   {
+    keys: ['A'],
+    label: 'Acessibilidade & LIBRAS',
+    description: 'Abre a central com intérprete de LIBRAS (VLibras), fonte e contraste.',
+    category: 'Geral',
+  },
+  {
     keys: ['Tab'],
     label: 'Foco Visual Neon',
     description: 'Percorre botões e links com destaque em contorno pop neon.',

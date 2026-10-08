@@ -128,7 +128,7 @@
 - **Critério de Aceite**: Ao acionar a alavanca, cilindros giram com efeito de desfoque de movimento (*blur*) e som de roleta; cápsula se abre exibindo o conselho sorteado e a assinatura de Thalita.
 - **Otimização para o Modelo**: Gerar a animação de rotação com keyframes de translação rápida finalizando com desaceleração cúbica suave (`cubic-bezier`).
 
-### [ ] Etapa 16: Gerador de Cards de Conselho para Redes Sociais
+### [x] Etapa 16: Gerador de Cards de Conselho para Redes Sociais
 - **Objetivo**: Implementar a funcionalidade de exportação do conselho sorteado em formato de card estilizado (9:16 para Instagram Stories e 1:1 para feed/WhatsApp) com botão de cópia e download.
 - **Arquivos-chave**: `src/components/advice-machine/ShareableCard.tsx`, `src/utils/card-generator.ts`.
 - **Critério de Aceite**: Card com arte visual impecável, borda scrapbook, autógrafo digital e botão "Copiar Frase" com toast de confirmação.

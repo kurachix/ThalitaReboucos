@@ -6,6 +6,7 @@ import { ShareableCard } from './ShareableCard';
 import { MagneticButton } from '@/components/common/MagneticButton';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useAppStore } from '@/store/use-app-store';
 import { triggerHaptic } from '@/utils/haptics';
 import { 
   Sparkles, 
@@ -23,6 +24,7 @@ import {
 export const AdviceMachineSection: React.FC = () => {
   const { playSlotLever, playSlotWin, playClick } = useAudio();
   const prefersReduced = useReducedMotion();
+  const unlockAchievement = useAppStore((state) => state.unlockAchievement);
 
   // Estados da Máquina Caça-Níquel
   const [isSpinning, setIsSpinning] = useState(false);
@@ -53,6 +55,7 @@ export const AdviceMachineSection: React.FC = () => {
     setLeverPulled(true);
     playSlotLever();
     triggerHaptic('heavy');
+    unlockAchievement('spun_slot');
     setIsCapsuleOpen(false);
 
     // Efeito de mola de retorno da alavanca após 220ms

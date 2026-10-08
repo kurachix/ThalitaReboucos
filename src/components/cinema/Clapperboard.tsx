@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Movie } from '@/types';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useAppStore } from '@/store/use-app-store';
 import { triggerHaptic } from '@/utils/haptics';
 import { Sparkles, Film, Play, CheckCircle } from 'lucide-react';
 
@@ -22,6 +23,7 @@ export const Clapperboard: React.FC<ClapperboardProps> = ({
 }) => {
   const { playClapper } = useAudio();
   const prefersReduced = useReducedMotion();
+  const unlockAchievement = useAppStore((state) => state.unlockAchievement);
 
   // Estados de física e rotação da haste da claquete
   const [stickAngle, setStickAngle] = useState(0); // Em graus (0 a -32)
@@ -41,6 +43,7 @@ export const Clapperboard: React.FC<ClapperboardProps> = ({
     // Dispara o som de impacto imediato e vibração física no dispositivo
     playClapper();
     triggerHaptic('heavy');
+    unlockAchievement('clapped_board');
     setShowClackBurst(true);
     setTakeCount((prev) => prev + 1);
 
@@ -54,7 +57,7 @@ export const Clapperboard: React.FC<ClapperboardProps> = ({
     }, 600);
 
     return () => clearTimeout(timer);
-  }, [playClapper, onClap, currentMovie]);
+  }, [playClapper, onClap, currentMovie, unlockAchievement]);
 
   // Clique rápido para bater
   const handleQuickClap = useCallback(() => {

@@ -4,6 +4,7 @@ import { NoteColor } from '@/types';
 import { NewNoteInput } from '@/hooks/use-local-notes';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { useAppStore } from '@/store/use-app-store';
 import { triggerHaptic } from '@/utils/haptics';
 import { 
   X, 
@@ -44,6 +45,7 @@ export const AddNoteModal: React.FC<AddNoteModalProps> = ({
 }) => {
   const { playPinPop, playClick } = useAudio();
   const prefersReduced = useReducedMotion();
+  const unlockAchievement = useAppStore((state) => state.unlockAchievement);
 
   // Estados do Formulário
   const [name, setName] = useState('');
@@ -125,6 +127,7 @@ export const AddNoteModal: React.FC<AddNoteModalProps> = ({
     // Dispara som tátil de alfinete espetando o mural e vibração háptica física
     playPinPop();
     triggerHaptic('medium');
+    unlockAchievement('pinned_note');
 
     onSubmit({
       name: name.trim(),

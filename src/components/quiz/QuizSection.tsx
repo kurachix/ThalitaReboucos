@@ -3,9 +3,12 @@ import { QUIZ_QUESTIONS, calculateQuizResult } from '@/data/quiz';
 import { CharacterId, QuizCharacterResult } from '@/types';
 import { QuizQuestionCard } from './QuizQuestionCard';
 import { QuizResultCard } from './QuizResultCard';
+import { useAppStore } from '@/store/use-app-store';
 import { Sparkles } from 'lucide-react';
 
 export const QuizSection: React.FC = () => {
+  const unlockAchievement = useAppStore((state) => state.unlockAchievement);
+
   // Estado do Quiz
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<
@@ -38,6 +41,7 @@ export const QuizSection: React.FC = () => {
       const computedResult = calculateQuizResult(affinities);
       setFinalResult(computedResult);
       setIsCompleted(true);
+      unlockAchievement('completed_quiz');
     }
   };
 

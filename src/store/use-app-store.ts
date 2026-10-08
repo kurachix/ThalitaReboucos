@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type ActiveModalType = 'book' | 'movie' | 'advice-card' | 'new-note' | 'keyboard' | null;
+export type ActiveModalType = 'book' | 'movie' | 'advice-card' | 'new-note' | 'keyboard' | 'passport' | null;
 
 export interface AppState {
   // Áudio e Trilha
@@ -25,8 +25,11 @@ export interface AppState {
   // Acessibilidade: Movimento Reduzido (a11y)
   isReducedMotion: boolean;
 
-  // Gamificação (Stickers Colecionados)
+  // Gamificação (Stickers Colecionados e Selos do Passaporte)
   collectedStickers: string[];
+  unlockedAchievements: string[];
+  isPassportOpen: boolean;
+  recentlyUnlockedAchievement: string | null;
 
   // Modais Globais
   activeModal: ActiveModalType;
@@ -46,10 +49,24 @@ export interface AppState {
   openKeyboardModal: () => void;
   closeKeyboardModal: () => void;
   toggleKeyboardModal: () => void;
+  openPassport: () => void;
+  closePassport: () => void;
+  togglePassport: () => void;
+  unlockAchievement: (id: string) => void;
+  clearRecentAchievement: () => void;
   toggleReducedMotion: () => void;
   setReducedMotion: (value: boolean) => void;
   collectSticker: (stickerId: string) => void;
   closeAllModals: () => void;
+}
+
+function getInitialAchievements(): string[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const saved = localStorage.getItem('thalita_reader_passport_achievements');
+    if (saved) return JSON.parse(saved);
+  } catch {}
+  return [];
 }
 
 function getInitialReducedMotion(): boolean {
@@ -81,6 +98,9 @@ export const useAppStore = create<AppState>((set) => ({
   isKeyboardModalOpen: false,
 
   collectedStickers: [],
+  unlockedAchievements: getInitialAchievements(),
+  isPassportOpen: false,
+  recentlyUnlockedAchievement: null,
   activeModal: null,
 
   // Alternar Áudio
@@ -106,10 +126,29 @@ export const useAppStore = create<AppState>((set) => ({
 
   // Controle de Livros
   openBookModal: (bookId: string) =>
-    set({
-      activeBookId: bookId,
-      isBookModalOpen: true,
-      activeModal: 'book',
+    set((state) => {
+      // Abrir um livro desbloqueia automaticamente o selo 'opened_book'
+      let nextAchievements = state.unlockedAchievements;
+      let newRecent = state.recentlyUnlockedAchievement;
+
+      if (!state.unlockedAchievements.includes('opened_book')) {
+        nextAchievements = [...state.unlockedAchievements, 'opened_book'];
+        newRecent = 'opened_book';
+        try {
+          localStorage.setItem(
+            'thalita_reader_passport_achievements',
+            JSON.stringify(nextAchievements)
+          );
+        } catch {}
+      }
+
+      return {
+        activeBookId: bookId,
+        isBookModalOpen: true,
+        activeModal: 'book',
+        unlockedAchievements: nextAchievements,
+        recentlyUnlockedAchievement: newRecent,
+      };
     }),
 
   closeBookModal: () =>
@@ -201,6 +240,42 @@ export const useAppStore = create<AppState>((set) => ({
     set({ isReducedMotion: value });
   },
 
+  // Controle do Passaporte da Leitora
+  openPassport: () =>
+    set({
+      isPassportOpen: true,
+      activeModal: 'passport',
+    }),
+
+  closePassport: () =>
+    set({
+      isPassportOpen: false,
+      activeModal: null,
+    }),
+
+  togglePassport: () =>
+    set((state) => ({
+      isPassportOpen: !state.isPassportOpen,
+      activeModal: !state.isPassportOpen ? 'passport' : null,
+    })),
+
+  unlockAchievement: (id: string) =>
+    set((state) => {
+      if (state.unlockedAchievements.includes(id)) {
+        return state;
+      }
+      const next = [...state.unlockedAchievements, id];
+      try {
+        localStorage.setItem('thalita_reader_passport_achievements', JSON.stringify(next));
+      } catch {}
+      return {
+        unlockedAchievements: next,
+        recentlyUnlockedAchievement: id,
+      };
+    }),
+
+  clearRecentAchievement: () => set({ recentlyUnlockedAchievement: null }),
+
   // Desbloquear e Colecionar Adesivos (Sem duplicatas)
   collectSticker: (stickerId: string) =>
     set((state) => ({
@@ -218,6 +293,7 @@ export const useAppStore = create<AppState>((set) => ({
       isMovieModalOpen: false,
       isAdviceCardModalOpen: false,
       isKeyboardModalOpen: false,
+      isPassportOpen: false,
       activeModal: null,
     }),
 }));

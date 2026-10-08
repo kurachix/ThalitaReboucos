@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAudio } from '@/hooks/use-audio';
 import { triggerHaptic } from '@/utils/haptics';
+import { useAppStore } from '@/store/use-app-store';
 import { RotateCcw, Play, CheckCircle2, Sparkles, Keyboard } from 'lucide-react';
 
 const FULL_TEXT = 'Escrevo para aproximar as pessoas através do afeto e da risada.';
@@ -13,6 +14,7 @@ export const Typewriter: React.FC = () => {
   const autoTypeTimerRef = useRef<number | null>(null);
 
   const { playTypewriterKey, playPageFlip, playClick } = useAudio();
+  const unlockAchievement = useAppStore((state) => state.unlockAchievement);
 
   // Avança uma letra e toca som de datilografia + vibração háptica tátil
   const typeNextLetter = useCallback(() => {
@@ -25,15 +27,17 @@ export const Typewriter: React.FC = () => {
           setIsFinished(true);
           setIsAutoTyping(false);
           triggerHaptic('success');
+          unlockAchievement('typed_manifesto');
         }
         return next;
       } else {
         setIsFinished(true);
         setIsAutoTyping(false);
+        unlockAchievement('typed_manifesto');
         return prev;
       }
     });
-  }, [playTypewriterKey]);
+  }, [playTypewriterKey, unlockAchievement]);
 
   // Listener para teclas físicas do teclado
   useEffect(() => {

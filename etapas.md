@@ -230,7 +230,8 @@
 - **Impacto na Interação**: Cria o sentimento de surpresa, encanto e descoberta orgânica, marcas registradas da literatura infanto-juvenil da autora.
 
 ### [ ] Etapa 30: Folheamento Tátil & Leitor com Audiobook Preview nos Livros
-- **Objetivo**: Enriquecer o modal de livros (`BookFlipbookModal`) com suporte a gestos touch de arrastar para virar página (*swipe-to-flip*), som aprimorado de folhear papel real e botão interativo "Ouvir Trecho" com síntese de voz (Web Speech API) ou áudio demonstrativo da autora.
+- **Objetivo**: Enriquecer o modal de livros (`BookFlipbookModal`) com suporte a gestos touch de arrastar para virar página (*swipe-to-flip*), som aprimorado de folhear papel real e botão interativo "Ouvir Trecho" com síntese de voz (Web Speech API) ou áudio demonstrativo da au
+tora.
 - **Arquivos-chave**: `src/components/bookshelf/BookFlipbookModal.tsx`, `src/components/bookshelf/AudiobookPlayer.tsx`.
 - **Critério de Aceite**: Usuário pode folhear a página clicando nas extremidades ou deslizando horizontalmente no touch; botão de play/pause para ouvir sinopse em áudio com barra de progresso em tempo real; marcador de página interativo que salva os livros favoritos do visitante no `localStorage`.
 - **Impacto na Interação**: Eleva o consumo da obra literária para um formato multissensorial (visual, sonoro e gestual).

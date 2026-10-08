@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from '@/components/common/Header';
 import { FloatingStickersLayer } from '@/components/common/FloatingStickersLayer';
 import { KeyboardShortcutsModal } from '@/components/common/KeyboardShortcutsModal';
+import { ReaderPassport } from '@/components/gamification/ReaderPassport';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { Heart, Sparkles, BookOpen, Instagram, Twitter } from 'lucide-react';
 import { THALITA_PROFILE } from '@/data/biography';
@@ -16,6 +17,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
       
       {/* Modal Global de Atalhos de Teclado (Modo Power-User) */}
       <KeyboardShortcutsModal />
+
+      {/* Gamificação: Passaporte da Leitora (Rastreador de Exploração & Selos) */}
+      <ReaderPassport />
       
       {/* Dados Estruturados Schema.org JSON-LD para SEO e Google Rich Results */}
       <StructuredData />

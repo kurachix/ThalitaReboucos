@@ -150,7 +150,7 @@
 - **Critério de Aceite**: Post-its com rotações orgânicas aleatórias (-3° a 4°), efeito de balanço ao passar o mouse (*pendulum hover*) e sombras que simulam papel descolado da parede.
 - **Otimização para o Modelo**: Renderização otimizada com CSS puro para as transformações de rotação e sombra.
 
-### [ ] Etapa 19: Formulário Dinâmico de Novo Recado com Persistência
+### [x] Etapa 19: Formulário Dinâmico de Novo Recado com Persistência
 - **Objetivo**: Permitir que o visitante digite seu nome, cidade e mensagem, escolha a cor do post-it (Rosa, Amarelo, Azul, Lilás) e pregue seu recado no mural com som de fixação.
 - **Arquivos-chave**: `src/components/fan-wall/AddNoteModal.tsx`, `src/hooks/use-local-notes.ts`.
 - **Critério de Aceite**: O novo post-it aparece imediatamente na tela com animação de impacto; notas salvas no `localStorage` para permanecerem ao recarregar a página.

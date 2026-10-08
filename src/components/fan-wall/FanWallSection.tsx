@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { DEFAULT_FAN_NOTES, BIENAL_MEMORIES } from '@/data/fan-wall';
-import { FanNote, NoteColor } from '@/types';
+import { BIENAL_MEMORIES } from '@/data/fan-wall';
+import { NoteColor } from '@/types';
 import { PostItNote } from './PostItNote';
 import { BienalPolaroid } from './BienalPolaroid';
+import { AddNoteModal } from './AddNoteModal';
+import { useLocalNotes, NewNoteInput } from '@/hooks/use-local-notes';
 import { useAudio } from '@/hooks/use-audio';
 import { 
   MessageSquare, 
@@ -15,22 +17,21 @@ import {
 } from 'lucide-react';
 
 export const FanWallSection: React.FC = () => {
-  const { playClick, playPinPop } = useAudio();
+  const { playClick } = useAudio();
+  const { notes, addNote, likeNote, recentlyAddedId } = useLocalNotes();
 
   // Estados de Filtros e Busca
   const [selectedColor, setSelectedColor] = useState<NoteColor | 'all'>('all');
   const [activeTab, setActiveTab] = useState<'all' | 'notes' | 'bienal'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  // Lista de notas (preparada para persistência local na Etapa 19)
-  const [notes, setNotes] = useState<FanNote[]>(DEFAULT_FAN_NOTES);
-
-  // Manipulador de curtidas em notas
-  const handleLikeNote = (id: string) => {
-    setNotes((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, likes: (n.likes || 0) + 1 } : n))
-    );
+  // Manipulador de novo recado
+  const handleAddNoteSubmit = (noteData: NewNoteInput) => {
+    addNote(noteData);
+    setToastMessage('📌 Seu recadinho foi pregado com sucesso no mural!');
+    setTimeout(() => setToastMessage(null), 3500);
   };
 
   // Filtragem combinada por busca e cor
@@ -175,13 +176,12 @@ export const FanWallSection: React.FC = () => {
             />
           </div>
 
-          {/* Botão de Pregar Novo Recado (teaser da Etapa 19) */}
+          {/* Botão de Pregar Novo Recado */}
           <button
             type="button"
             onClick={() => {
-              playPinPop();
-              setToastMessage('📌 O formulário para pregar seu próprio recado será ativado na Etapa 19!');
-              setTimeout(() => setToastMessage(null), 3500);
+              playClick();
+              setIsAddModalOpen(true);
             }}
             className="w-full lg:w-auto inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-pop-pink to-purple-600 hover:from-amber-600 hover:to-purple-700 text-white font-heading font-extrabold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95"
           >
@@ -273,7 +273,8 @@ export const FanWallSection: React.FC = () => {
                   <PostItNote
                     key={note.id}
                     note={note}
-                    onLike={handleLikeNote}
+                    onLike={likeNote}
+                    isRecentlyAdded={note.id === recentlyAddedId}
                   />
                 ))}
               </div>
@@ -298,6 +299,13 @@ export const FanWallSection: React.FC = () => {
         )}
 
       </div>
+
+      {/* Modal Formulário de Novo Recado */}
+      <AddNoteModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSubmit={handleAddNoteSubmit}
+      />
 
       {/* Toast Flutuante de Confirmação */}
       {toastMessage && (

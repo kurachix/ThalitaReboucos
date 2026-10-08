@@ -7,6 +7,7 @@ import { Heart, MapPin, BookOpen } from 'lucide-react';
 export interface PostItNoteProps {
   note: FanNote;
   onLike?: (id: string) => void;
+  isRecentlyAdded?: boolean;
 }
 
 interface ColorTheme {
@@ -73,7 +74,11 @@ const COLOR_THEMES: Record<NoteColor, ColorTheme> = {
   },
 };
 
-export const PostItNote: React.FC<PostItNoteProps> = ({ note, onLike }) => {
+export const PostItNote: React.FC<PostItNoteProps> = ({ 
+  note, 
+  onLike,
+  isRecentlyAdded = false,
+}) => {
   const { playPinPop, playClick } = useAudio();
   const prefersReduced = useReducedMotion();
 
@@ -113,8 +118,12 @@ export const PostItNote: React.FC<PostItNoteProps> = ({ note, onLike }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={`group relative p-5 sm:p-6 rounded-2xl border bg-gradient-to-br ${theme.bgGradient} ${theme.borderColor} ${
-        isHovered ? 'post-it-shadow-lifted z-20' : 'post-it-shadow z-10'
-      } ${prefersReduced ? '' : 'post-it-pendulum'} select-none transition-all duration-300 flex flex-col justify-between`}
+        isRecentlyAdded
+          ? 'ring-4 ring-sun-yellow shadow-2xl z-30 scale-105'
+          : isHovered
+          ? 'post-it-shadow-lifted z-20'
+          : 'post-it-shadow z-10'
+      } ${prefersReduced ? '' : isRecentlyAdded ? 'animate-bounce' : 'post-it-pendulum'} select-none transition-all duration-300 flex flex-col justify-between`}
       style={{
         // Define a rotação orgânica em CSS para a animação pendular
         // @ts-expect-error CSS variable customizada
@@ -126,6 +135,12 @@ export const PostItNote: React.FC<PostItNoteProps> = ({ note, onLike }) => {
           : `rotate(${note.rotationDeg}deg)`,
       }}
     >
+      {/* Badge de Impacto para Recado Recém-Pregado */}
+      {isRecentlyAdded && (
+        <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-sun-yellow text-amber-950 font-heading font-black text-[10px] uppercase tracking-wider shadow-md z-40 animate-pulse pointer-events-none">
+          ✨ Pregado Agora! ✨
+        </div>
+      )}
       {/* ======================================================== */}
       {/* ALFINETE FIXADOR REALISTA (PUSHPIN COM BRILHO METÁLICO)   */}
       {/* ======================================================== */}

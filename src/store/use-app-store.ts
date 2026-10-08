@@ -16,6 +16,9 @@ export interface AppState {
   selectedMovieId: string | null;
   isMovieModalOpen: boolean;
 
+  // Card de Conselho para Redes Sociais
+  isAdviceCardModalOpen: boolean;
+
   // Gamificação (Stickers Colecionados)
   collectedStickers: string[];
 
@@ -32,6 +35,8 @@ export interface AppState {
   openMovieModal: (movieId: string) => void;
   closeMovieModal: () => void;
   setSelectedMovieId: (movieId: string | null) => void;
+  openAdviceCardModal: () => void;
+  closeAdviceCardModal: () => void;
   collectSticker: (stickerId: string) => void;
   closeAllModals: () => void;
 }
@@ -47,6 +52,8 @@ export const useAppStore = create<AppState>((set) => ({
 
   selectedMovieId: null,
   isMovieModalOpen: false,
+
+  isAdviceCardModalOpen: false,
 
   collectedStickers: [],
   activeModal: null,
@@ -114,6 +121,19 @@ export const useAppStore = create<AppState>((set) => ({
       selectedMovieId: movieId,
     }),
 
+  // Controle do Card de Conselho para Redes
+  openAdviceCardModal: () =>
+    set({
+      isAdviceCardModalOpen: true,
+      activeModal: 'advice-card',
+    }),
+
+  closeAdviceCardModal: () =>
+    set({
+      isAdviceCardModalOpen: false,
+      activeModal: null,
+    }),
+
   // Desbloquear e Colecionar Adesivos (Sem duplicatas)
   collectSticker: (stickerId: string) =>
     set((state) => ({
@@ -129,6 +149,7 @@ export const useAppStore = create<AppState>((set) => ({
       isBookModalOpen: false,
       selectedMovieId: null,
       isMovieModalOpen: false,
+      isAdviceCardModalOpen: false,
       activeModal: null,
     }),
 }));

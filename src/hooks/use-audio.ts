@@ -58,6 +58,10 @@ export function useAudio() {
     if (!isMuted) soundEngine.playClick();
   }, [isMuted]);
 
+  const playCameraShutter = useCallback(() => {
+    if (!isMuted) soundEngine.playCameraShutter();
+  }, [isMuted]);
+
   return {
     isMuted,
     hasInteracted,
@@ -72,5 +76,6 @@ export function useAudio() {
     playPinPop,
     playConfettiPop,
     playClick,
+    playCameraShutter,
   };
 }

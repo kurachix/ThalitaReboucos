@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { ADVICE_QUOTES } from '@/data/advices';
 import { AdviceQuote } from '@/types';
 import { SlotReels, THEME_REEL_ITEMS, BOOK_REEL_ITEMS, CHARM_REEL_ITEMS } from './SlotReels';
+import { ShareableCard } from './ShareableCard';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { 
@@ -12,7 +13,9 @@ import {
   Check, 
   Heart, 
   BookOpen, 
-  Quote
+  Quote,
+  Camera,
+  CheckCircle2,
 } from 'lucide-react';
 
 export const AdviceMachineSection: React.FC = () => {
@@ -24,6 +27,10 @@ export const AdviceMachineSection: React.FC = () => {
   const [leverPulled, setLeverPulled] = useState(false);
   const [isCapsuleOpen, setIsCapsuleOpen] = useState(true); // Inicialmente aberta com um conselho inicial
   const [copied, setCopied] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Estado do Gerador de Card de Redes Sociais
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false);
 
   // Índices sorteados
   const [themeIndex, setThemeIndex] = useState(0);
@@ -78,10 +85,14 @@ export const AdviceMachineSection: React.FC = () => {
   // Cópia da frase sorteada para a área de transferência
   const handleCopyQuote = () => {
     playClick();
-    const textToCopy = `"${currentAdvice.quote}" — Thalita Rebouças (${currentAdvice.bookOrigin})`;
+    const textToCopy = `"${currentAdvice.quote}" — Thalita Rebouças (${currentAdvice.bookOrigin}) ✨`;
     navigator.clipboard?.writeText(textToCopy);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2400);
+    setToastMessage('✨ Frase copiada com sucesso! Pronta para colar no WhatsApp ou redes.');
+    setTimeout(() => {
+      setCopied(false);
+      setToastMessage(null);
+    }, 2800);
   };
 
   return (
@@ -263,8 +274,8 @@ export const AdviceMachineSection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Assinatura Autoral da Thalita */}
-              <div className="flex items-center justify-between pt-3 border-t border-amber-100 text-xs">
+              {/* Assinatura Autoral da Thalita e Ações do Conselho */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-amber-100 text-xs">
                 <div className="flex items-center gap-2">
                   <Heart className="w-4 h-4 text-pop-pink fill-current" />
                   <span className="font-handwriting text-xl sm:text-2xl text-pop-pink">
@@ -272,24 +283,62 @@ export const AdviceMachineSection: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Botão de Cópia com Feedback */}
+                {/* Botões de Ação do Conselho */}
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                  {/* Botão de Cópia com Feedback */}
+                  <button
+                    type="button"
+                    onClick={handleCopyQuote}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-slate-950 text-xs font-bold font-heading transition-colors shadow-xs active:scale-95"
+                    title="Copiar frase do conselho para área de transferência"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="text-emerald-700">Frase Copiada!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-slate-500" />
+                        <span>Copiar Frase</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Botão para Gerar Card Estilizado para Redes Sociais */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playClick();
+                      setIsCardModalOpen(true);
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-pop-pink to-purple-600 hover:from-pop-pink-dark hover:to-purple-700 text-white text-xs font-bold font-heading shadow-md hover:shadow-lg transition-all active:scale-95"
+                    title="Abrir gerador de cards de conselho (Stories 9:16 e Feed 1:1)"
+                  >
+                    <Camera className="w-3.5 h-3.5 text-sun-yellow" />
+                    <span>Gerar Card para Redes 📸</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Banner Teaser de Scrapbook para Redes Sociais */}
+              <div className="mt-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-pink-50 via-amber-50 to-pink-50 border border-pink-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2.5 text-slate-700">
+                  <span className="text-xl">📸</span>
+                  <p className="font-body">
+                    <strong>Gostou desse conselho?</strong> Exporte em formato de card estilizado com borda scrapbook, autógrafo digital e proporções perfeitas para <strong>Instagram Stories (9:16)</strong> ou <strong>Feed/WhatsApp (1:1)</strong>.
+                  </p>
+                </div>
                 <button
                   type="button"
-                  onClick={handleCopyQuote}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-slate-950 text-xs font-bold font-heading transition-colors shadow-xs active:scale-95"
-                  title="Copiar frase do conselho"
+                  onClick={() => {
+                    playClick();
+                    setIsCardModalOpen(true);
+                  }}
+                  className="shrink-0 px-4 py-2 rounded-full bg-pop-pink text-white font-heading font-extrabold uppercase tracking-wider text-[11px] shadow-sm hover:bg-pop-pink-dark transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700">Frase Copiada!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-slate-500" />
-                      <span>Copiar Frase</span>
-                    </>
-                  )}
+                  <Sparkles className="w-3.5 h-3.5 text-sun-yellow" />
+                  <span>Personalizar Card 🎨</span>
                 </button>
               </div>
 
@@ -306,6 +355,30 @@ export const AdviceMachineSection: React.FC = () => {
         </div>
 
       </div>
+
+      {/* =================================================================== */}
+      {/* MODAL ESTÚDIO DO CARD DE CONSELHO (STORIES 9:16 & FEED 1:1)         */}
+      {/* =================================================================== */}
+      <ShareableCard
+        advice={currentAdvice}
+        isOpen={isCardModalOpen}
+        onClose={() => setIsCardModalOpen(false)}
+      />
+
+      {/* =================================================================== */}
+      {/* TOAST DE FEEDBACK RÁPIDO DO CONSELHO                                */}
+      {/* =================================================================== */}
+      {toastMessage && (
+        <div 
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-md px-4 py-2.5 rounded-full shadow-2xl bg-slate-900/95 border border-emerald-400 text-white flex items-center gap-2.5 text-xs font-heading font-medium backdrop-blur-md animate-bounce"
+        >
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
     </section>
   );
 };

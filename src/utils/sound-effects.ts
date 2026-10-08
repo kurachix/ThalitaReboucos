@@ -269,6 +269,46 @@ class SoundEngine {
   }
 
   /**
+   * Som de obturador de câmera fotográfica / snapshot (Geração de Cards)
+   */
+  playCameraShutter() {
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+
+    // Primeiro clique mecânico
+    const osc1 = ctx.createOscillator();
+    const gain1 = ctx.createGain();
+    osc1.type = 'triangle';
+    osc1.frequency.setValueAtTime(850, now);
+    osc1.frequency.exponentialRampToValueAtTime(320, now + 0.025);
+    gain1.gain.setValueAtTime(0.2, now);
+    gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+    osc1.connect(gain1);
+    gain1.connect(ctx.destination);
+    osc1.start(now);
+    osc1.stop(now + 0.035);
+
+    // Ruído do obturador
+    this.playNoiseBurst(0.03, 0.12);
+
+    // Segundo clique de disparo mecânico
+    const t2 = now + 0.055;
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    osc2.type = 'triangle';
+    osc2.frequency.setValueAtTime(650, t2);
+    osc2.frequency.exponentialRampToValueAtTime(200, t2 + 0.035);
+    gain2.gain.setValueAtTime(0.22, t2);
+    gain2.gain.exponentialRampToValueAtTime(0.001, t2 + 0.04);
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    osc2.start(t2);
+    osc2.stop(t2 + 0.045);
+  }
+
+  /**
    * Clique suave de UI para botões gerais
    */
   playClick() {

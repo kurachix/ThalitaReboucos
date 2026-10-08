@@ -15,8 +15,9 @@ export const SoundPill: React.FC = () => {
     <button
       onClick={handleClick}
       type="button"
+      aria-pressed={!isMuted}
       aria-label={isMuted ? 'Ativar efeitos sonoros e trilha lo-fi' : 'Mutar áudio da experiência'}
-      className={`group relative flex items-center gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full border transition-all duration-300 select-none shadow-sm ${
+      className={`group relative flex items-center gap-2.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full border transition-all duration-300 select-none shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink ${
         isMuted
           ? 'bg-white/80 hover:bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-700'
           : 'bg-gradient-to-r from-pink-500/10 to-amber-500/10 border-pink-400/50 text-pink-600 hover:border-pink-500 shadow-pink-100'

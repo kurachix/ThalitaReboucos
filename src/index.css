@@ -30,6 +30,15 @@
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-handwriting: 'Caveat', cursive;
+
+  /* Variáveis de Animação e Acessibilidade (a11y) com Fallback Condicional */
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 300ms;
+  --motion-duration-slow: 500ms;
+  --motion-timing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --motion-timing-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-scale-hover: 1.05;
+  --motion-translate-hover: -4px;
 }
 
 @layer base {
@@ -245,4 +254,93 @@
   100% {
     transform: scaleY(1);
   }
+}
+
+/* =================================================================== */
+/* ACESSIBILIDADE INCLUSIVA (a11y) & MODO DE MOVIMENTO REDUZIDO         */
+/* =================================================================== */
+
+/* Foco visual de alto contraste para navegação por teclado (WCAG 2.1 AA) */
+:focus-visible {
+  outline: 3px solid #FF2A85 !important;
+  outline-offset: 3px !important;
+}
+
+/* Link acessível para pular direto para o conteúdo principal */
+.skip-to-content {
+  position: absolute;
+  top: -120px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.625rem 1.25rem;
+  background-color: #FF2A85;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: top 0.2s ease-out;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+}
+
+/* Utilitário para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Fallback Condicional Global quando Movimento Reduzido for detectado via SO */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0.01ms;
+    --motion-duration-normal: 0.01ms;
+    --motion-duration-slow: 0.01ms;
+    --motion-scale-hover: 1;
+    --motion-translate-hover: 0px;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .post-it-pendulum:hover {
+    animation: none !important;
+  }
+}
+
+/* Fallback Condicional quando Movimento Reduzido for ativado manualmente no site */
+html[data-reduced-motion="true"] {
+  --motion-duration-fast: 0.01ms;
+  --motion-duration-normal: 0.01ms;
+  --motion-duration-slow: 0.01ms;
+  --motion-scale-hover: 1;
+  --motion-translate-hover: 0px;
+}
+
+html[data-reduced-motion="true"] *,
+html[data-reduced-motion="true"] *::before,
+html[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-reduced-motion="true"] .post-it-pendulum:hover {
+  animation: none !important;
 }

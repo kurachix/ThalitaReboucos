@@ -19,6 +19,9 @@ export interface AppState {
   // Card de Conselho para Redes Sociais
   isAdviceCardModalOpen: boolean;
 
+  // Acessibilidade: Movimento Reduzido (a11y)
+  isReducedMotion: boolean;
+
   // Gamificação (Stickers Colecionados)
   collectedStickers: string[];
 
@@ -37,8 +40,21 @@ export interface AppState {
   setSelectedMovieId: (movieId: string | null) => void;
   openAdviceCardModal: () => void;
   closeAdviceCardModal: () => void;
+  toggleReducedMotion: () => void;
+  setReducedMotion: (value: boolean) => void;
   collectSticker: (stickerId: string) => void;
   closeAllModals: () => void;
+}
+
+function getInitialReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    const saved = localStorage.getItem('thalita_reduced_motion');
+    if (saved !== null) {
+      return saved === 'true';
+    }
+  } catch {}
+  return window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -46,6 +62,8 @@ export const useAppStore = create<AppState>((set) => ({
   isMuted: true,
   isAudioMuted: true,
   hasInteracted: false,
+
+  isReducedMotion: getInitialReducedMotion(),
 
   activeBookId: null,
   isBookModalOpen: false,
@@ -133,6 +151,29 @@ export const useAppStore = create<AppState>((set) => ({
       isAdviceCardModalOpen: false,
       activeModal: null,
     }),
+
+  // Acessibilidade: Controle de Movimento Reduzido (a11y)
+  toggleReducedMotion: () =>
+    set((state) => {
+      const next = !state.isReducedMotion;
+      try {
+        localStorage.setItem('thalita_reduced_motion', String(next));
+        if (typeof document !== 'undefined') {
+          document.documentElement.setAttribute('data-reduced-motion', String(next));
+        }
+      } catch {}
+      return { isReducedMotion: next };
+    }),
+
+  setReducedMotion: (value: boolean) => {
+    try {
+      localStorage.setItem('thalita_reduced_motion', String(value));
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-reduced-motion', String(value));
+      }
+    } catch {}
+    set({ isReducedMotion: value });
+  },
 
   // Desbloquear e Colecionar Adesivos (Sem duplicatas)
   collectSticker: (stickerId: string) =>

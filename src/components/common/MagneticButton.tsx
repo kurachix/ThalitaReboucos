@@ -2,12 +2,16 @@ import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { useDeviceCapability } from '@/hooks/use-device-capability';
 import { useAudio } from '@/hooks/use-audio';
+import { triggerHaptic, HapticPattern } from '@/utils/haptics';
 
 export interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   strength?: number; // Intensidade do magnetismo (0.1 a 0.6)
   maxOffset?: number; // Deslocamento máximo em pixels para manter elegância
   activeAudio?: boolean; // Se deve tocar som de clique padrão
+  haptic?: HapticPattern | false; // Padrão de vibração física mobile
+  enableRipple?: boolean; // Se deve renderizar o efeito Touch Ripple Pop
+  rippleColor?: string; // Cor personalizada do efeito de ripple
   className?: string;
 }
 
@@ -21,8 +25,12 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   strength = 0.32,
   maxOffset = 18,
   activeAudio = true,
+  haptic = 'medium',
+  enableRipple = true,
+  rippleColor = 'rgba(255, 42, 133, 0.25)',
   className = '',
   onClick,
+  onPointerDown,
   disabled = false,
   ...rest
 }) => {
@@ -34,10 +42,43 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isPointerMoving, setIsPointerMoving] = useState(false);
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number; size: number }[]>([]);
+  const nextRippleId = useRef(0);
   const rafId = useRef<number | null>(null);
 
   // Desativa magnetismo em telas sensíveis ao toque ou modo a11y
   const isDisabledMagnetic = disabled || prefersReduced || isTouchDevice;
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+    onPointerDown?.(e);
+
+    if (disabled) return;
+
+    // Resposta física háptica no smartphone
+    if (haptic) {
+      triggerHaptic(haptic);
+    }
+
+    // Cria o ripple centrado no ponto do clique/toque
+    if (enableRipple && buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const size = Math.max(rect.width, rect.height) * 2;
+
+      const rippleId = ++nextRippleId.current;
+      setRipples((prev) => [...prev, { id: rippleId, x, y, size }]);
+    }
+  };
+
+  // Limpeza de ripples antigos
+  useEffect(() => {
+    if (ripples.length === 0) return;
+    const timer = setTimeout(() => {
+      setRipples((prev) => prev.slice(1));
+    }, 550);
+    return () => clearTimeout(timer);
+  }, [ripples]);
 
   const handlePointerMove = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
     if (isDisabledMagnetic || !buttonRef.current) return;
@@ -94,6 +135,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   return (
     <button
       ref={buttonRef}
+      onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
@@ -110,7 +152,28 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       }}
       {...rest}
     >
-      {children}
+      {/* Camada visual de ripples elásticos */}
+      {enableRipple && (
+        <span className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none z-0" aria-hidden="true">
+          {ripples.map((ripple) => (
+            <span
+              key={ripple.id}
+              className="absolute rounded-full animate-ripple-pop"
+              style={{
+                left: ripple.x,
+                top: ripple.y,
+                width: ripple.size,
+                height: ripple.size,
+                backgroundColor: rippleColor,
+              }}
+            />
+          ))}
+        </span>
+      )}
+      <span className="relative z-10 inline-flex items-center justify-center w-full h-full">
+        {children}
+      </span>
     </button>
   );
 };
+

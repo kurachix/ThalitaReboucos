@@ -199,7 +199,7 @@
 
 ## ✨ FASE 9: Refinamento de Qualidade & Interação Usuário ➔ Plataforma (10 Atualizações de Excelência)
 
-### [ ] Etapa 25: Resposta Háptica Mobile e Efeito "Touch Ripple Pop"
+### [x] Etapa 25: Resposta Háptica Mobile e Efeito "Touch Ripple Pop"
 - **Objetivo**: Implementar respostas táteis físicas via `navigator.vibrate` em dispositivos móveis compatíveis nas interações-chave (clique das teclas da máquina de escrever, batida da claquete, alavanca do caça-níqueis e fixação do post-it com alfinete) acopladas a uma animação visual de micro-burst de partículas e ondulação elástica (*ripple pop*).
 - **Arquivos-chave**: `src/utils/haptics.ts`, `src/components/common/RippleFeedback.tsx`, `src/index.css`.
 - **Critério de Aceite**: Em dispositivos móveis suportados, ações de impacto disparam vibração sutil (10-30ms); visualmente, cada toque/clique em botões primários gera feedback expansivo suave com física elástica.

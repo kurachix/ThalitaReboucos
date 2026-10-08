@@ -6,6 +6,7 @@ import { ShareableCard } from './ShareableCard';
 import { MagneticButton } from '@/components/common/MagneticButton';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { triggerHaptic } from '@/utils/haptics';
 import { 
   Sparkles, 
   HelpCircle, 
@@ -44,13 +45,14 @@ export const AdviceMachineSection: React.FC = () => {
 
   const leverRef = useRef<HTMLDivElement>(null);
 
-  // Disparo da alavanca e sorteio da máquina
+  // Disparo da alavanca e sorteio da máquina com resposta tátil física
   const handlePullLever = useCallback(() => {
     if (isSpinning) return;
 
-    // Física e som da alavanca mecânica
+    // Física, som da alavanca mecânica e vibração no smartphone
     setLeverPulled(true);
     playSlotLever();
+    triggerHaptic('heavy');
     setIsCapsuleOpen(false);
 
     // Efeito de mola de retorno da alavanca após 220ms
@@ -76,6 +78,7 @@ export const AdviceMachineSection: React.FC = () => {
   const handleSpinComplete = useCallback(() => {
     setIsSpinning(false);
     playSlotWin();
+    triggerHaptic('success');
 
     // Abertura da cápsula revelando o conselho após pequeno suspense
     setTimeout(() => {
@@ -86,6 +89,7 @@ export const AdviceMachineSection: React.FC = () => {
   // Cópia da frase sorteada para a área de transferência
   const handleCopyQuote = () => {
     playClick();
+    triggerHaptic('double');
     const textToCopy = `"${currentAdvice.quote}" — Thalita Rebouças (${currentAdvice.bookOrigin}) ✨`;
     navigator.clipboard?.writeText(textToCopy);
     setCopied(true);

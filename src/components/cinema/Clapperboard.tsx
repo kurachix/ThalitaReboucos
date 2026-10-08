@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Movie } from '@/types';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { triggerHaptic } from '@/utils/haptics';
 import { Sparkles, Film, Play, CheckCircle } from 'lucide-react';
 
 interface ClapperboardProps {
@@ -32,13 +33,14 @@ export const Clapperboard: React.FC<ClapperboardProps> = ({
   const startYRef = useRef(0);
   const stickRef = useRef<HTMLDivElement>(null);
 
-  // Executa o impacto realista da claquete
+  // Executa o impacto realista da claquete com som e resposta háptica
   const triggerClapImpact = useCallback(() => {
     setIsClapping(true);
     setStickAngle(0); // Bate rápido no batente fixo
 
-    // Dispara o som de impacto imediato
+    // Dispara o som de impacto imediato e vibração física no dispositivo
     playClapper();
+    triggerHaptic('heavy');
     setShowClackBurst(true);
     setTakeCount((prev) => prev + 1);
 

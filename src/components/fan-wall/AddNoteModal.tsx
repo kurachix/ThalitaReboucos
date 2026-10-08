@@ -4,6 +4,7 @@ import { NoteColor } from '@/types';
 import { NewNoteInput } from '@/hooks/use-local-notes';
 import { useAudio } from '@/hooks/use-audio';
 import { useReducedMotion } from '@/hooks/use-reduced-motion';
+import { triggerHaptic } from '@/utils/haptics';
 import { 
   X, 
   MapPin, 
@@ -109,7 +110,11 @@ export const AddNoteModal: React.FC<AddNoteModalProps> = ({
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const isValid = Object.keys(newErrors).length === 0;
+    if (!isValid) {
+      triggerHaptic('error');
+    }
+    return isValid;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -117,8 +122,9 @@ export const AddNoteModal: React.FC<AddNoteModalProps> = ({
 
     if (!validateForm()) return;
 
-    // Dispara som tátil de alfinete espetando o mural
+    // Dispara som tátil de alfinete espetando o mural e vibração háptica física
     playPinPop();
+    triggerHaptic('medium');
 
     onSubmit({
       name: name.trim(),

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAudio } from '@/hooks/use-audio';
+import { triggerHaptic } from '@/utils/haptics';
 import { RotateCcw, Play, CheckCircle2, Sparkles, Keyboard } from 'lucide-react';
 
 const FULL_TEXT = 'Escrevo para aproximar as pessoas através do afeto e da risada.';
@@ -13,15 +14,17 @@ export const Typewriter: React.FC = () => {
 
   const { playTypewriterKey, playPageFlip, playClick } = useAudio();
 
-  // Avança uma letra e toca som de datilografia
+  // Avança uma letra e toca som de datilografia + vibração háptica tátil
   const typeNextLetter = useCallback(() => {
     setTypedLength((prev) => {
       if (prev < FULL_TEXT.length) {
         playTypewriterKey();
+        triggerHaptic('light');
         const next = prev + 1;
         if (next === FULL_TEXT.length) {
           setIsFinished(true);
           setIsAutoTyping(false);
+          triggerHaptic('success');
         }
         return next;
       } else {
@@ -73,6 +76,7 @@ export const Typewriter: React.FC = () => {
   // Iniciar digitação automática
   const handleAutoType = () => {
     playClick();
+    triggerHaptic('medium');
     if (typedLength >= FULL_TEXT.length) {
       // Reinicia e começa de novo
       setTypedLength(0);
@@ -84,6 +88,7 @@ export const Typewriter: React.FC = () => {
   // Reiniciar a folha de papel
   const handleReset = () => {
     playPageFlip();
+    triggerHaptic('light');
     if (autoTypeTimerRef.current !== null) {
       window.clearTimeout(autoTypeTimerRef.current);
     }

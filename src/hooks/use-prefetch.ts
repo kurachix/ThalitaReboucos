@@ -20,7 +20,6 @@ export function preconnectOrigin(originUrl: string) {
     dnsLink.href = originUrl;
     document.head.appendChild(dnsLink);
 
-    // 2. Preconnect (handshake TCP/TLS antecipado)
     const preconnectLink = document.createElement('link');
     preconnectLink.rel = 'preconnect';
     preconnectLink.href = originUrl;
@@ -72,12 +71,12 @@ export function prefetchYouTubeTrailer(trailerId: string | undefined) {
  */
 export function prefetchBookDetails(bookId: string) {
   if (typeof window === 'undefined') return;
-  
+
   // Aquece vozes do sintetizador de fala (Web Speech API) caso o usuário queira ouvir o trecho
   if ('speechSynthesis' in window) {
     try {
       window.speechSynthesis.getVoices();
-    } catch {}
+    } catch { }
   }
 
   prefetchedAssets.add(`book-${bookId}`);

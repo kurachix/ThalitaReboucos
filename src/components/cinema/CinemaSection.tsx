@@ -179,7 +179,7 @@ export const CinemaSection: React.FC = () => {
           {/* Lado Direito: Tela de Projeção com o Filme Iluminado pelo Feixe */}
           <div className="lg:col-span-7">
             <div 
-              className={`relative rounded-2xl border-2 transition-all duration-300 p-6 sm:p-8 ${
+              className={`relative rounded-2xl border-2 transition-all duration-300 p-6 sm:p-8 min-h-[460px] flex flex-col justify-between ${
                 isProjectorOn 
                   ? 'bg-slate-900/90 border-sun-yellow/60 shadow-[0_0_50px_rgba(255,209,59,0.15)] ring-1 ring-sun-yellow/30' 
                   : 'bg-slate-900/40 border-slate-800 opacity-60'
@@ -330,7 +330,7 @@ export const CinemaSection: React.FC = () => {
           {/* Grid e Carrossel Fluído de Filmes */}
           <div 
             ref={carouselRef}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch"
           >
             {MOVIES_CATALOG.map((movie, idx) => (
               <MovieCard

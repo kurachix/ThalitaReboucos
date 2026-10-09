@@ -47,14 +47,14 @@ export const MovieCard: React.FC<MovieCardProps> = ({
     <div
       onClick={handleCardClick}
       {...prefetchHandlers}
-      className={`group relative flex flex-col justify-between rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden select-none ${
+      className={`group relative flex flex-col justify-between h-full min-h-[440px] sm:min-h-[460px] rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden select-none ${
         isSelected
           ? 'bg-slate-900 border-sun-yellow shadow-[0_0_30px_rgba(255,209,59,0.25)] ring-2 ring-sun-yellow/40 scale-[1.02]'
           : 'bg-slate-950/80 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90 hover:-translate-y-1'
       }`}
     >
       {/* Topo do Card: Furinhos de Película 35mm & Badge de Streaming */}
-      <div className="p-4 sm:p-5 pb-3">
+      <div className="p-4 sm:p-5 pb-3 flex-1 flex flex-col">
         {/* Furinhos simulando borda de rolo de filme de 35mm */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-800/80 text-[10px] font-mono text-slate-500">
           <div className="flex items-center gap-1">
@@ -67,20 +67,20 @@ export const MovieCard: React.FC<MovieCardProps> = ({
         {/* Badge da Plataforma e Duração */}
         <div className="flex items-center justify-between pt-3 gap-2">
           <span
-            className="px-2.5 py-0.5 rounded-full text-[10px] font-heading font-extrabold uppercase tracking-wider text-white shadow-xs"
+            className="px-2.5 py-0.5 rounded-full text-[10px] font-heading font-extrabold uppercase tracking-wider text-white shadow-xs truncate"
             style={{ backgroundColor: movie.badgeColor }}
           >
             {movie.platformLabel}
           </span>
 
-          <span className="flex items-center gap-1 text-[11px] font-mono text-slate-400">
+          <span className="flex items-center gap-1 text-[11px] font-mono text-slate-400 shrink-0">
             <Clock className="w-3 h-3 text-slate-500" />
             <span>{movie.duration || 'Longa'}</span>
           </span>
         </div>
 
-        {/* Título da Obra */}
-        <div className="mt-3 space-y-1">
+        {/* Título da Obra (Altura Padronizada para 1 ou 2 Linhas) */}
+        <div className="mt-3 space-y-1 h-16 flex flex-col justify-start">
           <h3 className="font-heading font-black text-lg sm:text-xl text-white group-hover:text-sun-yellow transition-colors leading-snug line-clamp-2">
             {movie.title}
           </h3>
@@ -89,16 +89,16 @@ export const MovieCard: React.FC<MovieCardProps> = ({
           </p>
         </div>
 
-        {/* Marco / Destaque de Bilheteria */}
-        <div className="mt-3 p-2.5 rounded-xl bg-slate-950/90 border border-slate-800/90 flex items-start gap-2">
+        {/* Marco / Destaque de Bilheteria (Altura Padronizada) */}
+        <div className="mt-3 p-2.5 rounded-xl bg-slate-950/90 border border-slate-800/90 flex items-start gap-2 h-[72px] overflow-hidden">
           <Award className="w-4 h-4 text-sun-yellow shrink-0 mt-0.5" />
           <p className="text-xs text-slate-300 font-medium line-clamp-2 leading-tight">
             {movie.highlight}
           </p>
         </div>
 
-        {/* Elenco Principal Resumido */}
-        <div className="mt-3 space-y-1.5">
+        {/* Elenco Principal Resumido (Altura Padronizada) */}
+        <div className="mt-3 space-y-1.5 h-20 sm:h-24 overflow-hidden">
           <div className="flex items-center gap-1 text-[11px] font-heading font-bold text-slate-400">
             <Users className="w-3 h-3 text-pop-pink" />
             <span>Elenco:</span>
@@ -121,8 +121,8 @@ export const MovieCard: React.FC<MovieCardProps> = ({
         </div>
       </div>
 
-      {/* Rodapé do Card: Ação Primária de Assistir Trailer */}
-      <div className="p-4 pt-3 border-t border-slate-800/80 bg-slate-950/60 flex items-center justify-between gap-2">
+      {/* Rodapé do Card: Ação Primária de Assistir Trailer Fixada na Base */}
+      <div className="p-4 pt-3 border-t border-slate-800/80 bg-slate-950/60 flex items-center justify-between gap-2 mt-auto">
         <button
           type="button"
           onClick={handleTrailerClick}
@@ -134,7 +134,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({
         </button>
 
         {isSelected && (
-          <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono text-sun-yellow px-2">
+          <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono text-sun-yellow px-2 shrink-0">
             <Sparkles className="w-3 h-3 text-sun-yellow" />
             <span>Na Tela</span>
           </span>

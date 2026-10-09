@@ -7,10 +7,10 @@ import { BookOpen, Sparkles } from 'lucide-react';
 
 interface BookSpineProps {
   book: Book;
-  index: number;
+  index?: number;
 }
 
-export const BookSpine: React.FC<BookSpineProps> = ({ book, index }) => {
+export const BookSpine: React.FC<BookSpineProps> = ({ book }) => {
   const openBookModal = useAppStore((state) => state.openBookModal);
   const { playPageFlip } = useAudio();
   const [imageError, setImageError] = useState(false);
@@ -25,15 +25,13 @@ export const BookSpine: React.FC<BookSpineProps> = ({ book, index }) => {
     openBookModal(book.id);
   };
 
-  // Variação orgânica sutil de altura de prateleira (210px a 240px)
-  const heightClass = index % 3 === 0 ? 'h-64' : index % 3 === 1 ? 'h-60' : 'h-62';
   const hasCover = Boolean(book.coverUrl) && !imageError;
 
   return (
     <div
       onClick={handleBookClick}
       {...prefetchHandlers}
-      className={`group relative flex flex-col justify-between w-40 sm:w-44 ${heightClass} rounded-r-xl rounded-l-xs p-3 cursor-pointer select-none transition-all duration-300 ease-out hover:-translate-y-3 hover:scale-105 hover:rotate-[-1.5deg] overflow-hidden`}
+      className="group relative flex flex-col justify-between w-40 sm:w-44 h-64 rounded-r-xl rounded-l-xs p-3 cursor-pointer select-none transition-all duration-300 ease-out hover:-translate-y-3 hover:scale-105 hover:rotate-[-1.5deg] overflow-hidden"
       style={{
         backgroundColor: book.coverAccent,
         boxShadow: `

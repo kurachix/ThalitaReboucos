@@ -386,7 +386,7 @@ export const BookFlipbookModal: React.FC = () => {
             <div className="my-auto py-3">
               {currentBook.coverUrl && !imageError ? (
                 <div
-                  className="relative mx-auto w-48 sm:w-56 h-68 sm:h-76 rounded-r-2xl rounded-l-xs overflow-hidden shadow-2xl transform transition-transform duration-300 hover:scale-[1.02] border-r-2 border-y border-amber-950/20 group"
+                  className="relative mx-auto w-48 sm:w-56 h-72 sm:h-80 aspect-[2/3] rounded-r-2xl rounded-l-xs overflow-hidden shadow-2xl transform transition-transform duration-300 hover:scale-[1.02] border-r-2 border-y border-amber-950/20 group"
                   style={{
                     backgroundColor: currentBook.coverAccent,
                     boxShadow: `
@@ -435,7 +435,7 @@ export const BookFlipbookModal: React.FC = () => {
                 </div>
               ) : (
                 <div
-                  className="relative mx-auto w-48 sm:w-56 h-64 sm:h-72 rounded-r-2xl rounded-l-xs p-5 flex flex-col justify-between text-white shadow-2xl transform transition-transform duration-300 hover:scale-[1.02]"
+                  className="relative mx-auto w-48 sm:w-56 h-72 sm:h-80 aspect-[2/3] rounded-r-2xl rounded-l-xs p-5 flex flex-col justify-between text-white shadow-2xl transform transition-transform duration-300 hover:scale-[1.02]"
                   style={{
                     backgroundColor: currentBook.coverAccent,
                     boxShadow: `

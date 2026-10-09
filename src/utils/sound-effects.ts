@@ -172,6 +172,34 @@ class SoundEngine {
   }
 
   /**
+   * Trava mecânica nítida de parada de cilindro da roleta
+   */
+  playReelStop() {
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(480, now);
+    osc.frequency.exponentialRampToValueAtTime(100, now + 0.07);
+
+    gain.gain.setValueAtTime(0.28, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.07);
+
+    // Pequeno estalo metálico de impacto
+    this.playNoiseBurst(0.02, 0.18);
+  }
+
+  /**
    * Sino festivo de sorteio concluído (Caça-Níquel)
    */
   playSlotWin() {

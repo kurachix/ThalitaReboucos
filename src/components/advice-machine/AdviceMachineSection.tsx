@@ -1,17 +1,16 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ADVICE_QUOTES } from '@/data/advices';
 import { AdviceQuote } from '@/types';
 import { SlotReels, THEME_REEL_ITEMS, BOOK_REEL_ITEMS, CHARM_REEL_ITEMS } from './SlotReels';
+import { SlotLever } from './SlotLever';
 import { ShareableCard } from './ShareableCard';
 import { MagneticButton } from '@/components/common/MagneticButton';
 import { useAudio } from '@/hooks/use-audio';
-import { useReducedMotion } from '@/hooks/use-reduced-motion';
 import { useAppStore } from '@/store/use-app-store';
 import { triggerHaptic } from '@/utils/haptics';
 import { 
   Sparkles, 
   HelpCircle, 
-  RotateCcw, 
   Copy, 
   Check, 
   Heart, 
@@ -22,13 +21,11 @@ import {
 } from 'lucide-react';
 
 export const AdviceMachineSection: React.FC = () => {
-  const { playSlotLever, playSlotWin, playClick } = useAudio();
-  const prefersReduced = useReducedMotion();
+  const { playSlotWin, playClick } = useAudio();
   const unlockAchievement = useAppStore((state) => state.unlockAchievement);
 
   // Estados da Máquina Caça-Níquel
   const [isSpinning, setIsSpinning] = useState(false);
-  const [leverPulled, setLeverPulled] = useState(false);
   const [isCapsuleOpen, setIsCapsuleOpen] = useState(true); // Inicialmente aberta com um conselho inicial
   const [copied, setCopied] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -45,24 +42,12 @@ export const AdviceMachineSection: React.FC = () => {
   const [currentAdvice, setCurrentAdvice] = useState<AdviceQuote>(ADVICE_QUOTES[0]);
   const [spinCount, setSpinCount] = useState(1);
 
-  const leverRef = useRef<HTMLDivElement>(null);
-
-  // Disparo da alavanca e sorteio da máquina com resposta tátil física
+  // Disparo da alavanca e sorteio da máquina
   const handlePullLever = useCallback(() => {
     if (isSpinning) return;
 
-    // Física, som da alavanca mecânica e vibração no smartphone
-    setLeverPulled(true);
-    playSlotLever();
-    triggerHaptic('heavy');
     unlockAchievement('spun_slot');
     setIsCapsuleOpen(false);
-
-    // Efeito de mola de retorno da alavanca após 220ms
-    setTimeout(() => {
-      setLeverPulled(false);
-      setIsSpinning(true);
-    }, 220);
 
     // Sorteio de novos índices para os 3 cilindros e o conselho
     const nextAdviceIndex = Math.floor(Math.random() * ADVICE_QUOTES.length);
@@ -75,7 +60,9 @@ export const AdviceMachineSection: React.FC = () => {
     setCharmIndex(nextCharm);
     setCurrentAdvice(ADVICE_QUOTES[nextAdviceIndex]);
     setSpinCount((prev) => prev + 1);
-  }, [isSpinning, playSlotLever]);
+
+    setIsSpinning(true);
+  }, [isSpinning, unlockAchievement]);
 
   // Conclusão da rotação dos cilindros
   const handleSpinComplete = useCallback(() => {
@@ -185,66 +172,12 @@ export const AdviceMachineSection: React.FC = () => {
           </div>
 
           {/* ======================================================== */}
-          {/* ALAVANCA MECÂNICA DA MÁQUINA (CLIQUE OU ARRASTE)          */}
+          {/* ALAVANCA MECÂNICA DA MÁQUINA (CLIQUE, ARRASTE OU TECLADO) */}
           {/* ======================================================== */}
-          <div className="flex flex-col items-center justify-center">
-            <div
-              ref={leverRef}
-              onClick={handlePullLever}
-              role="button"
-              tabIndex={0}
-              data-focal-action="advice-lever"
-              aria-label="Puxar alavanca da máquina de conselhos"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handlePullLever();
-                }
-              }}
-              className="group cursor-pointer flex flex-col items-center focus:outline-none focus:ring-4 focus:ring-sun-yellow rounded-2xl p-2 select-none"
-              title="Puxe a alavanca para girar a roleta de conselhos!"
-            >
-              {/* Esfera Vermelha Superior da Alavanca */}
-              <div 
-                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-red-600 via-pop-pink to-amber-200 border-4 border-white shadow-xl flex items-center justify-center transition-transform ${
-                  prefersReduced
-                    ? leverPulled ? 'scale-90' : 'scale-100'
-                    : leverPulled 
-                      ? 'translate-y-16 scale-95' 
-                      : 'translate-y-0 group-hover:scale-110 group-hover:-translate-y-1'
-                }`}
-              >
-                <Sparkles className="w-6 h-6 text-white drop-shadow-sm" />
-              </div>
-
-              {/* Haste de Aço Inox Cromada */}
-              <div 
-                className={`w-4 bg-gradient-to-r from-slate-300 via-white to-slate-400 border-x border-slate-500 rounded-sm shadow-md transition-all ${
-                  leverPulled ? 'h-10 opacity-70' : 'h-24 sm:h-28'
-                }`}
-              />
-
-              {/* Base Mecânica / Caixa de Engrenagem */}
-              <div className="w-16 h-10 bg-gradient-to-b from-slate-700 to-slate-900 rounded-xl border-2 border-slate-600 shadow-lg flex items-center justify-center text-[10px] font-mono text-sun-yellow font-bold">
-                PUXE ⇊
-              </div>
-            </div>
-
-            {/* Botão de Disparo Textual com Efeito Magnético */}
-            <MagneticButton
-              type="button"
-              disabled={isSpinning}
-              onClick={handlePullLever}
-              className={`mt-4 px-5 py-2.5 rounded-full font-heading font-black text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 flex items-center gap-2 ${
-                isSpinning
-                  ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                  : 'bg-pop-pink hover:bg-pop-pink-dark text-white shadow-pop-pink/30 hover:scale-105'
-              }`}
-            >
-              <RotateCcw className={`w-4 h-4 ${isSpinning ? 'animate-spin' : ''}`} />
-              <span>{isSpinning ? 'Girando Roleta...' : 'Puxar Alavanca! 🎰'}</span>
-            </MagneticButton>
-          </div>
+          <SlotLever
+            isSpinning={isSpinning}
+            onPull={handlePullLever}
+          />
 
         </div>
 

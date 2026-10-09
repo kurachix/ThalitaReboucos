@@ -42,6 +42,10 @@ export function useAudio() {
     if (!isMuted) soundEngine.playSlotSpin();
   }, [isMuted]);
 
+  const playReelStop = useCallback(() => {
+    if (!isMuted) soundEngine.playReelStop();
+  }, [isMuted]);
+
   const playSlotWin = useCallback(() => {
     if (!isMuted) soundEngine.playSlotWin();
   }, [isMuted]);
@@ -72,6 +76,7 @@ export function useAudio() {
     playClapper,
     playSlotLever,
     playSlotSpin,
+    playReelStop,
     playSlotWin,
     playPinPop,
     playConfettiPop,

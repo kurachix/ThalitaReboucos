@@ -8,6 +8,8 @@ Este projeto rompe definitivamente o modelo enciclopédico convencional, transfo
 
 ## 🌟 Os 7 Atos da Experiência Hiper-Interativa
 
+
+
 ### 1. Ato 1: O Ateliê da Autora (Hero Screen)
 - **Mesa de Datilografia Retrô**: Máquina de escrever interativa que reage a toques e teclas físicas do teclado para datilografar o manifesto da autora com feedback sonoro de máquina mecânica e rolo móvel.
 - **Óculos de Cores Mutáveis (SVG Interativo)**: Troca instantânea da cor da armação clássica da autora (*Rosa Choque, Amarelo Neon, Roxo Elétrico, Turquesa Mar*) com adaptação cromática dos títulos e botões.

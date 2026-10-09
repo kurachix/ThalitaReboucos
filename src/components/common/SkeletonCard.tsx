@@ -18,44 +18,42 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = ({
       <div
         role="status"
         aria-label="Carregando card de cinema..."
-        className={`h-full min-h-[440px] sm:min-h-[460px] relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-4 sm:p-5 overflow-hidden animate-scrapbook-shimmer ${className}`}
+        className={`h-full relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-950/70 p-3.5 sm:p-4 overflow-hidden animate-scrapbook-shimmer ${className}`}
       >
         {/* Furinhos de película 35mm no topo */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
-          <div className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-800/80">
+          <div className="flex items-center gap-1">
             <Film className="w-3.5 h-3.5 text-slate-700 animate-pulse" />
-            <div className="w-16 h-2.5 rounded bg-slate-800/80 animate-pulse" />
+            <div className="w-16 h-2 rounded bg-slate-800/80 animate-pulse" />
           </div>
-          <div className="w-10 h-2.5 rounded bg-slate-800/80 animate-pulse" />
+          <div className="w-10 h-2 rounded bg-slate-800/80 animate-pulse" />
         </div>
 
-        {/* Badge e Duração */}
-        <div className="flex items-center justify-between pt-3 gap-2">
-          <div className="w-20 h-5 rounded-full bg-slate-800 animate-pulse" />
-          <div className="w-14 h-4 rounded bg-slate-800/60 animate-pulse" />
+        {/* Placeholder do Cartaz 2:3 Padronizado */}
+        <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden my-3 bg-slate-900/90 border border-slate-800 animate-pulse flex items-center justify-center">
+          <Film className="w-8 h-8 text-slate-800/80" />
         </div>
 
         {/* Título e Diretor (Altura Padronizada) */}
-        <div className="mt-3 space-y-2 h-16">
-          <div className="w-3/4 h-5 rounded bg-slate-800 animate-pulse" />
-          <div className="w-1/2 h-3.5 rounded bg-slate-800/60 animate-pulse" />
+        <div className="space-y-1 h-14">
+          <div className="w-3/4 h-4 rounded bg-slate-800 animate-pulse" />
+          <div className="w-1/2 h-3 rounded bg-slate-800/60 animate-pulse" />
         </div>
 
         {/* Destaque / Citação de Bilheteria (Altura Padronizada) */}
-        <div className="mt-3 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5 h-[72px]">
-          <div className="w-full h-3 rounded bg-slate-800 animate-pulse" />
-          <div className="w-4/5 h-3 rounded bg-slate-800/80 animate-pulse" />
+        <div className="mt-2 p-2 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-1.5 h-[68px]">
+          <div className="w-full h-2.5 rounded bg-slate-800 animate-pulse" />
+          <div className="w-4/5 h-2.5 rounded bg-slate-800/80 animate-pulse" />
         </div>
 
         {/* Elenco (Altura Padronizada) */}
-        <div className="mt-3 flex gap-1.5 h-20 sm:h-24">
-          <div className="w-16 h-4 rounded bg-slate-800/70 animate-pulse" />
-          <div className="w-16 h-4 rounded bg-slate-800/70 animate-pulse" />
-          <div className="w-12 h-4 rounded bg-slate-800/50 animate-pulse" />
+        <div className="mt-2 flex gap-1 h-16 sm:h-20">
+          <div className="w-16 h-3.5 rounded bg-slate-800/70 animate-pulse" />
+          <div className="w-16 h-3.5 rounded bg-slate-800/70 animate-pulse" />
         </div>
 
         {/* Botão Assistir Trailer Fixado na Base */}
-        <div className="mt-auto pt-3 border-t border-slate-800/80">
+        <div className="mt-auto pt-2 border-t border-slate-800/80">
           <div className="w-full h-9 rounded-xl bg-slate-800 flex items-center justify-center gap-2 animate-pulse">
             <Play className="w-3.5 h-3.5 text-slate-600 fill-slate-600" />
             <div className="w-24 h-3 rounded bg-slate-700" />

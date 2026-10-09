@@ -201,49 +201,67 @@ export const CinemaSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Título do Filme e Direção */}
-              <div className="py-4 space-y-2">
-                <h3 className="text-2xl sm:text-3xl font-black font-heading text-white tracking-tight">
-                  {currentMovie.title}
-                </h3>
-                <p className="text-xs font-mono text-sun-yellow">
-                  Direção de {currentMovie.director}
-                </p>
-              </div>
+              {/* Conteúdo Central da Projeção: Cartaz Oficial & Detalhes */}
+              <div className="flex flex-col sm:flex-row gap-6 items-start py-4">
+                {/* Cartaz Oficial de Cinema da Obra Selecionada */}
+                {currentMovie.posterUrl && (
+                  <div className="w-36 sm:w-44 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl border border-slate-700/80 shrink-0 mx-auto sm:mx-0 group relative bg-slate-950">
+                    <img
+                      src={currentMovie.posterUrl}
+                      alt={`Cartaz oficial do filme ${currentMovie.title}`}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                )}
 
-              {/* Destaque de Bilheteria / Recorde de Audiência */}
-              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-start gap-3 my-2">
-                <Award className="w-5 h-5 text-sun-yellow shrink-0 mt-0.5" />
-                <div>
-                  <span className="block text-[11px] uppercase tracking-wider text-slate-400 font-heading font-bold">
-                    Marco do Cinema & Streaming
-                  </span>
-                  <p className="text-xs sm:text-sm text-slate-200 font-semibold">
-                    {currentMovie.highlight}
+                {/* Dados da Obra (Título, Marco, Sinopse e Elenco) */}
+                <div className="flex-1 space-y-3">
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black font-heading text-white tracking-tight">
+                      {currentMovie.title}
+                    </h3>
+                    <p className="text-xs font-mono text-sun-yellow mt-0.5">
+                      Direção de {currentMovie.director}
+                    </p>
+                  </div>
+
+                  {/* Destaque de Bilheteria / Recorde de Audiência */}
+                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-start gap-2.5">
+                    <Award className="w-4 h-4 text-sun-yellow shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-[10px] uppercase tracking-wider text-slate-400 font-heading font-bold">
+                        Marco do Cinema & Streaming
+                      </span>
+                      <p className="text-xs sm:text-sm text-slate-200 font-semibold">
+                        {currentMovie.highlight}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Sinopse da Adaptação */}
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-body">
+                    {currentMovie.synopsis}
                   </p>
-                </div>
-              </div>
 
-              {/* Sinopse da Adaptação */}
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-body py-2">
-                {currentMovie.synopsis}
-              </p>
-
-              {/* Elenco Consagrado */}
-              <div className="pt-2 border-t border-slate-800/80 space-y-2">
-                <div className="flex items-center gap-1.5 text-xs text-slate-400 font-heading font-bold">
-                  <Users className="w-3.5 h-3.5 text-pop-pink" />
-                  <span>Elenco Principal:</span>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {currentMovie.cast.map((actor) => (
-                    <span 
-                      key={actor}
-                      className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 text-xs font-mono border border-slate-700/60"
-                    >
-                      {actor}
-                    </span>
-                  ))}
+                  {/* Elenco Consagrado */}
+                  <div className="pt-2 border-t border-slate-800/80 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs text-slate-400 font-heading font-bold">
+                      <Users className="w-3.5 h-3.5 text-pop-pink" />
+                      <span>Elenco Principal:</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {currentMovie.cast.map((actor) => (
+                        <span 
+                          key={actor}
+                          className="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-200 text-xs font-mono border border-slate-700/60"
+                        >
+                          {actor}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 

@@ -39,6 +39,7 @@ export interface Movie {
   highlight: string;
   synopsis: string;
   trailerId?: string; // YouTube video ID para exibição leve
+  posterUrl?: string; // Link direto para o cartaz oficial do filme
   badgeColor: string;
   trivia?: string; // Curiosidades e bastidores contados pela autora
   duration?: string;

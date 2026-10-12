@@ -1,8 +1,3 @@
-/**
- * Catálogo de Selos do Passaporte da Leitora
- * Rastreia as 6 experiências interativas fundamentais da plataforma.
- */
-
 export interface AchievementStamp {
   id: string;
   title: string;
@@ -39,6 +34,7 @@ export const PASSPORT_ACHIEVEMENTS: AchievementStamp[] = [
     id: 'clapped_board',
     title: 'Diretora de Cinema',
     category: 'Cine-Thalita',
+
     description: 'Bateu a claquete cinematográfica e acendeu o projetor de estreias.',
     hint: 'Clique ou puxe a haste móvel da claquete no Cine-Thalita para gravar a tomada!',
     emoji: '🎬',

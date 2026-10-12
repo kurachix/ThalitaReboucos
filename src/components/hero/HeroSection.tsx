@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Sparkles, 
   BookOpen, 
   ArrowDown, 
   Heart, 
-  Award,
-  Users
+  Award, 
+  Users 
 } from 'lucide-react';
-import { GlassesColorPicker, GLASSES_COLORS, GlassesColor } from './GlassesColorPicker';
 import { Typewriter } from './Typewriter';
 import { useAudio } from '@/hooks/use-audio';
 import { MagneticButton } from '@/components/common/MagneticButton';
 
 export const HeroSection: React.FC = () => {
-  const [activeGlasses, setActiveGlasses] = useState<GlassesColor>(GLASSES_COLORS[0]);
   const { playClick } = useAudio();
 
   const handleScrollTo = (id: string) => {
@@ -41,13 +39,10 @@ export const HeroSection: React.FC = () => {
             <span>Ato 1 · O Ateliê da Escritora Carioca</span>
           </div>
 
-          {/* Título Principal com Cor Dinâmica */}
+          {/* Título Principal */}
           <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-slate-900 tracking-tight font-heading leading-[1.1]">
             O Ateliê Pop & Diário Mágico de{' '}
-            <span 
-              className="transition-colors duration-300"
-              style={{ color: activeGlasses.hex }}
-            >
+            <span className="text-pop-pink">
               Thalita Rebouças
             </span>
           </h1>
@@ -89,8 +84,7 @@ export const HeroSection: React.FC = () => {
             <MagneticButton
               type="button"
               onClick={() => handleScrollTo('#timeline')}
-              className="px-6 py-3 rounded-full text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 hover:scale-105 active:scale-95"
-              style={{ backgroundColor: activeGlasses.hex }}
+              className="px-6 py-3 rounded-full text-white font-heading font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 hover:scale-105 active:scale-95 bg-pop-pink hover:bg-pop-pink-dark"
             >
               <span>Ver Linha do Tempo</span>
               <ArrowDown className="w-4 h-4" />
@@ -104,11 +98,6 @@ export const HeroSection: React.FC = () => {
               <BookOpen className="w-4 h-4 text-pop-pink" />
               <span>Explorar Estante Pop</span>
             </MagneticButton>
-          </div>
-
-          {/* Óculos Interativos em Destaque na Lateral */}
-          <div className="pt-4 border-t border-slate-200/60 max-w-md mx-auto lg:mx-0">
-            <GlassesColorPicker onColorChange={(c) => setActiveGlasses(c)} />
           </div>
 
         </div>

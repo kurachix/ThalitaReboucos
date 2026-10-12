@@ -9,11 +9,10 @@ import { triggerHaptic } from '@/utils/haptics';
 import { 
   Eye, 
   Type, 
-  Sparkles, 
   X, 
   RotateCcw, 
   MessageSquare, 
-  Sliders, 
+  Accessibility, 
   Bookmark 
 } from 'lucide-react';
 
@@ -28,7 +27,6 @@ export const A11yDrawer: React.FC = () => {
     setFontSize,
     toggleDyslexicFont,
     toggleHighContrast,
-    toggleReducedMotion,
     toggleReadingRuler,
     toggleVLibras,
     openVLibrasWidget,
@@ -42,7 +40,6 @@ export const A11yDrawer: React.FC = () => {
     preferences.fontSize !== 'normal',
     preferences.dyslexicFont,
     preferences.highContrast,
-    preferences.reducedMotion,
     preferences.readingRuler,
     preferences.vlibrasEnabled,
   ].filter(Boolean).length;
@@ -132,7 +129,7 @@ export const A11yDrawer: React.FC = () => {
       {/* ================================================================= */}
       <aside 
         aria-label="Painel de Acessibilidade e LIBRAS"
-        className="fixed bottom-5 left-5 z-40 flex flex-col items-start gap-2 select-none"
+        className="fixed bottom-5 left-5 z-40 select-none"
       >
         <button
           ref={triggerBtnRef}
@@ -140,21 +137,22 @@ export const A11yDrawer: React.FC = () => {
           onClick={handleToggleOpen}
           aria-expanded={isOpen}
           aria-controls="a11y-drawer-panel"
-          aria-label={`Menu de Acessibilidade e LIBRAS. ${activeFeaturesCount} preferências ativas.`}
-          className="group relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-full bg-white/95 hover:bg-amber-50/95 text-slate-800 border-2 border-amber-300 shadow-xl backdrop-blur-md transition-all transform active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink"
+          aria-label={`Menu de Acessibilidade e LIBRAS. Atalho: tecla A. ${activeFeaturesCount} preferências ativas.`}
+          className="group relative flex items-center gap-3 px-4 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white border-2 border-amber-300 shadow-2xl transition-all duration-200 transform active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-pop-pink focus-visible:ring-offset-2"
         >
-          {/* Ícone de Acessibilidade */}
-          <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-sun-yellow to-pop-pink text-white flex items-center justify-center shadow-xs">
-            <Sliders className="w-3.5 h-3.5 text-slate-950" />
+          {/* Ícone Internacional de Acessibilidade */}
+          <div className="w-8 h-8 rounded-full bg-pop-pink text-white flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 transition-transform">
+            <Accessibility className="w-5 h-5 text-white" />
           </div>
 
           <div className="flex flex-col text-left">
-            <span className="text-xs font-heading font-black tracking-tight text-slate-900 leading-tight">
+            <span className="text-sm font-heading font-black tracking-tight text-white leading-tight">
               Acessibilidade
             </span>
-            <span className="text-[10px] font-mono text-pop-pink font-bold flex items-center gap-1">
+            <span className="text-[11px] font-mono text-amber-300 font-bold flex items-center gap-1.5">
               <span>LIBRAS</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[10px] text-slate-400 font-sans border border-slate-700 rounded px-1 hidden sm:inline">[A]</span>
             </span>
           </div>
 
@@ -162,7 +160,7 @@ export const A11yDrawer: React.FC = () => {
           {activeFeaturesCount > 0 && (
             <span 
               aria-label={`${activeFeaturesCount} preferências ativas`}
-              className="ml-1 w-5 h-5 rounded-full bg-pop-pink text-white font-mono text-[10px] font-black flex items-center justify-center shadow-xs animate-bounce"
+              className="ml-1 w-5 h-5 rounded-full bg-sun-yellow text-slate-950 font-mono text-[11px] font-black flex items-center justify-center shadow-xs animate-bounce"
             >
               {activeFeaturesCount}
             </span>
@@ -191,8 +189,8 @@ export const A11yDrawer: React.FC = () => {
             {/* Topo do Painel */}
             <div className="flex items-center justify-between pb-3 border-b border-amber-200">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-sun-yellow text-slate-950 flex items-center justify-center shadow-xs">
-                  <Sliders className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-pop-pink text-white flex items-center justify-center shadow-xs">
+                  <Accessibility className="w-4 h-4 text-white" />
                 </div>
                 <div>
                   <h3 id="a11y-drawer-title" className="font-heading font-black text-lg text-slate-900 leading-tight">
@@ -390,42 +388,6 @@ export const A11yDrawer: React.FC = () => {
                   <div
                     className={`w-5 h-5 rounded-full bg-white transition-transform shadow-xs ${
                       preferences.highContrast ? 'translate-x-5' : 'translate-x-0'
-                    }`}
-                  />
-                </button>
-              </div>
-
-              {/* Reduzir Animações / Movimento */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
-                <div className="flex items-center gap-2.5">
-                  <Sparkles className="w-4 h-4 text-indigo-500" />
-                  <div>
-                    <strong className="block text-xs text-slate-800 font-heading">
-                      Pausar Animações
-                    </strong>
-                    <span className="text-[11px] text-slate-500 block leading-tight">
-                      Desativa oscilações e efeitos flutuantes contínuos
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    playClick();
-                    triggerHaptic('light');
-                    toggleReducedMotion();
-                  }}
-                  role="switch"
-                  aria-checked={preferences.reducedMotion}
-                  aria-label="Pausar animações"
-                  className={`w-11 h-6 rounded-full transition-colors p-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    preferences.reducedMotion ? 'bg-indigo-600' : 'bg-slate-300'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform shadow-xs ${
-                      preferences.reducedMotion ? 'translate-x-5' : 'translate-x-0'
                     }`}
                   />
                 </button>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Heart, Menu, X, BookOpen, Film, HelpCircle, MessageSquare, Sparkles, Clock, Zap, ZapOff, Keyboard } from 'lucide-react';
+import { Heart, Menu, X, BookOpen, Film, HelpCircle, MessageSquare, Sparkles, Clock, Accessibility, Keyboard } from 'lucide-react';
 import { SoundPill } from '@/components/audio/SoundPill';
 import { useAudio } from '@/hooks/use-audio';
-import { useReducedMotionControls } from '@/hooks/use-reduced-motion';
 import { useAppStore } from '@/store/use-app-store';
 import { triggerHaptic } from '@/utils/haptics';
 
@@ -25,7 +24,6 @@ const NAV_ITEMS: NavItem[] = [
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { playClick } = useAudio();
-  const { isReducedMotion, toggleReducedMotion } = useReducedMotionControls();
   const toggleKeyboardModal = useAppStore((state) => state.toggleKeyboardModal);
 
   const handleNavClick = (href: string) => {
@@ -85,37 +83,20 @@ export const Header: React.FC = () => {
 
         {/* Controles do Lado Direito */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Botão de Alternância de Movimento Reduzido (a11y) */}
+          {/* Botão de Central de Acessibilidade & LIBRAS */}
           <button
             type="button"
             onClick={() => {
               playClick();
-              toggleReducedMotion();
+              triggerHaptic('light');
+              window.dispatchEvent(new CustomEvent('toggle-a11y-drawer'));
             }}
-            aria-label={
-              isReducedMotion
-                ? 'Desativar modo de movimento reduzido (ativar animações completas)'
-                : 'Ativar modo de movimento reduzido (reduzir animações para sensibilidade a movimento)'
-            }
-            aria-pressed={isReducedMotion}
-            className={`p-2 rounded-full border transition-all text-xs font-heading font-bold flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink ${
-              isReducedMotion
-                ? 'bg-purple-100 text-purple-900 border-purple-300 shadow-xs'
-                : 'bg-white/80 hover:bg-slate-100 text-slate-600 border-slate-200'
-            }`}
-            title={isReducedMotion ? 'Movimento reduzido ativo' : 'Alternar movimento reduzido'}
+            aria-label="Abrir central de acessibilidade e tradutor de LIBRAS (atalho tecla A)"
+            className="p-2 sm:px-3 sm:py-2 rounded-full border border-slate-200 bg-white/90 hover:bg-amber-50 hover:border-amber-300 text-slate-700 hover:text-pop-pink transition-all text-xs font-heading font-bold flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-pop-pink shadow-xs"
+            title="Central de Acessibilidade & LIBRAS [A]"
           >
-            {isReducedMotion ? (
-              <>
-                <ZapOff className="w-4 h-4 text-purple-700" />
-                <span className="hidden xl:inline text-[11px]">Movimento Reduzido</span>
-              </>
-            ) : (
-              <>
-                <Zap className="w-4 h-4 text-slate-500" />
-                <span className="hidden xl:inline text-[11px]">Animações</span>
-              </>
-            )}
+            <Accessibility className="w-4 h-4 text-pop-pink" />
+            <span className="hidden xl:inline text-[11px]">Acessibilidade</span>
           </button>
 
           {/* Botão de Atalhos de Teclado [?] */}
@@ -175,33 +156,24 @@ export const Header: React.FC = () => {
             );
           })}
 
-          {/* Controle de Movimento Reduzido no Menu Mobile */}
+          {/* Central de Acessibilidade no Menu Mobile */}
           <div className="pt-2 border-t border-amber-200/50">
             <button
               type="button"
               onClick={() => {
                 playClick();
-                toggleReducedMotion();
+                triggerHaptic('light');
+                setIsMobileMenuOpen(false);
+                window.dispatchEvent(new CustomEvent('toggle-a11y-drawer'));
               }}
-              aria-pressed={isReducedMotion}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold font-heading transition-colors ${
-                isReducedMotion
-                  ? 'bg-purple-100 text-purple-900 border border-purple-200'
-                  : 'bg-slate-100 text-slate-700'
-              }`}
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold font-heading bg-amber-50 hover:bg-pink-50 text-slate-800 transition-colors border border-amber-200/60"
             >
               <div className="flex items-center gap-2">
-                {isReducedMotion ? (
-                  <ZapOff className="w-4 h-4 text-purple-700 shrink-0" />
-                ) : (
-                  <Zap className="w-4 h-4 text-slate-500 shrink-0" />
-                )}
-                <span>Modo de Movimento Reduzido</span>
+                <Accessibility className="w-4 h-4 text-pop-pink shrink-0" />
+                <span>Central de Acessibilidade</span>
               </div>
-              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                isReducedMotion ? 'bg-purple-200 text-purple-900' : 'bg-slate-200 text-slate-600'
-              }`}>
-                {isReducedMotion ? 'Ativado' : 'Desativado'}
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-pop-pink text-white">
+                LIBRAS
               </span>
             </button>
 

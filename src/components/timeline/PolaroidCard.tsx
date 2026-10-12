@@ -24,8 +24,11 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ milestone, index }) 
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [airplaneFlying, setAirplaneFlying] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const { playClick, playPageFlip } = useAudio();
   const prefersReduced = useReducedMotion();
+
+  const hasImage = Boolean(milestone.imageUrl) && !imageError;
 
   // Rotação orgânica natural de álbum de figurinhas (-2deg a +2deg)
   const baseRotation = (index % 2 === 0 ? -1.5 : 1.5) * (0.8 + (index % 3) * 0.2);
@@ -122,40 +125,73 @@ export const PolaroidCard: React.FC<PolaroidCardProps> = ({ milestone, index }) 
       <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-polaroid border border-slate-200/80 flex flex-col justify-between space-y-4">
         
         {/* Moldura da Foto */}
-        <div className="relative aspect-[4/3] rounded-xl bg-gradient-to-tr from-amber-50 via-slate-100 to-pink-50 border border-slate-200/60 overflow-hidden flex flex-col items-center justify-center p-4">
+        <div className="relative aspect-[4/3] rounded-xl bg-slate-900 border border-slate-200/60 overflow-hidden flex flex-col items-center justify-center">
           
           {/* Badge do Ano */}
-          <div className="absolute top-2.5 left-2.5 bg-slate-900/85 backdrop-blur-xs text-white px-2.5 py-0.5 rounded-full text-xs font-black font-heading tracking-wider shadow-xs">
+          <div className="absolute top-2.5 left-2.5 bg-slate-900/85 backdrop-blur-xs text-white px-2.5 py-0.5 rounded-full text-xs font-black font-heading tracking-wider shadow-xs z-20">
             {milestone.year}
           </div>
 
           {/* Badge de Destaque da Categoria */}
-          <div className="absolute top-2.5 right-2.5 bg-white/90 text-slate-800 px-2 py-0.5 rounded-md text-[10px] font-bold font-heading border border-slate-200 shadow-2xs">
+          <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-xs text-slate-800 px-2 py-0.5 rounded-md text-[10px] font-bold font-heading border border-slate-200 shadow-2xs z-20">
             {milestone.badge}
           </div>
 
-          {/* Ícone e Animação do Aviãozinho se for o ano 2000 */}
-          <div className="relative flex items-center justify-center">
-            {renderMilestoneIcon()}
-            {milestone.id === 'milestone-2000' && (
-              <div 
-                className={`absolute -top-2 -right-8 transition-all duration-700 pointer-events-none ${
-                  airplaneFlying ? 'translate-x-12 -translate-y-8 rotate-45 opacity-0' : 'animate-bounce'
-                }`}
-              >
-                <span className="text-xs bg-rose-100 text-rose-700 px-1.5 py-0.5 rounded-full font-bold">
-                  20 recusas! ✈️
+          {/* Animação do Aviãozinho se for o ano 2000 */}
+          {milestone.id === 'milestone-2000' && (
+            <div 
+              className={`absolute top-10 right-3 z-20 transition-all duration-700 pointer-events-none ${
+                airplaneFlying ? 'translate-x-12 -translate-y-8 rotate-45 opacity-0' : 'animate-bounce'
+              }`}
+            >
+              <span className="text-xs bg-rose-500/95 text-white shadow-md px-2 py-0.5 rounded-full font-bold">
+                20 recusas! ✈️
+              </span>
+            </div>
+          )}
+
+          {hasImage ? (
+            <>
+              {/* Foto Real do Marco Histórico */}
+              <img
+                src={milestone.imageUrl}
+                alt={`Foto da memória de ${milestone.year}: ${milestone.title}`}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none select-none"
+                loading="lazy"
+                onError={() => setImageError(true)}
+              />
+
+              {/* Vinheta Superior para Legibilidade dos Badges */}
+              <div className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none z-10" />
+
+              {/* Vinheta Inferior com Título e Subtítulo */}
+              <div className="absolute inset-x-0 bottom-0 p-3 pt-8 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col items-center text-center z-10 pointer-events-none">
+                <span className="font-heading font-extrabold text-white text-sm sm:text-base leading-tight drop-shadow-md line-clamp-1">
+                  {milestone.title}
+                </span>
+                <span className="text-[11px] text-amber-200/90 font-body drop-shadow-xs line-clamp-1">
+                  {milestone.subtitle}
                 </span>
               </div>
-            )}
-          </div>
 
-          <span className="font-heading font-extrabold text-slate-800 text-base text-center mt-2 px-2 line-clamp-1">
-            {milestone.title}
-          </span>
-          <span className="text-xs text-slate-500 font-body text-center line-clamp-1">
-            {milestone.subtitle}
-          </span>
+              {/* Efeito de Reflexo / Lens Flare Polaroid */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-10" />
+            </>
+          ) : (
+            /* Fallback Estilizado com Ilustração e Ícone */
+            <div className="w-full h-full bg-gradient-to-tr from-amber-50 via-slate-100 to-pink-50 flex flex-col items-center justify-center p-4">
+              <div className="relative flex items-center justify-center mb-2">
+                {renderMilestoneIcon()}
+              </div>
+
+              <span className="font-heading font-extrabold text-slate-800 text-base text-center mt-1 px-2 line-clamp-1">
+                {milestone.title}
+              </span>
+              <span className="text-xs text-slate-500 font-body text-center line-clamp-1">
+                {milestone.subtitle}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Legenda Manuscrita Autêntica da Polaroid */}

@@ -28,6 +28,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'Pequena Thalita inventando seus primeiros causos no Rio.',
     badge: 'A Origem',
     stickerId: 'sticker-sun',
+    imageUrl: 'https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'milestone-1993',
@@ -39,6 +40,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'Máquina de escrever nos tempos de faculdade de jornalismo.',
     badge: 'Formação',
     stickerId: 'sticker-pencil',
+    imageUrl: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 'milestone-2000',
@@ -50,6 +52,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'O primeiro livro impresso de forma independente!',
     badge: 'Persistência',
     stickerId: 'sticker-airplane',
+    imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1506300762i/6570794.jpg',
   },
   {
     id: 'milestone-2003',
@@ -61,6 +64,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'A febre nacional da boyband Slavabody Disco Disco Boys.',
     badge: 'Febre Pop',
     stickerId: 'sticker-star',
+    imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1506301688i/6570719.jpg',
   },
   {
     id: 'milestone-2004',
@@ -72,6 +76,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'A capa que virou leitura obrigatória entre gerações.',
     badge: 'Sucesso Absoluto',
     stickerId: 'sticker-heart',
+    imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1506318805i/20632046.jpg',
   },
   {
     id: 'milestone-2010',
@@ -83,6 +88,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'Pavilhões lotados esperando para ver a Thalita.',
     badge: 'Amor dos Fãs',
     stickerId: 'sticker-stamp',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Thalita_Rebou%C3%A7as_%28cropped%29.jpg',
   },
   {
     id: 'milestone-2017',
@@ -94,6 +100,7 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'Thalita no set de filmagem acompanhando cada tomada.',
     badge: 'Cinemas',
     stickerId: 'sticker-popcorn',
+    imageUrl: 'https://image.tmdb.org/t/p/w500/p4YiseA6zPrXQMAJ7dj9GxCTHmo.jpg',
   },
   {
     id: 'milestone-2021',
@@ -105,5 +112,6 @@ export const TIMELINE_MILESTONES: TimelineMilestone[] = [
     polaroidCaption: 'O mundo assistindo às histórias da autora carioca.',
     badge: 'Mundial',
     stickerId: 'sticker-globe',
+    imageUrl: 'https://image.tmdb.org/t/p/w500/bGIy308alpX12xdBVsREgsHawQC.jpg',
   },
 ];

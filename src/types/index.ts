@@ -64,6 +64,7 @@ export interface TimelineMilestone {
   polaroidCaption: string;
   badge: string;
   stickerId?: string;
+  imageUrl?: string;
 }
 
 export type AdviceCategory = 'mae' | 'amizade' | 'amor-proprio' | 'drama' | 'humor';
